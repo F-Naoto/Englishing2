@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_04_140518) do
+ActiveRecord::Schema.define(version: 2022_09_04_140938) do
 
   create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "content", null: false
@@ -70,6 +70,17 @@ ActiveRecord::Schema.define(version: 2022_09_04_140518) do
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
   end
 
+  create_table "teacher_reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "teacher_id", null: false
+    t.string "content"
+    t.integer "score"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["student_id"], name: "index_teacher_reviews_on_student_id"
+    t.index ["teacher_id"], name: "index_teacher_reviews_on_teacher_id"
+  end
+
   create_table "teachers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -92,4 +103,6 @@ ActiveRecord::Schema.define(version: 2022_09_04_140518) do
   add_foreign_key "questions", "students"
   add_foreign_key "relationships", "students", column: "follower_id"
   add_foreign_key "relationships", "teachers", column: "followed_id"
+  add_foreign_key "teacher_reviews", "students"
+  add_foreign_key "teacher_reviews", "teachers"
 end
