@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'likes/create'
+  get 'likes/destroy'
   get 'best_answers/create'
   root to: 'home#index'
   devise_for :teachers, controllers: {
