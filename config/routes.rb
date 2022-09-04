@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'relationships/create'
+  get 'relationships/destroy'
   get 'likes/create'
   get 'likes/destroy'
   get 'best_answers/create'
