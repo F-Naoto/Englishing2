@@ -1,0 +1,20 @@
+<h1>All Questions</h1>
+<%= form_with(model: @question, local: true) do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %> <br>
+  <%= f.label :content %>
+  <%= f.text_area :content %>
+  <%= f.submit '質問'%>
+<% end %>
+
+<% @questions.each do |question| %>
+  <div class="card" style="width: 60rem;">
+    <div class="card-body">
+      <h5 class="card-title">タイトル：<%= question.title %></h5>
+      <h6 class="card-subtitle mb-2 text-muted">生徒名：<%= link_to question.student.name, student_path(question.student) %></h6>
+      <p class="card-text">質問内容：<%= question.content %></p>
+      <%= link_to '回答する', question_path(question), class: 'link' %>
+    </div>
+  </div>
+<% end %>
+<div class='p-top__paginate'><%= paginate(@questions) %></div>
