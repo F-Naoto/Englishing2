@@ -1,0 +1,17 @@
+<h1>All students</h1>
+<%= search_form_for @search do |f| %>
+  <%= f.label :self_introduction_cont, "キーワード" %>
+  <%= f.search_field :self_introduction_cont %>
+  <div class="actions"><%= f.submit "検索" %></div>
+<% end %>
+
+<ul class="students">
+  <% @students.each do |student| %>
+    <li>
+      <%= link_to student.name, student %><br>
+      <%= student.email %><br>
+      <%= student.self_introduction %>
+    </li>
+  <% end %>
+</ul>
+<div class='p-top__paginate'><%= paginate(@students) %></div>
