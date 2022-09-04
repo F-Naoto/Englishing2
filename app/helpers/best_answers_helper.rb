@@ -1,0 +1,2 @@
+module BestAnswersHelper
+end
