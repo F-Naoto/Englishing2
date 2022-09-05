@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_04_151659) do
+ActiveRecord::Schema.define(version: 2022_09_05_123759) do
 
   create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "content", null: false
@@ -30,6 +30,31 @@ ActiveRecord::Schema.define(version: 2022_09_04_151659) do
     t.bigint "student_id", null: false
     t.index ["question_id"], name: "index_best_answers_on_question_id"
     t.index ["student_id"], name: "index_best_answers_on_student_id"
+  end
+
+  create_table "chat_room_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "chat_room_id", null: false
+    t.bigint "student_id", null: false
+    t.bigint "teacher_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["chat_room_id"], name: "index_chat_room_users_on_chat_room_id"
+    t.index ["student_id"], name: "index_chat_room_users_on_student_id"
+    t.index ["teacher_id"], name: "index_chat_room_users_on_teacher_id"
+  end
+
+  create_table "chat_rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "chats", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "student_id"
+    t.integer "teacher_id"
+    t.integer "room_id"
+    t.string "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -103,6 +128,9 @@ ActiveRecord::Schema.define(version: 2022_09_04_151659) do
   add_foreign_key "answers", "teachers"
   add_foreign_key "best_answers", "questions"
   add_foreign_key "best_answers", "students"
+  add_foreign_key "chat_room_users", "chat_rooms"
+  add_foreign_key "chat_room_users", "students"
+  add_foreign_key "chat_room_users", "teachers"
   add_foreign_key "likes", "questions"
   add_foreign_key "likes", "students"
   add_foreign_key "questions", "students"
