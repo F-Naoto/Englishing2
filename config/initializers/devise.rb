@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'a0b61c1b33cb1e06e29901d9750951f8c6e2e53f5809e8b783ab0a0213e115f7bb97f93465090927ebd8960feb8f3f6f295dfee26b4276518f4ecedecd3c32f5'
+  # config.secret_key = 'baa69137cf473013a5e8b42bc48863894dd26b479e35d0f5f94a645669d9aac88eeda7817c0abbdc151b5b78d882c37d13794c4ca48dddaac5721b8c85f549b1'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -126,7 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'a4ff62a8ac9f96f7832e705fdfeeb2b8b9a5703565cf86e505921b083fa499e103340c06169e3371a6c57e4c5617cbda9dd36186b4cec2e54e01a8bc34ad0dc4'
+  # config.pepper = '5a16768d57bbb92b318d7cfc0fbcb3cbdab1f73dc8fc1cd9dd87f5e30fdc9467a7f41cf206ed81217bc2550ae9532cdb7208757eaa869e6abfd4e92eb3188355'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -244,7 +244,7 @@ Devise.setup do |config|
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
-  # config.scoped_views = false
+  config.scoped_views = true
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).
@@ -252,7 +252,7 @@ Devise.setup do |config|
 
   # Set this configuration to false if you want /users/sign_out to sign out
   # only the current scope. By default, Devise signs out all scopes.
-  # config.sign_out_all_scopes = true
+  config.sign_out_all_scopes = false
 
   # ==> Navigation configuration
   # Lists the formats that should be treated as navigational. Formats like
@@ -263,10 +263,10 @@ Devise.setup do |config|
   # should add them to the navigational formats lists.
   #
   # The "*/*" below is required to match Internet Explorer requests.
-  # config.navigational_formats = ['*/*', :html]
+  config.navigational_formats = ['*/*', :html, :turbo_stream]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
-  config.sign_out_via = :delete
+  config.sign_out_via = :get
 
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting

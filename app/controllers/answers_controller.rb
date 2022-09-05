@@ -4,10 +4,10 @@ class AnswersController < ApplicationController
     @answer = current_teacher.answers.build(question_params)
     if @answer.save
       flash[:success] = "質問を投稿しました。"
-      redirect_to @answer
+      redirect_to "/questions/#{params[:answer][:question_id]}"
     else
       flash[:danger] = "質問を投稿できませんでした。"
-      render question_path(params[:question_id])
+      render 
     end
   end
 

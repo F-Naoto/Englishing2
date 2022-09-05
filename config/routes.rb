@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
-  get 'relationships/create'
-  get 'relationships/destroy'
-  get 'likes/create'
-  get 'likes/destroy'
   get 'best_answers/create'
-  root to: 'home#index'
+  root to: 'home#top'
   devise_for :teachers, controllers: {
     sessions:      'teachers/sessions',
     passwords:     'teachers/passwords',

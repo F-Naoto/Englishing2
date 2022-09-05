@@ -24,13 +24,13 @@
     <div class="card-body">
       <h5 class="card-title"><%=answer.teacher.name %></h5>
       <p class="card-text"><%=answer.content %></p>
-                          <% unless BestAnswer.best_answer_selected?(@question)%>
+                          <%# <% unless BestAnswer.best_answer_selected?(@question)%> %>
                             <%= form_with model: @best_answer do |f| %>
                               <%= f.hidden_field :question_id, value: @question.id %>
                               <%= f.hidden_field :teacher_id, value: answer.teacher.id %>
                               <%= f.submit 'ベストアンサーに選ぶ' %>
                             <% end %>
-                          <% end %>
+                          <%# <% end %> %>
     </div>
   </div>
 <% end %>

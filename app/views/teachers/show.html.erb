@@ -1,21 +1,28 @@
 <h1>プロフィール画面</h1>
   <div class="card" style="width: 60rem;">
     <div class="card-body">
-      <h5 class="card-title">生徒名：<%=@student.name %></h5>
-      <h5 class="card-title">自己紹介：<%=@student.self_introduction %></h5>
-      <h3 class="card-title">質問数：<%=@student.questions.count %></h3>
-      フォローする！！！
+      <h5 class="card-title">生徒名：<%=@teacher.name %></h5>
+      <h5 class="card-title">自己紹介：<%=@teacher.self_introduction %></h5>
+      <h3 class="card-title">回答数：<%=%></h3>
+      <h3 class="card-title">評価：<%= %></h3>
+      <i class="far fa-clock"></i>
+      <div id="follow_form">
+        <%= link_to "Edit", edit_teacher_registration_path %>
+        <% if current_student.following?(@teacher) %>
+          <%= render 'partials/unfollow' %>
+        <% else %>
+          <%= render 'partials/follow' %>
+        <% end %>
+        </div>
     </div>
   </div>
-
-<% @student.questions.each do |question|%>
-  <div class="card">
-  <div class="card-header">
-   質問
-  </div>
-  <div class="card-body">
-    <h5 class="card-title"><%=question.title %></h5>
-    <p class="card-text"><%=question.content %></p>
-  </div>
+<div class='star-container' style='display:flex'>
+  <i class="fa-regular fa-star" data-num='1' style='display:block'></i>
+  <i class="fa-regular fa-star" data-num='2' style='display:block'></i>
+  <i class="fa-regular fa-star" data-num='3' style='display:block'></i>
+  <i class="fa-regular fa-star" data-num='4' style='display:block'></i>
+  <i class="fa-regular fa-star" data-num='5' style='display:block'></i>
+  <i class="fa-regular fa-star" data-num='6' style='display:block'></i>
+  <i class="fa-regular fa-star" data-num='7' style='display:block'></i>
 </div>
-<% end %>
+  <%= render 'partials/review', teacher: @teacher, teacher_review: @teacher_review %>

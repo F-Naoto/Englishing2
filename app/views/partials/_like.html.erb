@@ -1,0 +1,11 @@
+<% if question.liked_by?(current_student) %>
+  <%= button_to  question_likes_path(question.id), method: :delete do %>
+    <i class="fas fa-heart"></i>
+    <%= question.likes.count %>
+  <% end %>
+  <% else %>
+  <%= button_to question_likes_path(question.id), method: :post do %>
+    <i class="far fa-heart"></i>
+    <%= question.likes.count %>
+  <% end %>
+<% end %>
