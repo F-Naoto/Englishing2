@@ -12,6 +12,9 @@ class Student < ApplicationRecord
                                   dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :best_answers, dependent: :destroy
+  has_many :chat_room_users, dependent: :destroy
+  has_many :chat_rooms, through: :chat_room_users
+  has_many :chat_messages, dependent: :destroy
     # ユーザーをフォローする
     def follow(other_user)
       active_relationships.create(followed_id: other_user)

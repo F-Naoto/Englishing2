@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
   get 'best_answers/create'
   root to: 'home#top'
   devise_for :teachers, controllers: {
@@ -34,4 +35,5 @@ Rails.application.routes.draw do
   resources :answers
   resources :relationships, only:%i[create destroy]
   resources :best_answers, only:%i[create]
+  resources :chat_rooms, only:%i[create show]
 end

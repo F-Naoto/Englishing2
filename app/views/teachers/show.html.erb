@@ -16,6 +16,10 @@
         </div>
     </div>
   </div>
+<%= button_to chat_rooms_path(params: { teacher_id: @teacher.id }), { method: :post } do %>
+チャットルームを作成
+<% end %>
+
 <div class='star-container' style='display:flex'>
   <i class="fa-regular fa-star" data-num='1' style='display:block'></i>
   <i class="fa-regular fa-star" data-num='2' style='display:block'></i>
