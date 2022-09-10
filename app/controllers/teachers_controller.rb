@@ -6,6 +6,7 @@ class TeachersController < ApplicationController
 
   def show
     @teacher = Teacher.find(params[:id])
-    @teacher_review = current_student.teacher_reviews.build
+    @teacher_review = current_student.teacher_reviews.build if current_student
+    @teacher_reviews = TeacherReview.all
   end
 end

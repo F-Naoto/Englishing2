@@ -1,43 +1,33 @@
-let numStarRunk = 0
-const starContainer = document.querySelector('.star-container')
+const stars = document.querySelector(".ratings").children;
+const ratingValue = document.getElementById("rating-value");
+const ratingValueDisplay = document.getElementById("rating-value-display");
+let index;
 
-starContainer.addEventListener('mouseout', handleMouseOutStarContainer)
-
-Object.keys(starContainer.children).forEach((key, index) => {
-  starContainer.children[key].addEventListener('click', handleClickStar)
-  starContainer.children[key].addEventListener('mouseover', handleMouseOverStar)
-})
-
-
-function handleClickStar() {
-  numStarRunk = parseInt(this.dataset.num)
+for(let i=0; i<stars.length; i++){
+	stars[i].addEventListener("mouseover",function(){
+		for(let j=0; j<stars.length; j++){
+			stars[j].classList.remove("fa-star");
+			stars[j].classList.add("fa-star-o");
+		}
+		for(let j=0; j<=i; j++){
+			console.log(stars.length)
+			stars[j].classList.remove("fa-star-o");
+			stars[j].classList.add("fa-star");
+		}
+	})
+	stars[i].addEventListener("click",function(){
+		ratingValue.value = i+1;
+		ratingValueDisplay.textContent = ratingValue.value;
+		index = i;
+	})
+	stars[i].addEventListener("mouseout",function(){
+		for(let j=0; j<stars.length; j++){
+			stars[j].classList.remove("fa-star");
+			stars[j].classList.add("fa-star-o");
+		}
+		for(let j=0; j<=index; j++){
+			stars[j].classList.remove("fa-star-o");
+			stars[j].classList.add("fa-star");
+		}
+	})
 }
-
-function handleMouseOverStar() {
-  const numCurrentStar = parseInt(this.dataset.num)
-  const starElements = this.parentNode.children
-
-  Object.keys(starElements).forEach((key, index) => {
-    if(index >= numCurrentStar) return
-    starElements[key].classList.remove('fa-regular')
-    starElements[key].classList.add('fa-solid')
-  })
-}
-
-function handleMouseOutStarContainer() {
-  Object.keys(this.children).forEach((key, index) => {
-    this.children[key].classList.remove('fa-solid')
-    this.children[key].classList.add('fa-regular')
-  })
-
-  Object.keys(this.children).forEach((key, index) => {
-    if(index >= numStarRunk) return
-    this.children[key].classList.remove('fa-regular')
-    this.children[key].classList.add('fa-solid')
-  })
-}
-
-
-
-
-
