@@ -1,7 +1,14 @@
 # frozen_string_literal: true
 
 class Students::RegistrationsController < Devise::RegistrationsController
-  before_action :configure_permitted_parameters, only:[:create]
+  before_action :configure_permitted_parameters, only:[:create, :update]
+
+  def update
+    super
+    if account_update_params[:avatar].present?
+      resource.avatar.attach(account_update_params[:avatar])
+    end
+  end
 
   protected
   # The path used after sign up.
@@ -9,8 +16,12 @@ class Students::RegistrationsController < Devise::RegistrationsController
     student_path(resource)
   end
 
+  def after_update_path_for(resource)
+    teacher_path(current_student)
+  end
+
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:email, :name, :self_introduction])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :avatar])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:email, :name, :self_introduction, :avatar])
   end
 end

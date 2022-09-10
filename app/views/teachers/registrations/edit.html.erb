@@ -5,15 +5,21 @@
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, class: "space-y-6") do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
           <div>
+            <%= f.label :avatar, "アバター", class: "block text-sm font-medium text-neutral-600, mt-3" %>
+            <div class="mt-1">
+              <%= f.file_field :avatar, class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %>
+            </div>
+          </div>
+          <div>
             <%= f.label :name, "ユーザー名", class: "block text-sm font-medium text-neutral-600, mt-3" %>
             <div class="mt-1">
-              <%= f.text_field :name, autofocus: true, class: "form-control", placeholder: "最大10文字", maxlength: 10, class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %>
+              <%= f.text_field :name, autofocus: true, placeholder: "最大10文字", maxlength: 10, class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %>
             </div>
           </div>
           <div class="space-y-1">
             <%= f.label :email, "メールアドレス", class: "block text-sm font-medium text-neutral-600, mt-3" %>
             <div class="mt-1">
-              <%= f.email_field :email, autocomplete: "email", class: "form-control", placeholder: "xxx@email.com", class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %>
+              <%= f.email_field :email, autocomplete: "email", placeholder: "xxx@email.com", class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %>
             </div>
           </div>
           <div class="space-y-1">
@@ -28,7 +34,7 @@
           <div class="space-y-1">
             <%= f.label :password, "パスワード変更(変更したい場合)", class: "block text-sm font-medium text-neutral-600, mt-3" %>
             <div class="mt-1">
-              <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "半角英数6文字以上", class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %>
+              <%= f.password_field :password, autocomplete: "new-password", placeholder: "半角英数6文字以上", class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %>
             </div>
           </div>
           <div class="space-y-1">
