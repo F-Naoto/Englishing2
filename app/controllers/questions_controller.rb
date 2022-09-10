@@ -1,6 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_student!
-  # before_action :authenticate_teacher!
+  # before_action :authenticate_student!
 
   def index
     @questions = Question.page(params[:page]).per(5)

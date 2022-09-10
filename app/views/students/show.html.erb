@@ -1,21 +1,35 @@
-<h1>プロフィール画面</h1>
-  <div class="card" style="width: 60rem;">
-    <div class="card-body">
-      <h5 class="card-title">生徒名：<%=@student.name %></h5>
-      <h5 class="card-title">自己紹介：<%=@student.self_introduction %></h5>
-      <h3 class="card-title">質問数：<%=@student.questions.count %></h3>
-      フォローする！！！
+<h1 class="text-purple-900 font-bold text-2xl text-center mt-10">プロフィール</h1>
+<div class="mt-4 bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden">
+  <div class="sm:flex sm:items-center px-4 py-4">
+    <img class="block h-16 sm:h-24 rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0" src="https://avatars2.githubusercontent.com/u/4323180?s=400&u=4962a4441fae9fba5f0f86456c6c506a21ffca4f&v=4" alt="">
+    <div class="text-center sm:text-left sm:flex-grow">
+      <div class="mb-4">
+        <p class="text-xl leading-tight"><%=@student.name %></p>
+        <p class="text-sm leading-tight text-grey-dark"><%=@student.self_introduction %></p>
+        <p class="text-sm leading-tight text-grey-dark">質問数：<%=@student.questions.count %></p>
+      </div>
+      <div>
+        <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">Message</button>
+        <% if current_student && current_student.id = @student.id %>
+          <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white"><%= link_to "Edit", edit_student_registration_path %>
+          </button>
+        <% end %>
+      </div>
     </div>
   </div>
+</div>
+
 
 <% @student.questions.each do |question|%>
-  <div class="card">
-  <div class="card-header">
-   質問
-  </div>
-  <div class="card-body">
-    <h5 class="card-title"><%=question.title %></h5>
-    <p class="card-text"><%=question.content %></p>
-  </div>
-</div>
+  <%= link_to question_path(question), class: 'link' do %>
+    <div class="bg-white">
+      <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
+        <div class="mt-3 grid sm:grid-cols-1 xl:grid-cols-1 gap-4 md:gap-8">
+          <div class="flex flex-col border rounded-lg p-4 md:p-6">
+            <h3 class="text-lg md:text-xl font-semibold mb-2"><%=question.title %></h3>
+            <h3 class="text-lg md:text-xl font-semibold mb-2"><%=question.content %></h3>
+          </div>
+      </div>
+    </div>
+  <% end %>
 <% end %>
