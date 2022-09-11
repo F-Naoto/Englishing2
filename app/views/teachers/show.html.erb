@@ -151,13 +151,13 @@
 <% form_with(model: @teacher_review, url: teacher_teacher_reviews_path(@teacher), local: true) do |f| %>
     <div class="main-rating">
       <div class="ratings mb-3">
-        <span class="fa fa-star-o" id="star"></span>
-        <span class="fa fa-star-o" id="star"></span>
-        <span class="fa fa-star-o" id="star"></span>
-        <span class="fa fa-star-o" id="star"></span>
-        <span class="fa fa-star-o" id="star"></span>
+        <i class="fa-light fa-star" id="star"></i>
+        <i class="fa-light fa-star" id="star"></i>
+        <i class="fa-light fa-star" id="star"></i>
+        <i class="fa-light fa-star" id="star"></i>
+        <i class="fa-light fa-star" id="star"></i>
       </div>
-      <div class="ml-3 rating-value-display"><span id="rating-value-display">0</span>/5</div>
+    <div class="ml-3 rating-value-display"><span id="rating-value-display">0</span>/5</div>
     </div>
     <% f.hidden_field :teacher_id, value: @teacher.id %>
     <%# <%= f.hidden_field :score, id: "rating-value" %> %>
