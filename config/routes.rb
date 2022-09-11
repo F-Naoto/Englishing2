@@ -33,7 +33,8 @@ Rails.application.routes.draw do
     resource :likes, only:%i[create destroy]
   end
   resources :answers
-  resources :relationships, only:%i[create destroy]
+  resources :st_relationships, only:%i[create destroy]
+  resources :ss_relationships, only:%i[create destroy]
   resources :best_answers, only:%i[create]
   resources :chat_rooms, only:%i[create show]
 end

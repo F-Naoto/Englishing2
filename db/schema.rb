@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_10_143156) do
+ActiveRecord::Schema.define(version: 2022_09_11_134530) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -108,14 +108,24 @@ ActiveRecord::Schema.define(version: 2022_09_10_143156) do
     t.index ["student_id"], name: "index_questions_on_student_id"
   end
 
-  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "ss_relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "follower_id"
     t.bigint "followed_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["followed_id"], name: "index_relationships_on_followed_id"
-    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
-    t.index ["follower_id"], name: "index_relationships_on_follower_id"
+    t.index ["followed_id"], name: "index_ss_relationships_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_ss_relationships_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_ss_relationships_on_follower_id"
+  end
+
+  create_table "st_relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "follower_id"
+    t.bigint "followed_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["followed_id"], name: "index_st_relationships_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_st_relationships_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_st_relationships_on_follower_id"
   end
 
   create_table "students", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -171,8 +181,10 @@ ActiveRecord::Schema.define(version: 2022_09_10_143156) do
   add_foreign_key "likes", "questions"
   add_foreign_key "likes", "students"
   add_foreign_key "questions", "students"
-  add_foreign_key "relationships", "students", column: "follower_id"
-  add_foreign_key "relationships", "teachers", column: "followed_id"
+  add_foreign_key "ss_relationships", "students", column: "followed_id"
+  add_foreign_key "ss_relationships", "students", column: "follower_id"
+  add_foreign_key "st_relationships", "students", column: "follower_id"
+  add_foreign_key "st_relationships", "teachers", column: "followed_id"
   add_foreign_key "teacher_reviews", "students"
   add_foreign_key "teacher_reviews", "teachers"
 end

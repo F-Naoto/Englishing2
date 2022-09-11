@@ -6,10 +6,10 @@ class Teacher < ApplicationRecord
   has_one_attached :avatar
   has_many :answers, dependent: :destroy
   has_many :teacher_reviews, dependent: :destroy
-  has_many :passive_relationships, class_name: "Relationship",
-                                  foreign_key: "followed_id",
-                                  dependent: :destroy
-  has_many :followers, through: :passive_relationships, source: :follower
+  has_many :st_passive_relationships, class_name: "StRelationship",
+                                      foreign_key: "followed_id",
+                                      dependent: :destroy
+  has_many :st_followers, through: :st_passive_relationships, source: :follower
   has_many :best_answers, dependent: :destroy
   has_many :chat_room_users
   has_many :chat_rooms, through: :chat_room_users

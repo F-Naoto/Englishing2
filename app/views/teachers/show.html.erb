@@ -16,13 +16,13 @@
       <div>
         <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">Message</button>
         <% if current_student %>
-        <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">
-          <% if current_student.following?(@teacher) %>
-            <%= render 'partials/unfollow' %>
-          <% else %>
-            <%= render 'partials/follow' %>
-          <% end %>
-        </button>
+          <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">
+            <% if current_student.st_following?(@teacher) %>
+              <%= render 'partials/st_unfollow', teacher: @teacer %>
+            <% else %>
+              <%= render 'partials/st_follow', teacher: @teacher %>
+            <% end %>
+          </button>
         <% end %>
         <% if current_teacher %>
           <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white"><%= link_to "Edit", edit_teacher_registration_path %>
@@ -151,17 +151,16 @@
 <% form_with(model: @teacher_review, url: teacher_teacher_reviews_path(@teacher), local: true) do |f| %>
     <div class="main-rating">
       <div class="ratings mb-3">
-        <i class="fa-light fa-star" id="star"></i>
-        <i class="fa-light fa-star" id="star"></i>
-        <i class="fa-light fa-star" id="star"></i>
-        <i class="fa-light fa-star" id="star"></i>
-        <i class="fa-light fa-star" id="star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
       </div>
     <div class="ml-3 rating-value-display"><span id="rating-value-display">0</span>/5</div>
     </div>
     <% f.hidden_field :teacher_id, value: @teacher.id %>
-    <%# <%= f.hidden_field :score, id: "rating-value" %> %>
-    <% f.hidden_field :score, value: 2 %>
+    <%= f.hidden_field :score, value: "rating-value" %>
     <%= f.text_area :content, class: "textarea" %>
     <%= f.submit "保存", class: "button mt-3" %>
     <%# <%= link_to "他のレビューを見る", ramen_shop_reviews_path(ramen_shop), class: "button light ml-3 mt-3" %> %>
