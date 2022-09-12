@@ -4,22 +4,18 @@
       <div class="text-center mt-6">
         <h1 class="text-purple-900 font-bold text-2xl">回答する</h1>
         <div class="py-8 border-b border-indigo-50">
-            <div class: "flex-1 justify-center">
-              <div><%= f.label :title, "タイトル" %></div>
-              <div><%= f.text_field :title, class: "border border-gray-300 rounded w-14" %> <br></div>
+          <div class="flex-1 justify-center">
+            <div>
+              <%= f.label :content, "内容" %>
             </div>
-            <div class: "flex-1 justify-center w-20">
-              <div>
-              <%= f.label :content, "質問内容" %>
-              </div>
-              <div>
-                <%= f.text_area :content, class: "w-6/12 border border-gray-300 rounded" %>
-              </div>
+            <div>
+              <%= f.text_area :content, class: "border border-gray-300 rounded w-4/12 h-32" %>
             </div>
-            <%= f.hidden_field :question_id, value: question.id %>
-            <div class: "flex justify-center mt-8">
-              <%= f.submit '回答する', class: "text-white py-2 px-4 rounded-lg bg-purple-700 hover:bg-purple-600 shadow-md font-medium  transition-colors" %>
-            </div>
+          </div>
+          <%= f.hidden_field :question_id, value: question.id %>
+          <div class="flex justify-center mt-8">
+            <%= f.submit '回答する', class: "text-white py-2 px-4 rounded-lg bg-purple-700 hover:bg-purple-600 shadow-md font-medium  transition-colors cursor-pointer" %>
+          </div>
         </div>
       </div>
     <% end %>

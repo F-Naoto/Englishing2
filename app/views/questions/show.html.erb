@@ -1,9 +1,12 @@
 <h1 class="text-purple-900 font-bold text-2xl text-center mt-10">回答ページ</h1>
+<% @question.answers.each do |em| %>
+<%= em.errors.full_messages %>
+<% end %>
 <div class="mt-4 bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden">
   <div class="sm:flex sm:items-center px-4 py-4 ">
     <div class="mb-4">
       <p class="text-xl leading-tight">タイトル：<%= @question.title %></p>
-      <h6 class="card-subtitle mb-2 text-muted">生徒名：<%=link_to @question.student.name, student_path(@question.student) %></h6>
+      <h6 class="card-subtitle mb-2 text-muted">生徒名：<%= link_to @question.student.name, student_path(@question.student) %></h6>
       <p class="text-sm leading-tight text-grey-dark">質問内容：<%= @question.content %></p>
       <%= render 'partials/like', question: @question if current_student %>
       <%= render 'solved_mark',   question: @question %>
