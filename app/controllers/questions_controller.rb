@@ -8,8 +8,8 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     @likes = @question.likes
-    @answer = current_teacher.answers.build
-    @best_answer = current_student.best_answers.build
+    @answer = current_teacher.answers.build if current_teacher
+    @best_answer = current_student.best_answers.build if current_student
   end
 
   def new

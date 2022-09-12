@@ -4,7 +4,7 @@
     <title>Englishing2</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    
+
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -14,6 +14,17 @@
 
   <body>
     <%= render "partials/navbar"%>
+
+    <% if current_student %>
+      <% if unchecked_ss_notifications.any? %>
+      <i class="fa fa-circle" style="color: gold;"></i>
+      <% end %>
+      <li>
+        <%= link_to "NOTICE", ss_notifications_path, class: "btn-default" %>
+      </li>
+    <% end %>
+
+
     <%= yield %>
   </body>
 </html>

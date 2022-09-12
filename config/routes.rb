@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   resources :answers
   resources :st_relationships, only:%i[create destroy]
   resources :ss_relationships, only:%i[create destroy]
-  resources :best_answers, only:%i[create]
-  resources :chat_rooms, only:%i[create show]
+  resources :ss_notifications, only:%i[index]
+  resources :best_answers,     only:%i[create]
+  resources :chat_rooms,       only:%i[create show]
 end

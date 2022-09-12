@@ -20,6 +20,8 @@ class Student < ApplicationRecord
   has_many :chat_room_users, dependent: :destroy
   has_many :chat_rooms, through: :chat_room_users
   has_many :chat_messages, dependent: :destroy
+  has_many :ss_active_notifications,  class_name: 'SsNotification', foreign_key: 'visitor_id', dependent: :destroy
+  has_many :ss_passive_notifications, class_name: 'SsNotification', foreign_key: 'visited_id', dependent: :destroy
 
     def st_follow(teacher)
       st_active_relationships.create(followed_id: teacher)
@@ -43,5 +45,16 @@ class Student < ApplicationRecord
 
     def ss_following?(student)
       ss_following.include?(student)
+    end
+
+    def create_notification_follow!(current_student)
+      temp = SsNotification.where(["visitor_id = ? and visited_id = ? and action = ? ", current_student.id, id, 'follow'])
+      if temp.blank?
+        ss_notification = current_student.ss_active_notifications.build(
+          visited_id: id,
+          action: 'follow'
+        )
+        ss_notification.save if ss_notification.valid?
+      end
     end
 end

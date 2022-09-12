@@ -1,4 +1,3 @@
-
 <% if current_student %>
   <%= form_with(model: current_student.ss_active_relationships.find_by(followed_id: student.id),
               html: { method: :delete }, local: true) do |f| %>

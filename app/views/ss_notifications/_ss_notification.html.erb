@@ -1,0 +1,7 @@
+<% visitor = ss_notification.visitor %>
+<% question = ss_notification.question %>
+
+<div class="student-view clearfix ">
+  <%= ss_notification_form(ss_notification) %><span class="moderate-font"><%= " (#{time_ago_in_words(ss_notification.created_at)} 前)" %></span>
+  <br>
+</div>
