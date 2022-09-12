@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
-  get 'best_answers/create'
-  root to: 'home#top'
   devise_for :teachers, controllers: {
     sessions:      'teachers/sessions',
     passwords:     'teachers/passwords',
@@ -12,6 +10,8 @@ Rails.application.routes.draw do
     passwords:     'students/passwords',
     registrations: 'students/registrations'
   }
+  get 'best_answers/create'
+  root to: 'home#top'
   resources :students do
     member do
       get :following
