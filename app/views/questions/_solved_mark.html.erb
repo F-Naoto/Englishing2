@@ -1,0 +1,3 @@
+<% if BestAnswer.where(question_id: question.id).exists? %>
+  <%= image_tag "solved.png", class: "w-30" %>
+<% end %>

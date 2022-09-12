@@ -18,7 +18,7 @@
         <% if current_student %>
           <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">
             <% if current_student.st_following?(@teacher) %>
-              <%= render 'partials/st_unfollow', teacher: @teacer %>
+              <%= render 'partials/st_unfollow', teacher: @teacher %>
             <% else %>
               <%= render 'partials/st_follow', teacher: @teacher %>
             <% end %>
