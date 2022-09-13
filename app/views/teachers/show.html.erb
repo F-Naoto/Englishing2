@@ -8,27 +8,33 @@
         <% else %>
           <img src="https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=256" loading="lazy" alt="Photo by Radu Florin" class="w-40 h-full object-cover object-center" />
         <% end %>
-        <div><p class="text-xl leading-tight"><%=@teacher.name %></p></div>
-        <div><p class="text-sm leading-tight text-grey-dark">自己紹介<%=@teacher.self_introduction %></p></div>
-        <div><p class="text-sm leading-tight text-grey-dark">回答数</p></div>
-        <div><p class="text-sm leading-tight text-grey-dark">評価</p></div>
-      </div>
-      <div class="text-center">
-        <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">Message</button>
-        <% if current_student %>
-          <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">
-            <% if current_student.st_following?(@teacher) %>
-              <%= render 'partials/st_unfollow', teacher: @teacher %>
-            <% else %>
-              <%= render 'partials/st_follow', teacher: @teacher %>
+        <div class="sm:text-left sm:flex-grow">
+          <div class="mb-4">
+          <p class="text-xl leading-tight"><%=@teacher.name %></p>
+          <p class="text-sm leading-tight text-grey-dark">自己紹介<%=@teacher.self_introduction %></p>
+          <p class="text-sm leading-tight text-grey-dark">回答数</p>
+          <p class="text-sm leading-tight text-grey-dark">評価</p>
+          </div>
+          <div class="text-center">
+            <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">
+              Message
+            </button>
+            <% if current_student %>
+              <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">
+                <% if current_student.st_following?(@teacher) %>
+                  <%= render 'partials/st_unfollow', teacher: @teacher %>
+                <% else %>
+                  <%= render 'partials/st_follow', teacher: @teacher %>
+                <% end %>
+              </button>
             <% end %>
-          </button>
-        <% end %>
-        <% if current_teacher %>
-          <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">
-            <%= link_to "Edit", edit_teacher_registration_path %>
-          </button>
-        <% end %>
+            <% if current_teacher && current_teacher.id == @teacher.id %>
+              <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">
+                <%= link_to "Edit", edit_teacher_registration_path %>
+              </button>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -38,13 +44,12 @@
   <% @teacher.teacher_reviews.limit(5).each do |teacher_review| %>
     <div class="w-2/5 m-auto">
       <div class="flex flex-col gap-3 py-4 md:py-8 border-b-2">
-          <div>
-            <span class="block text-sm font-bold"><%= teacher_review.student.name %></span>
-            <span class="block text-gray-500 text-sm"><%= teacher_review.created_at %></span>
-          </div>
-          <%= render 'star', teacher: @teacher, teacher_review: teacher_review %>
-          <p class="text-gray-600"><%= teacher_review.content %></p>
+        <div>
+          <span class="block text-sm font-bold"><%= teacher_review.student.name %></span>
+          <span class="block text-gray-500 text-sm"><%= teacher_review.created_at %></span>
         </div>
+        <%= render 'star', teacher: @teacher, teacher_review: teacher_review %>
+        <p class="text-gray-600"><%= teacher_review.content %></p>
       </div>
     </div>
   <% end %>
