@@ -2,6 +2,7 @@
 
 class Teachers::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, only: [:create, :update]
+  
   def update
     super
     if account_update_params[:avatar].present?
