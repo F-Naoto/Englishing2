@@ -1,19 +1,19 @@
 <h1 class="text-purple-900 font-bold text-2xl text-center mt-10">プロフィール</h1>
-<div class="mt-4 bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden">
+<div class="mt-4 bg-white mx-auto max-w-md shadow-lg rounded-lg overflow-hidden">
   <div class="sm:flex sm:items-center px-4 py-4">
-    <% if @teacher.avatar.attached? %>
-      <%= image_tag @teacher.avatar, class: "block h-16 sm:h-24 rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0" %>
-    <% else %>
-      <img src="https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=256" loading="lazy" alt="Photo by Radu Florin" class="w-full h-full object-cover object-center" />
-    <% end %>
-    <div class="text-center sm:text-left sm:flex-grow">
+    <div class="w-3/5 text-center sm:text-left sm:flex-grow">
       <div class="mb-4">
-        <p class="text-xl leading-tight"><%=@teacher.name %></p>
-        <p class="text-sm leading-tight text-grey-dark">自己紹介:<%=@teacher.self_introduction %></p>
-        <p class="text-sm leading-tight text-grey-dark">回答数</p>
-        <p class="text-sm leading-tight text-grey-dark">評価</p>
+        <% if @teacher.avatar.attached? %>
+          <%= image_tag @teacher.avatar, class: "w-40 block h-full sm:h-24 rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0" %>
+        <% else %>
+          <img src="https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=256" loading="lazy" alt="Photo by Radu Florin" class="w-40 h-full object-cover object-center" />
+        <% end %>
+        <div><p class="text-xl leading-tight"><%=@teacher.name %></p></div>
+        <div><p class="text-sm leading-tight text-grey-dark">自己紹介<%=@teacher.self_introduction %></p></div>
+        <div><p class="text-sm leading-tight text-grey-dark">回答数</p></div>
+        <div><p class="text-sm leading-tight text-grey-dark">評価</p></div>
       </div>
-      <div>
+      <div class="text-center">
         <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">Message</button>
         <% if current_student %>
           <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">
@@ -40,10 +40,7 @@
           <span class="block text-sm font-bold"><%= teacher_review.student.name %></span>
           <span class="block text-gray-500 text-sm"><%= teacher_review.created_at %></span>
         </div>
-        <!-- stars - start -->
-        <div class="flex gap-0.5 -ml-1">
-          <span class="text-3xl text-gray-200">★</span>
-        </div>
+        <%= render 'star', teacher: @teacher, teacher_reviews: @teacher.teacher_reviews %>
         <p class="text-gray-600"><%= teacher_review.content %></p>
       </div>
     </div>
