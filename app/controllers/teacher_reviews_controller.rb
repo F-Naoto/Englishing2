@@ -2,7 +2,6 @@ class TeacherReviewsController < ApplicationController
   before_action :authenticate_student!, only: [:create]
   def index
     @teacher = Teacher.find(params[:teacher_id])
-    @teacher_reviews = @teacher.teacher_reviews
   end
 
   def create
