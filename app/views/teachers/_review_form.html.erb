@@ -1,0 +1,19 @@
+<div class="rating-box mt-10 text-center">
+  <h2 class="text-xl font-bold">レビューする</h2>
+  <%= form_with(model: teacher_review, url: teacher_teacher_reviews_path(teacher), local: true) do |f| %>
+    <div class="main-rating">
+      <div class="ratings mt-6 mb-3">
+        <span class="text-3xl text-gray-200">★</span>
+        <span class="text-3xl text-gray-200">★</span>
+        <span class="text-3xl text-gray-200">★</span>
+        <span class="text-3xl text-gray-200">★</span>
+        <span class="text-3xl text-gray-200">★</span>
+      </div>
+      <div class="rating-value-display text-2xl"><span id="rating-value-display">0</span>/5</div>
+    </div>
+    <%= f.hidden_field :teacher_id, value: teacher.id %>
+    <%= f.hidden_field :score, id: "rating-value" %>
+    <%= f.text_area :content, class: "border border-gray-300 rounded w-4/12 h-32 mt-6" %><br>
+    <%= f.submit "保存", class: "button mt-3 flex items-center justify-center w-3/12 cursor-pointer m-auto px-8 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+  <% end %>
+</div>

@@ -8,9 +8,11 @@ class TeacherReviewsController < ApplicationController
   def create
     @teacher_review = current_student.teacher_reviews.build(teacher_review_params)
     if @teacher_review.save
+      flash[:notice] = "レビューを投稿しました。"
       redirect_to teacher_teacher_reviews_path(@teacher_review.teacher)
     else
-      render teachers_path
+      flash[:alert] = "レビューを投稿できませんでした。"
+      #保留
     end
   end
 
