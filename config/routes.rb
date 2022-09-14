@@ -14,16 +14,22 @@ Rails.application.routes.draw do
   root to: 'home#top'
   resources :students do
     member do
-      get :following
+      get :st_following
+    end
+    member do
+      get :ss_following
+    end
+    member do
+      get :ss_follower
     end
     collection do
       get 'search'
     end
   end
   resources :teachers do
-    member do
-      get :followers
-    end
+    # member do
+    #   get :followers
+    # end
     collection do
       get 'search'
     end

@@ -9,13 +9,17 @@ class Student < ApplicationRecord
   has_many :teacher_reviews, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :st_active_relationships, class_name: "StRelationship",
-                                    foreign_key: "follower_id",
-                                    dependent: :destroy
+                                     foreign_key: "follower_id",
+                                     dependent: :destroy
   has_many :st_following, through: :st_active_relationships, source: :followed
   has_many :ss_active_relationships, class_name: "SsRelationship",
-                                    foreign_key: "follower_id",
-                                    dependent: :destroy
+                                     foreign_key: "follower_id",
+                                     dependent: :destroy
   has_many :ss_following, through: :ss_active_relationships, source: :followed
+  has_many :ss_passive_relationships, class_name: "SsRelationship",
+                                      foreign_key: "followed_id",
+                                      dependent: :destroy
+  has_many :ss_follower, through: :ss_passive_relationships, source: :follower
   has_many :best_answers, dependent: :destroy
   has_many :chat_room_users, dependent: :destroy
   has_many :chat_rooms, through: :chat_room_users
