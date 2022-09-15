@@ -1,8 +1,6 @@
+<h1 class="text-gray-800 text-3xl lg:text-3xl font-bold text-center mb-4 md:mb-6 mt-20"><%= "Student Followers of #{@student.name}" %></h1>
 <div class="bg-white py-6 sm:py-8 lg:py-12">
   <div class="max-w-screen-xl px-4 md:px-8 mx-auto">
-    <div class="mb-10 md:mb-16">
-      <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6"><%= "#{@student.name}の生徒フォロワー一覧" %></h2>
-    </div>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-x-4 lg:gap-x-8 gap-y-8 lg:gap-y-12">
       <% @ss_followers.each do |ss_follower| %>
         <div class="flex flex-col items-center">
