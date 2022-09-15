@@ -22,7 +22,7 @@
         <div class="flex flex-col items-center overflow-hidden">
           <div class="w-24 md:w-32 h-24 md:h-32 bg-gray-100 rounded-full overflow-hidden shadow-lg mb-2 md:mb-4">
             <% if teacher.avatar.attached? %>
-              <%= image_tag teacher.avatar, class: "block h-16 sm:h-24 rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0" %>
+              <%= image_tag teacher.avatar, class: "m-auto w-40 h-40 rounded-full object-cover object-center" %>
             <% else %>
               <img src="https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=256" loading="lazy" alt="Photo by Radu Florin" class="w-full h-full object-cover object-center" />
             <% end %>

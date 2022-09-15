@@ -1,12 +1,12 @@
 <h1 class="text-gray-800 text-3xl lg:text-3xl font-bold text-center mb-4 md:mb-6 mt-20">Student Profile</h1>
 <div class="mt-4 bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden">
-  <div class="sm:flex sm:items-center px-4 py-4">
-    <div class="w-3/5 text-center sm:text-left sm:flex-grow">
+  <div class="px-4 py-4">
+    <div class="m-auto w-3/5 text-center sm:text-left sm:flex-grow">
       <div class="mb-4">
         <% if @student.avatar.attached? %>
-          <%= image_tag @student.avatar, class: "w-40 block h-full sm:h-24 rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0" %>
+          <%= image_tag @student.avatar, class: "m-auto w-40 h-40 rounded-full object-cover object-center" %>
         <% else %>
-          <img src="https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=256" loading="lazy" alt="Photo by Radu Florin" class="w-40 h-full object-cover object-center" />
+          <img src="https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=256" loading="lazy" alt="Photo by Radu Florin" class="m-auto w-40 h-full object-cover object-center">
         <% end %>
         <div class="text-center sm:flex-grow">
           <div class="mb-4">
@@ -18,27 +18,27 @@
             <p><%= link_to @student.ss_following.count, ss_following_student_path(@student), class: 'text-sm leading-tight text-blue-500 underline' %>フォロー（生徒）</p>
             <p><%= link_to @student.ss_follower.count, ss_follower_student_path(@student), class: 'text-sm leading-tight text-blue-500 underline' %>フォロワー（生徒）</p>
           </div>
-          <div class="text-center">
-            <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">
-              Message
-            </button>
-            <% if current_student %>
-              <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">
-                <% if current_student.ss_following?(@student) %>
-                  <%= render 'partials/ss_unfollow', student: @student %>
-                <% else %>
-                  <%= render 'partials/ss_follow', student: @student %>
-                <% end %>
-              </button>
-              <% end %>
-              <% if current_student && current_student.id == @student.id %>
-              <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white"><%= link_to "Edit", edit_student_registration_path %>
-              </button>
-              <% end %>
-            </div>
-          </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="text-center">
+    <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">
+      Message
+    </button>
+    <% if current_student %>
+      <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">
+        <% if current_student.ss_following?(@student) %>
+          <%= render 'partials/ss_unfollow', student: @student %>
+        <% else %>
+          <%= render 'partials/ss_follow', student: @student %>
+        <% end %>
+      </button>
+      <% end %>
+      <% if current_student && current_student.id == @student.id %>
+      <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white"><%= link_to "Edit", edit_student_registration_path %>
+      </button>
+      <% end %>
     </div>
   </div>
 </div>
