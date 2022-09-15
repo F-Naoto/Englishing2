@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     registrations: 'students/registrations'
   }
   get 'best_answers/create'
+  get 'teacher_reviews/ranking', to: 'teacher_reviews#ranking'
   root to: 'home#top'
   resources :students do
     member do
@@ -27,9 +28,6 @@ Rails.application.routes.draw do
     end
   end
   resources :teachers do
-    # member do
-    #   get :followers
-    # end
     collection do
       get 'search'
     end

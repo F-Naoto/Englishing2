@@ -1,0 +1,22 @@
+<h1 class="text-gray-800 text-3xl lg:text-3xl font-bold text-center mb-4 md:mb-6 mt-20">Teacher Ranking</h1>
+<div class="reviews-list mt-10">
+  <% @teachers.each_with_index do |teacher, index| %>
+    <%= link_to teacher_path(teacher) do %>
+      <div class="w-2/5 m-auto mt-4 text-center">
+        <div class="flex flex-col gap-3 py-4 md:py-8 border-b-2">
+          <div>
+            <span class="text-3xl text-yellow-400 font-bold"><%= "#{index+1}位"%></span>
+          </div>
+          <div>
+            <span></span>
+            <%= "#{teacher.name}先生" %>
+          </div>
+          <div>
+            <span></span>
+            <%= "平均点：#{teacher.average_score}点" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

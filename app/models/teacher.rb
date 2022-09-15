@@ -25,7 +25,8 @@ class Teacher < ApplicationRecord
 
   def review_score_percentage
     unless self.teacher_reviews.empty?
-      teacher_reviews.average(:score).round(1).to_f*100/5
+      average = teacher_reviews.average(:score).to_f*100/5
+      average.round(1)
     else
       0.0
     end

@@ -24,8 +24,12 @@ class Student < ApplicationRecord
   has_many :chat_room_users, dependent: :destroy
   has_many :chat_rooms, through: :chat_room_users
   has_many :chat_messages, dependent: :destroy
-  has_many :ss_active_notifications,  class_name: 'SsNotification', foreign_key: 'visitor_id', dependent: :destroy
-  has_many :ss_passive_notifications, class_name: 'SsNotification', foreign_key: 'visited_id', dependent: :destroy
+  has_many :ss_active_notifications,  class_name: 'SsNotification',
+                                      foreign_key: 'visitor_id',
+                                      dependent: :destroy
+  has_many :ss_passive_notifications, class_name: 'SsNotification',
+                                      foreign_key: 'visited_id',
+                                      dependent: :destroy
 
     def st_follow(teacher)
       st_active_relationships.create(followed_id: teacher)

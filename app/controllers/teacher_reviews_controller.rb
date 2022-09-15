@@ -1,5 +1,7 @@
 class TeacherReviewsController < ApplicationController
   before_action :authenticate_student!, only: [:create]
+  after_action  :change_average_score,  only: [:create]
+
   def index
     @teacher = Teacher.find(params[:teacher_id])
   end
@@ -29,11 +31,21 @@ class TeacherReviewsController < ApplicationController
     end
   end
 
+  def change_average_score
+    @teacher = Teacher.find(teacher_review_params[:teacher_id])
+    average_score = @teacher.average_score
+    @teacher.update(average_score: average_score)
+  end
+
   #   def destroy
   #     Teacher.find(params[:id]).destroy
   #     flash[:success] = "User deleted"
   #     redirect_to teachers_url
   #   end
+
+  def ranking
+    @teachers = Teacher.order(average_score: :DESC).limit(10)
+  end
 
   private
     def teacher_review_params

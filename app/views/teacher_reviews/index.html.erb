@@ -1,12 +1,12 @@
 <div class="reviews-list mt-10">
-  <h2 class="text-2xl font-bold text-center text-purple-900 font-bold mt-10"><%= @teacher.name %>のレビュー一覧</h2>
+  <h1 class="text-2xl font-bold text-center text-purple-900 font-bold mt-10"><%= @teacher.name %>のレビュー一覧</h1>
   <div class="text-center mt-8 text-xl">
     <div>
-      <p>ユーザー平均点</p>
+      <p>生徒平均点</p>
       <%= "#{@teacher.average_score}点" %>
     </div>
     <div class="mt-4">
-      <p>ユーザー満足度</p>
+      <p>生徒満足度</p>
       <%= "#{@teacher.review_score_percentage}%" %>
     </div>
   </div>

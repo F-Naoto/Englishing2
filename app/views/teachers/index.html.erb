@@ -1,14 +1,11 @@
+<h1 class="text-gray-800 text-3xl lg:text-3xl font-bold text-center mb-4 md:mb-6 mt-20">Meet Your Teacher</h1>
 <div class="bg-white py-6 sm:py-8 lg:py-12">
   <div class="max-w-screen-xl px-4 md:px-8 mx-auto">
-    <div class="mb-10 md:mb-16">
-      <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6">Meet your teacher</h2>
-    </div>
     <%= search_form_for @search do |f| %>
       <%= f.label :self_introduction_cont, "キーワード" %>
       <%= f.search_field :self_introduction_cont %>
       <div class="actions"><%= f.submit "検索" %></div>
     <% end %>
-
     <div class="grid grid-cols-2 md:grid-cols-4 gap-x-4 lg:gap-x-8 gap-y-8 lg:gap-y-12">
       <% @teachers.each do |teacher| %>
         <div class="flex flex-col items-center overflow-hidden">
@@ -29,9 +26,4 @@
   </div>
 </div>
 
-
-
-<ul class="teachers">
-
-</ul>
 <div class='p-top__paginate'><%= paginate(@teachers) %></div>
