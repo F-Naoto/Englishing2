@@ -6,7 +6,7 @@
         <% if @teacher.avatar.attached? %>
           <%= image_tag @teacher.avatar, class: "m-auto w-40 h-40 rounded-full object-cover object-center" %>
         <% else %>
-          <img src="https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=256" loading="lazy" alt="Photo by Radu Florin" class="m-auto w-40 h-full object-cover object-center">
+          <img src="https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=256" loading="lazy" alt="Photo by Radu Florin" class="m-auto w-40 h-40 rounded-full object-cover object-center">
         <% end %>
         <div class="sm:text-left sm:flex-grow">
           <div class="mb-4">

@@ -7,13 +7,20 @@
           <div>
             <span class="text-3xl text-yellow-400 font-bold"><%= "#{index+1}位"%></span>
           </div>
-          <div>
-            <span></span>
-            <%= "#{teacher.name}先生" %>
-          </div>
-          <div>
-            <span></span>
-            <%= "平均点：#{teacher.average_score}点" %>
+          <div class="flex item-center">
+            <% if teacher.avatar.attached? %>
+              <%= image_tag teacher.avatar, class: "mx-10 w-40 h-40 rounded-full object-cover object-center" %>
+            <% else %>
+              <img src="https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=256" loading="lazy" alt="Photo by Radu Florin" class="mx-10 w-40 h-40 rounded-full object-cover object-center">
+            <% end %>
+            <div class="mt-6">
+              <div>
+                <span class="text-3xl"><%= "#{teacher.name}先生" %></span>
+              </div>
+              <div>
+                <span class="text-2xl"><%= "平均点：#{teacher.average_score}点" %></span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
