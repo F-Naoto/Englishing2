@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    models:
+      student: '生徒'
+      teacher: '先生'
+    attributes:
+      user:
+        email: 'メールアドレス'
+        password: 'パスワード'
+        password_confirmation: 'パスワード確認'
+        name: '名前'
+# model全体に対応させるときはmodelsの階層を作り、
+# カラム名を対応させるときはattributesの階層を作って日本語化にする文字を記入。

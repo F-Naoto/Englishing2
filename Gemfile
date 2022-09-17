@@ -65,3 +65,4 @@ gem 'rubocop'
 gem 'rubocop-rails', require: false
 gem "tailwindcss-rails", "~> 2.0"
 gem 'psych', '~> 3.1'
+gem 'rails-i18n'
