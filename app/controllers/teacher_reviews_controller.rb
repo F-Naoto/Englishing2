@@ -13,7 +13,6 @@ class TeacherReviewsController < ApplicationController
       redirect_to teacher_teacher_reviews_path(@teacher_review.teacher)
     else
       flash[:alert] = "レビューを投稿できませんでした。"
-      #保留
     end
   end
 

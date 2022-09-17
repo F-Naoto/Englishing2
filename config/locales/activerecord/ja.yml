@@ -1,13 +1,14 @@
 ja:
   activerecord:
     models:
-      student: '生徒'
-      teacher: '先生'
+      # view側： User.model_name.human => "ユーザ" / t("activerecord.models.user")と同じ
+      student: 生徒
+      teacher: 先生
+      teacher_review: 先生レビュー
+    # model毎に定義したいattributesを記述
     attributes:
-      user:
-        email: 'メールアドレス'
-        password: 'パスワード'
-        password_confirmation: 'パスワード確認'
-        name: '名前'
-# model全体に対応させるときはmodelsの階層を作り、
-# カラム名を対応させるときはattributesの階層を作って日本語化にする文字を記入。
+        teacher_review:
+          id: ID
+          # view側： User.human_attribute_name :name => "名前" /　t("activerecord.attributes.user.name")と同じ
+          score: 点数
+          content: 内容
