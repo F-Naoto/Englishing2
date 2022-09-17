@@ -19,9 +19,9 @@
               <img src="https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=256" loading="lazy" alt="Photo by Radu Florin" class="w-full h-full object-cover object-center" />
             <% end %>
           </div>
-          <div>
+          <div class="break-words", style="word-break: break-all;">
             <div class="text-indigo-500 md:text-lg font-bold text-center"><%= link_to student.name, student %></div>
-            <p class="text-gray-500 text-sm md:text-base text-center mb-3 md:mb-4"><%= student.self_introduction %></p>
+            <p class="text-gray-500 text-sm md:text-base text-center mb-3 md:mb-4 px-6 py-4"><%= student.self_introduction %></p>
           </div>
         </div>
       <% end %>
