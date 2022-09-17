@@ -28,6 +28,13 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def destroy
+    @question = Question.find(params[:id])
+    @question.destroy
+    flash[:success] = "質問を削除しました。"
+    redirect_to questions_path
+  end
+
     private
       def question_params
         params.permit(:title, :content)

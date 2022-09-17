@@ -3,6 +3,5 @@ class Answer < ApplicationRecord
 
   belongs_to :teacher
   belongs_to :question
-  has_many   :best_answers, dependent: :destroy
   validates  :content, presence: true, length: {minimum:1, maximum:300}
 end

@@ -13,10 +13,10 @@ const appRoom = consumer.subscriptions.create("RoomChannel", {
   }
 });
 
-window.addEventListener("keypress", function(e) {
-  if (e.keyCode === 13) {
-    appRoom.speak(e.target.value);
-    e.target.value = '';
-    e.preventDefault();
-  }
-})
+// window.addEventListener("keypress", function(e) {
+//   if (e.keyCode === 13) {
+//     appRoom.speak(e.target.value);
+//     e.target.value = '';
+//     e.preventDefault();
+//   }
+// })
