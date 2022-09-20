@@ -1,3 +1,5 @@
+
+<% if current_student %>
 <div class="rating-box mt-3">
   <%= form_with(model: teacher_review, url: teacher_teacher_reviews_path(teacher), local: true) do |f| %>
     <div class="main-rating">
@@ -16,5 +18,8 @@
     <%= f.submit "保存", class: "button mt-3" %>
   <% end %>
 </div>
+
+<% end %>
+
 
 <%= javascript_include_tag 'review.js' %>

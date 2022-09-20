@@ -1,14 +1,32 @@
 ja:
   activerecord:
     models:
-      # view側： User.model_name.human => "ユーザ" / t("activerecord.models.user")と同じ
       student: 生徒
       teacher: 先生
       teacher_review: 先生レビュー
-    # model毎に定義したいattributesを記述
     attributes:
-        teacher_review:
-          id: ID
-          # view側： User.human_attribute_name :name => "名前" /　t("activerecord.attributes.user.name")と同じ
-          score: 点数
-          content: 内容
+      student:
+        name: 名前
+        email: メールアドレス
+        self_introduction: 自己紹介
+        password: パスワード
+        password_confirmation: パスワード確認
+      teacher:
+        name: 名前
+        email: メールアドレス
+        self_introduction: 自己紹介
+        password: パスワード
+        password_confirmation: パスワード確認
+      teacher_review:
+        score: 点数
+        content: 内容
+  errors:
+    messages:
+      already_confirmed: は既に登録済みです。ログインしてください。
+      confirmation_period_expired: の期限が切れました。%{period} までに確認する必要があります。 新しくリクエストしてください。
+      expired: の有効期限が切れました。新しくリクエストしてください。
+      not_found: は見つかりませんでした。
+      not_locked: は凍結されていません。
+      not_saved:
+        one: エラーが発生したため %{resource} は保存されませんでした。
+        other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"

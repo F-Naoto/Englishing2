@@ -31,38 +31,43 @@ class Student < ApplicationRecord
                                       foreign_key: 'visited_id',
                                       dependent: :destroy
 
-    def st_follow(teacher)
-      st_active_relationships.create(followed_id: teacher)
-    end
+  validates :name, presence: true, length: {minimum: 5, maximum: 15}
+  validates :email, presence: true, length: {minimum: 5, maximum:30}
+  validates :password, presence: true, length: {minimum:6, maximum:15}
+  validates :password_confirmation, presence: true, length: {minimum:6, maximum:15}
 
-    def st_unfollow(teacher)
-      st_active_relationships.find_by(followed_id: teacher)
-    end
+  def st_follow(teacher)
+    st_active_relationships.create(followed_id: teacher)
+  end
 
-    def st_following?(teacher)
-      st_following.include?(teacher)
-    end
+  def st_unfollow(teacher)
+    st_active_relationships.find_by(followed_id: teacher)
+  end
 
-    def ss_follow(student)
-      ss_active_relationships.create(followed_id: student)
-    end
+  def st_following?(teacher)
+    st_following.include?(teacher)
+  end
 
-    def ss_unfollow(student)
-      ss_active_relationships.find_by(followed_id: student)
-    end
+  def ss_follow(student)
+    ss_active_relationships.create(followed_id: student)
+  end
 
-    def ss_following?(student)
-      ss_following.include?(student)
-    end
+  def ss_unfollow(student)
+    ss_active_relationships.find_by(followed_id: student)
+  end
 
-    def create_notification_follow!(current_student)
-      temp = SsNotification.where(["visitor_id = ? and visited_id = ? and action = ? ", current_student.id, id, 'follow'])
-      if temp.blank?
-        ss_notification = current_student.ss_active_notifications.build(
-          visited_id: id,
-          action: 'follow'
-        )
-        ss_notification.save if ss_notification.valid?
-      end
+  def ss_following?(student)
+    ss_following.include?(student)
+  end
+
+  def create_notification_follow!(current_student)
+    temp = SsNotification.where(["visitor_id = ? and visited_id = ? and action = ? ", current_student.id, id, 'follow'])
+    if temp.blank?
+      ss_notification = current_student.ss_active_notifications.build(
+        visited_id: id,
+        action: 'follow'
+      )
+      ss_notification.save if ss_notification.valid?
     end
+  end
 end
