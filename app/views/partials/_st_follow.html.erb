@@ -1,6 +1,0 @@
-<% if current_student %>
-  <%= form_with(model: current_student.st_active_relationships.build, local: true) do |f| %>
-    <%= hidden_field_tag :followed_id, teacher.id %>
-    <%= f.submit "Follow" %>
-  <% end %>
-<% end %>

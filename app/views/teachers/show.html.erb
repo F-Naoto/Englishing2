@@ -8,26 +8,19 @@
         <% else %>
           <img src="https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=256" loading="lazy" alt="Photo by Radu Florin" class="m-auto w-40 h-40 rounded-full object-cover object-center">
         <% end %>
-        <div class="sm:text-left sm:flex-grow">
+        <div class="sm:flex-grow">
           <div class="mb-4">
-          <p class="text-xl leading-tight"><%=@teacher.name %></p>
-          <p class="text-sm leading-tight text-grey-dark">自己紹介<%=@teacher.self_introduction %></p>
-          <p class="text-sm leading-tight text-grey-dark">回答数</p>
-          <p class="text-sm leading-tight text-grey-dark">評価</p>
+            <p class="text-xl leading-tight text-center pt-3"><%=@teacher.name %></p>
+            <p class="text-sm leading-tight text-grey-dark text-center">回答数<%= @teacher.answers.count %></p>
+            <p class="text-sm leading-tight text-grey-dark text-center">評価<%= @teacher.average_score %></p>
+            <p><%= link_to @teacher.st_followers.count, "", class: 'text-sm leading-tight text-blue-500 underline text-center', id:'followers' %>フォロワー（生徒）</p>
+            <p class="text-sm leading-tight text-grey-dark text-left py-3">自己紹介<%=@teacher.self_introduction %></p>
           </div>
           <div class="text-center">
             <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">
               Message
             </button>
-            <% if current_student %>
-              <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">
-                <% if current_student.st_following?(@teacher) %>
-                  <%= render 'partials/st_unfollow', teacher: @teacher %>
-                <% else %>
-                  <%= render 'partials/st_follow', teacher: @teacher %>
-                <% end %>
-              </button>
-            <% end %>
+            <%= render 'students/st_follow_form', teacher: @teacher %>
             <% if current_teacher && current_teacher.id == @teacher.id %>
               <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">
                 <%= link_to "Edit", edit_teacher_registration_path %>
@@ -49,7 +42,7 @@
             <span class="block text-sm font-bold"><%= teacher_review.student.name %></span>
             <span class="block text-gray-500 text-sm"><%= teacher_review.created_at %></span>
           </div>
-          <%= render 'star', teacher: @teacher, teacher_review: teacher_review %>
+          <%= render 'teachers/star', teacher: @teacher, teacher_review: teacher_review %>
           <p class="text-gray-600"><%= teacher_review.content %></p>
         </div>
       </div>
@@ -61,6 +54,6 @@
     <h2 class="text-xl font-bold text-center">レビューはまだありません。</h2>
   <% end %>
 </div>
-<%= render 'review_form', teacher: @teacher, teacher_review: @teacher_review %>
+<%= render 'teacher_reviews/review_form', teacher: @teacher, teacher_review: @teacher_review %>
 
 <%= javascript_include_tag 'review.js' %>

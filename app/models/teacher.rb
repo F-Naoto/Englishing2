@@ -14,6 +14,10 @@ class Teacher < ApplicationRecord
   has_many :chat_room_users
   has_many :chat_rooms, through: :chat_room_users
   has_many :chat_messages, dependent: :destroy
+  # validates :name, presence: true, length: {minimum: 5, maximum: 15}
+  # validates :email, presence: true, length: {minimum: 5, maximum:30}
+  # validates :password, presence: true, length: {minimum:6, maximum:15}
+  # validates :password_confirmation, presence: true, length: {minimum:6, maximum:15}
 
   def average_score
     unless self.teacher_reviews.empty?

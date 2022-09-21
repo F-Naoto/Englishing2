@@ -11,12 +11,14 @@ ja:
         self_introduction: 自己紹介
         password: パスワード
         password_confirmation: パスワード確認
+        current_password: 現在のパスワード
       teacher:
         name: 名前
         email: メールアドレス
         self_introduction: 自己紹介
         password: パスワード
         password_confirmation: パスワード確認
+        current_password: 現在のパスワード
       teacher_review:
         score: 点数
         content: 内容

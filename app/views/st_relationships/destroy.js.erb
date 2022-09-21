@@ -1,0 +1,4 @@
+follow_form = document.querySelector("#follow_form")
+followers = document.querySelector("#followers")
+follow_form.innerHTML = "<%= j(render('students/st_follow', teacher: @followed_teacher)) %>"
+followers.innerHTML = "<%= @followed_teacher.st_followers.count %>"

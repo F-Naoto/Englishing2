@@ -12,8 +12,9 @@ class TeacherReviewsController < ApplicationController
       flash[:notice] = "レビューを投稿しました。"
       redirect_to teacher_teacher_reviews_path(@teacher_review.teacher)
     else
-      flash[:alert] = "レビューを投稿できませんでした。"
-      render "teachers/#{@teacher_review.teacher.id}"
+      @teacher = @teacher_review.teacher
+      flash.now[:alert] = "レビューを投稿できませんでした。"
+      render "teachers/show"
     end
   end
 
