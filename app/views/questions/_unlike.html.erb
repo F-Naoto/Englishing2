@@ -1,4 +1,4 @@
-<%= button_to question_likes_path(question.id), method: :post, remote: true do %>
-  <i class="far fa-heart"></i>
+<%= button_to question_likes_path(question.id), method: :delete, remote: true do %>
+  <i class="fa fa-heart"></i>
   <%= question.likes.count %>
 <% end %>

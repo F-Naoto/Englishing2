@@ -1,5 +1,5 @@
 <% if question.liked_by?(current_student) %>
-  <%= render 'like', question: question %>
-<% else %>
   <%= render 'unlike', question: question %>
+<% else %>
+  <%= render 'like', question: question %>
 <% end %>
