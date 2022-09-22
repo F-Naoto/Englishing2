@@ -4,13 +4,12 @@ class LikesController < ApplicationController
     @question = Question.find(params[:question_id])
     if like.save
       @question.create_notification_by(current_student)
-      redirect_to question_path(params[:question_id])
     end
   end
 
   def destroy
+    @question = Question.find(params[:question_id])
     like = current_student.likes.find_by(question_id: params[:question_id])
     like.destroy
-    redirect_to question_path(params[:question_id])
   end
 end
