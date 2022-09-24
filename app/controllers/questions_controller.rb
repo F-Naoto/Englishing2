@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
 
   def index
     @search = Question.ransack(params[:q])
-    @questions = @search.result.page(params[:page]).per(5)
+    @questions = @search.result.page(params[:page]).per(8)
   end
 
   def show

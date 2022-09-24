@@ -1,7 +1,7 @@
 class TeachersController < ApplicationController
   def index
     @search = Teacher.ransack(params[:q])
-    @teachers = @search.result.page(params[:page]).per(5)
+    @teachers = @search.result.page(params[:page]).per(8)
   end
 
   def show

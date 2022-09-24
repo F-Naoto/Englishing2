@@ -4,11 +4,10 @@ class StudentsController < ApplicationController
 
   def index
     @search = Student.ransack(params[:q])
-    @students = @search.result.page(params[:page]).per(5)
+    @students = @search.result.page(params[:page]).per(8)
   end
 
   def show
-    # @student = Student.find(params[:id])
   end
 
   def st_following

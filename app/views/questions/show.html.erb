@@ -2,7 +2,10 @@
 <div class="mt-4 bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden">
   <div class="px-4 py-4">
     <div class="mb-4">
-      <%= render 'questions/like_form', question: @question if current_student %>
+      <div class="flex">
+        <%= render 'questions/like_form', question: @question if current_student %>
+        <div class="text-sm leading-tight pl-2", id="likes_count"><%= @question.likes.count %></div>
+      </div>
       <p class="text-xl leading-tight">タイトル：<%= @question.title %></p>
       <h6 class="card-subtitle mb-2 text-muted">生徒名：<%= link_to @question.student.name, student_path(@question.student) %></h6>
       <p class="text-sm leading-tight text-grey-dark">質問内容：<%= @question.content %></p>

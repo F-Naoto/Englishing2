@@ -1,2 +1,4 @@
-heart = document.querySelector(".fa-heart");
+heart = document.querySelector(".like_form");
+likes_count = document.querySelector("#likes_count");
 heart.innerHTML = "<%= j(render('questions/unlike', question: @question)) %>"
+likes_count.innerHTML ="<%= @question.likes.count %>"
