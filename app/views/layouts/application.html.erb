@@ -9,23 +9,11 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
   </head>
 
-  <body>
+  <body class="pt-20 pb-20 m-0">
     <%= render "partials/navbar"%>
     <%= render 'layouts/notification' %>
-
-    <% if current_student %>
-      <% if unchecked_ss_notifications.any? %>
-      <i class="fa fa-circle" style="color: gold;"></i>
-      <% end %>
-      <li>
-        <%= link_to "NOTICE", ss_notifications_path, class: "btn-default" %>
-      </li>
-    <% end %>
-
-
     <%= yield %>
   </body>
 </html>

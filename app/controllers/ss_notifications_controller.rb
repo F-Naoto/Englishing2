@@ -1,14 +1,8 @@
 class SsNotificationsController < ApplicationController
   def index
-    @ss_notifications = current_student.ss_passive_notifications
+    @ss_notifications = current_student.ss_passive_notifications.page(params[:page]).per(20)
     @ss_notifications.where(checked: false).each do |ss_notification|
         ss_notification.update_attributes(checked: true)
-      end
+    end
   end
-
-  # def destroy_all
-  #   #通知を全削除
-  #   @notifications = current_user.passive_notifications.destroy_all
-  #   redirect_to users_notifications_path
-  # end
 end
