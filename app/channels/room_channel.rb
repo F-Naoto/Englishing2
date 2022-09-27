@@ -4,10 +4,13 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    # Any cleanup needed when channel is unsubscribed
   end
 
   def speak(data)
-    ActionCable.server.broadcast 'room_channel', message: data['message']
+    ActionCable.server.broadcast 'room_channel', { content: data['content']}
+    # ChatMessage.create!(content:      data['content'])
+                        # chat_room_id: params['chat_room'],
+                        # teacher_id:   params['chat_room'],
+                        # student_id:   current_student.id)
   end
 end

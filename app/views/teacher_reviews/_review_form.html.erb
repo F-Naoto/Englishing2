@@ -1,7 +1,7 @@
 <% if current_student %>
   <div class="rating-box mt-10 text-center">
     <h2 class="text-xl font-bold">レビューする</h2>
-    <%= form_with(model: teacher_review, url: teacher_teacher_reviews_path(teacher), local: true) do |f| %>
+    <%= form_with(model: teacher_review, url: teacher_teacher_reviews_path(teacher), data:{tabolinks: false}, local: true) do |f| %>
     <%= render 'layouts/error_messages', object: f.object %>
       <div class="main-rating">
         <div class="ratings mt-6 mb-3">

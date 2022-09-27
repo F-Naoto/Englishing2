@@ -1,22 +1,32 @@
-import consumer from "./consumer"
+import consumer from './consumer'
 
-// 「const appRoom =」を追記
-const appRoom = consumer.subscriptions.create("RoomChannel", {
-  // 省略
+$(function() {
+  const chatChannel = consumer.subscriptions.create("RoomChannel", {
+    connected() {
+    },
 
-  received(data) {
-    return alert(data['message']);
-  },
+    disconnected() {
+    },
 
-  speak: function(message) {
-    return this.perform('speak', {message: message});
-  }
+    // received: function(data) {
+    //   return $('#messages').append(data['content']);
+    // },
+    received: function(data) {
+      return alert(data['content']);
+    },
+
+    speak: function(content) {
+      return this.perform('speak', {
+        content: content
+      });
+    }
+  });
+
+  $(document).on('keypress', '[data-behavior~=room_speaker]', function(event) {
+    if (event.keyCode === 13) {
+      chatChannel.speak(event.target.value);
+      event.target.value = '';
+      return event.preventDefault();
+    }
+  });
 });
-
-// window.addEventListener("keypress", function(e) {
-//   if (e.keyCode === 13) {
-//     appRoom.speak(e.target.value);
-//     e.target.value = '';
-//     e.preventDefault();
-//   }
-// })

@@ -1,9 +1,8 @@
-<p>チャットルームページ</p>
-<div id='chat-messages'>
-  <%= render @chat_messages %>
-</div>
-
+<h1>Chat room</h1>
 <form>
   <label>Say something:</label><br>
   <input type="text" data-behavior="room_speaker">
 </form>
+<div id='messages' data-room_id="<%= @chat_room.id %>">
+  <%= render @chat_messages %>
+</div>
