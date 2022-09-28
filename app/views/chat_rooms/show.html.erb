@@ -1,8 +1,9 @@
 <h1>Chat room</h1>
-<form>
-  <label>Say something:</label><br>
-  <input type="text" data-behavior="room_speaker">
-</form>
-<div id='messages' data-room_id="<%= @chat_room.id %>">
+
+<div id='messages'>
   <%= render @chat_messages %>
 </div>
+
+<form>
+  <textarea data-behavior="room_speaker" data-room_id="<%= @chat_room.id %>" data-teacher_id="<%= @chat_room.chat_room_users.map(&:teacher_id).first %>" data-student_id="<%= @chat_room.chat_room_users.map(&:student_id).first %>" placeholder="メッセージを入力" class="chat-room__message-form_textarea"></textarea>
+</form>
