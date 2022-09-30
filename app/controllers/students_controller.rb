@@ -1,5 +1,4 @@
 class StudentsController < ApplicationController
-  before_action :authenticate_student!
   before_action :set_student, only:%i[show st_following ss_following ss_follower]
 
   def index

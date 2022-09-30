@@ -1,6 +1,6 @@
 class RoomChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "room_channel"
+    stream_from "room_channel_#{params['room']}"
   end
 
   def unsubscribed
@@ -12,6 +12,7 @@ class RoomChannel < ApplicationCable::Channel
       chat_room_id: data['room_id'],
       teacher_id:   data['teacher_id'],
       student_id:   data['student_id'],
+      poster:       data['poster'],
     )
   end
 end

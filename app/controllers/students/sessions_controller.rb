@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Students::SessionsController < Devise::SessionsController
+  before_action :check_both_login
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
@@ -26,5 +27,12 @@ class Students::SessionsController < Devise::SessionsController
   # end
   def after_sign_in_path_for(resource)
     student_path(resource)
+  end
+
+  def check_both_login
+    if current_teacher
+      redirect_to root_url
+      flash[:alert] = "先生と生徒は同時にログインできません。先生アカウントをログアウトしてください。"
+    end
   end
 end

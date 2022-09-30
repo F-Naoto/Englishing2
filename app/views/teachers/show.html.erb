@@ -17,7 +17,7 @@
             <p class="text-sm leading-tight text-grey-dark text-left py-3">自己紹介<%=@teacher.self_introduction %></p>
           </div>
           <div class="text-center">
-            <%= render 'teachers/message' %>
+            <%= render 'teachers/message' if current_student %>
             <%= render 'students/st_follow_form', teacher: @teacher %>
             <% if current_teacher && current_teacher.id == @teacher.id %>
               <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">
