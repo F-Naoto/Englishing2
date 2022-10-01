@@ -1,0 +1,327 @@
+kudanaoto@naotoF Englishing2 % git push heroku develop:main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 353 bytes | 353.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Compressing source files... done.
+remote: Building source:
+remote:
+remote: -----> Building on the Heroku-22 stack
+remote: -----> Determining which buildpack to use for this app
+remote:  !     Warning: Multiple default buildpacks reported the ability to handle this app. The first buildpack in the list below will be used.
+remote:                         Detected buildpacks: Ruby,Node.js
+remote:                         See https://devcenter.heroku.com/articles/buildpacks#buildpack-detect-order
+remote: -----> Ruby app detected
+remote: -----> Installing bundler 2.3.10
+remote: -----> Removing BUNDLED WITH version in the Gemfile.lock
+remote: -----> Compiling Ruby/Rails
+remote: -----> Using Ruby version: ruby-3.1.1
+remote: -----> Installing dependencies using bundler 2.3.10
+remote:        Running: BUNDLE_WITHOUT='development:test' BUNDLE_PATH=vendor/bundle BUNDLE_BIN=vendor/bundle/bin BUNDLE_DEPLOYMENT=1 bundle install -j4
+remote:        Fetching gem metadata from https://rubygems.org/.........
+remote:        Fetching rake 13.0.6
+remote:        Installing rake 13.0.6
+remote:        Fetching concurrent-ruby 1.1.10
+remote:        Fetching minitest 5.16.3
+remote:        Fetching zeitwerk 2.6.0
+remote:        Fetching thread_safe 0.3.6
+remote:        Installing zeitwerk 2.6.0
+remote:        Installing minitest 5.16.3
+remote:        Fetching builder 3.2.4
+remote:        Installing thread_safe 0.3.6
+remote:        Fetching erubi 1.11.0
+remote:        Installing builder 3.2.4
+remote:        Installing concurrent-ruby 1.1.10
+remote:        Using racc 1.6.0
+remote:        Fetching crass 1.0.6
+remote:        Installing erubi 1.11.0
+remote:        Fetching rack 2.2.4
+remote:        Installing crass 1.0.6
+remote:        Fetching nio4r 2.5.8
+remote:        Fetching websocket-extensions 0.1.5
+remote:        Installing websocket-extensions 0.1.5
+remote:        Installing rack 2.2.4
+remote:        Installing nio4r 2.5.8 with native extensions
+remote:        Fetching marcel 1.0.2
+remote:        Installing marcel 1.0.2
+remote:        Fetching mini_mime 1.1.2
+remote:        Fetching ast 2.4.2
+remote:        Fetching bcrypt 3.1.18
+remote:        Installing ast 2.4.2
+remote:        Installing mini_mime 1.1.2
+remote:        Installing bcrypt 3.1.18 with native extensions
+remote:        Fetching msgpack 1.5.6
+remote:        Using bundler 2.3.10
+remote:        Fetching coderay 1.1.3
+remote:        Installing msgpack 1.5.6 with native extensions
+remote:        Installing coderay 1.1.3
+remote:        Fetching method_source 1.0.0
+remote:        Installing method_source 1.0.0
+remote:        Fetching thor 1.2.1
+remote:        Installing thor 1.2.1
+remote:        Fetching orm_adapter 0.5.0
+remote:        Installing orm_adapter 0.5.0
+remote:        Fetching diff-lcs 1.5.0
+remote:        Installing diff-lcs 1.5.0
+remote:        Fetching ffi 1.15.5
+remote:        Installing ffi 1.15.5 with native extensions
+remote:        Fetching json 2.6.2
+remote:        Installing json 2.6.2 with native extensions
+remote:        Fetching kaminari-core 1.2.2
+remote:        Installing kaminari-core 1.2.2
+remote:        Fetching mysql2 0.5.4
+remote:        Installing mysql2 0.5.4 with native extensions
+remote:        Fetching parallel 1.22.1
+remote:        Installing parallel 1.22.1
+remote:        Fetching psych 3.3.2
+remote:        Installing psych 3.3.2 with native extensions
+remote:        Fetching rainbow 3.1.1
+remote:        Installing rainbow 3.1.1
+remote:        Fetching regexp_parser 2.5.0
+remote:        Installing regexp_parser 2.5.0
+remote:        Fetching rexml 3.2.5
+remote:        Installing rexml 3.2.5
+remote:        Fetching rspec-support 3.11.0
+remote:        Installing rspec-support 3.11.0
+remote:        Fetching ruby-progressbar 1.11.0
+remote:        Installing ruby-progressbar 1.11.0
+remote:        Fetching unicode-display_width 2.2.0
+remote:        Installing unicode-display_width 2.2.0
+remote:        Fetching tilt 2.0.11
+remote:        Installing tilt 2.0.11
+remote:        Fetching turbolinks-source 5.2.0
+remote:        Installing turbolinks-source 5.2.0
+remote:        Fetching nokogiri 1.13.8 (x86_64-linux)
+remote:        Installing nokogiri 1.13.8 (x86_64-linux)
+remote:        Fetching tzinfo 1.2.10
+remote:        Installing tzinfo 1.2.10
+remote:        Fetching websocket-driver 0.7.5
+remote:        Installing websocket-driver 0.7.5 with native extensions
+remote:        Fetching i18n 1.12.0
+remote:        Installing i18n 1.12.0
+remote:        Fetching rack-test 2.0.2
+remote:        Installing rack-test 2.0.2
+remote:        Fetching warden 1.2.9
+remote:        Installing warden 1.2.9
+remote:        Fetching rack-proxy 0.7.2
+remote:        Installing rack-proxy 0.7.2
+remote:        Fetching sprockets 4.1.1
+remote:        Installing sprockets 4.1.1
+remote:        Fetching parser 3.1.2.1
+remote:        Fetching mail 2.7.1
+remote:        Installing parser 3.1.2.1
+remote:        Installing mail 2.7.1
+remote:        Fetching pry 0.14.1
+remote:        Fetching puma 4.3.12
+remote:        Installing pry 0.14.1
+remote:        Installing puma 4.3.12 with native extensions
+remote:        Fetching bootsnap 1.13.0
+remote:        Installing bootsnap 1.13.0 with native extensions
+remote:        Fetching rspec-core 3.11.0
+remote:        Installing rspec-core 3.11.0
+remote:        Fetching rspec-expectations 3.11.0
+remote:        Installing rspec-expectations 3.11.0
+remote:        Fetching rspec-mocks 3.11.1
+remote:        Installing rspec-mocks 3.11.1
+remote:        Fetching turbolinks 5.2.1
+remote:        Installing turbolinks 5.2.1
+remote:        Fetching loofah 2.18.0
+remote:        Installing loofah 2.18.0
+remote:        Fetching activesupport 6.0.5.1
+remote:        Installing activesupport 6.0.5.1
+remote:        Fetching faker 2.23.0
+remote:        Installing faker 2.23.0
+remote:        Fetching rubocop-ast 1.21.0
+remote:        Installing rubocop-ast 1.21.0
+remote:        Fetching pry-rails 0.3.9
+remote:        Installing pry-rails 0.3.9
+remote:        Fetching rails-html-sanitizer 1.4.3
+remote:        Installing rails-html-sanitizer 1.4.3
+remote:        Fetching rails-dom-testing 2.0.3
+remote:        Installing rails-dom-testing 2.0.3
+remote:        Fetching globalid 1.0.0
+remote:        Installing globalid 1.0.0
+remote:        Fetching activemodel 6.0.5.1
+remote:        Installing activemodel 6.0.5.1
+remote:        Fetching factory_bot 6.2.1
+remote:        Installing factory_bot 6.2.1
+remote:        Fetching rubocop 1.36.0
+remote:        Installing rubocop 1.36.0
+remote:        Fetching actionview 6.0.5.1
+remote:        Installing actionview 6.0.5.1
+remote:        Fetching activejob 6.0.5.1
+remote:        Installing activejob 6.0.5.1
+remote:        Fetching activerecord 6.0.5.1
+remote:        Installing activerecord 6.0.5.1
+remote:        Fetching rubocop-rails 2.15.2
+remote:        Installing rubocop-rails 2.15.2
+remote:        Fetching actionpack 6.0.5.1
+remote:        Installing actionpack 6.0.5.1
+remote:        Fetching jbuilder 2.11.5
+remote:        Installing jbuilder 2.11.5
+remote:        Fetching kaminari-actionview 1.2.2
+remote:        Installing kaminari-actionview 1.2.2
+remote:        Fetching kaminari-activerecord 1.2.2
+remote:        Installing kaminari-activerecord 1.2.2
+remote:        Fetching ransack 3.1.0
+remote:        Installing ransack 3.1.0
+remote:        Fetching actioncable 6.0.5.1
+remote:        Installing actioncable 6.0.5.1
+remote:        Fetching activestorage 6.0.5.1
+remote:        Installing activestorage 6.0.5.1
+remote:        Fetching actionmailer 6.0.5.1
+remote:        Installing actionmailer 6.0.5.1
+remote:        Fetching railties 6.0.5.1
+remote:        Installing railties 6.0.5.1
+remote:        Fetching sprockets-rails 3.4.2
+remote:        Installing sprockets-rails 3.4.2
+remote:        Fetching kaminari 1.2.2
+remote:        Installing kaminari 1.2.2
+remote:        Fetching actionmailbox 6.0.5.1
+remote:        Installing actionmailbox 6.0.5.1
+remote:        Fetching actiontext 6.0.5.1
+remote:        Installing actiontext 6.0.5.1
+remote:        Fetching cssbundling-rails 1.1.1
+remote:        Installing cssbundling-rails 1.1.1
+remote:        Fetching responders 3.0.1
+remote:        Installing responders 3.0.1
+remote:        Fetching factory_bot_rails 6.2.0
+remote:        Installing factory_bot_rails 6.2.0
+remote:        Fetching jquery-rails 4.5.0
+remote:        Installing jquery-rails 4.5.0
+remote:        Fetching rails-i18n 7.0.5
+remote:        Installing rails-i18n 7.0.5
+remote:        Fetching rspec-rails 5.1.2
+remote:        Fetching tailwindcss-rails 2.0.12 (x86_64-linux)
+remote:        Installing rspec-rails 5.1.2
+remote:        Fetching webpacker 4.3.0
+remote:        Installing webpacker 4.3.0
+remote:        Fetching rails 6.0.5.1
+remote:        Installing rails 6.0.5.1
+remote:        Fetching devise 4.8.1
+remote:        Fetching sassc 2.4.0
+remote:        Installing devise 4.8.1
+remote:        Installing sassc 2.4.0 with native extensions
+remote:        Installing tailwindcss-rails 2.0.12 (x86_64-linux)
+remote:        Fetching font-awesome-sass 6.1.2
+remote:        Fetching sassc-rails 2.1.2
+remote:        Installing sassc-rails 2.1.2
+remote:        Fetching sass-rails 6.0.0
+remote:        Installing font-awesome-sass 6.1.2
+remote:        Installing sass-rails 6.0.0
+remote:        Bundle complete! 32 Gemfile dependencies, 96 gems now installed.
+remote:        Gems in the groups 'development' and 'test' were not installed.
+remote:        Bundled gems are installed into `./vendor/bundle`
+remote:        Bundle completed (92.44s)
+remote:        Cleaning up the bundler cache.
+remote: -----> Installing node-v16.13.1-linux-x64
+remote: -----> Installing yarn-v1.22.17
+remote: -----> Detecting rake tasks
+remote: -----> Preparing app for Rails asset pipeline
+remote:        Running: rake assets:precompile
+remote:        yarn install v1.22.17
+remote:        [1/4] Resolving packages...
+remote:        [2/4] Fetching packages...
+remote:        [3/4] Linking dependencies...
+remote:        warning " > postcss-loader@4.3.0" has unmet peer dependency "webpack@^4.0.0 || ^5.0.0".
+remote:        warning " > webpack-dev-server@4.10.1" has unmet peer dependency "webpack@^4.37.0 || ^5.0.0".
+remote:        warning "webpack-dev-server > webpack-dev-middleware@5.3.3" has unmet peer dependency "webpack@^4.0.0 || ^5.0.0".
+remote:        [4/4] Building fresh packages...
+remote:        error /tmp/build_df850c69/node_modules/node-sass: Command failed.
+remote:        Exit code: 1
+remote:        Command: node scripts/build.js
+remote:        Arguments:
+remote:        Directory: /tmp/build_df850c69/node_modules/node-sass
+remote:        Output:
+remote:        Building: /tmp/build_df850c69/bin/node /tmp/build_df850c69/node_modules/node-gyp/bin/node-gyp.js rebuild --verbose --libsass_ext= --libsass_cflags= --libsass_ldflags= --libsass_library=
+remote:        gyp info it worked if it ends with ok
+remote:        gyp verb cli [
+remote:        gyp verb cli   '/tmp/build_df850c69/bin/node',
+remote:        gyp verb cli   '/tmp/build_df850c69/node_modules/node-gyp/bin/node-gyp.js',
+remote:        gyp verb cli   'rebuild',
+remote:        gyp verb cli   '--verbose',
+remote:        gyp verb cli   '--libsass_ext=',
+remote:        gyp verb cli   '--libsass_cflags=',
+remote:        gyp verb cli   '--libsass_ldflags=',
+remote:        gyp verb cli   '--libsass_library='
+remote:        gyp verb cli ]
+remote:        gyp info using node-gyp@3.8.0
+remote:        gyp info using node@16.13.1 | linux | x64
+remote:        gyp verb command rebuild []
+remote:        gyp verb command clean []
+remote:        gyp verb clean removing "build" directory
+remote:        gyp verb command configure []
+remote:        gyp verb check python checking for Python executable "python2" in the PATH
+remote:        gyp verb `which` failed Error: not found: python2
+remote:        gyp verb `which` failed     at getNotFoundError (/tmp/build_df850c69/node_modules/which/which.js:13:12)
+remote:        gyp verb `which` failed     at F (/tmp/build_df850c69/node_modules/which/which.js:68:19)
+remote:        gyp verb `which` failed     at E (/tmp/build_df850c69/node_modules/which/which.js:80:29)
+remote:        gyp verb `which` failed     at /tmp/build_df850c69/node_modules/which/which.js:89:16
+remote:        gyp verb `which` failed     at /tmp/build_df850c69/node_modules/isexe/index.js:42:5
+remote:        gyp verb `which` failed     at /tmp/build_df850c69/node_modules/isexe/mode.js:8:5
+remote:        gyp verb `which` failed     at FSReqCallback.oncomplete (node:fs:198:21)
+remote:        gyp verb `which` failed  python2 Error: not found: python2
+remote:        gyp verb `which` failed     at getNotFoundError (/tmp/build_df850c69/node_modules/which/which.js:13:12)
+remote:        gyp verb `which` failed     at F (/tmp/build_df850c69/node_modules/which/which.js:68:19)
+remote:        gyp verb `which` failed     at E (/tmp/build_df850c69/node_modules/which/which.js:80:29)
+remote:        gyp verb `which` failed     at /tmp/build_df850c69/node_modules/which/which.js:89:16
+remote:        gyp verb `which` failed     at /tmp/build_df850c69/node_modules/isexe/index.js:42:5
+remote:        gyp verb `which` failed     at /tmp/build_df850c69/node_modules/isexe/mode.js:8:5
+remote:        gyp verb `which` failed     at FSReqCallback.oncomplete (node:fs:198:21) {
+remote:        gyp verb `which` failed   code: 'ENOENT'
+remote:        gyp verb `which` failed }
+remote:        gyp verb check python checking for Python executable "python" in the PATH
+remote:        gyp verb `which` succeeded python /usr/bin/python
+remote:        gyp ERR! configure error
+remote:        gyp ERR! stack Error: Command failed: /usr/bin/python -c import sys; print "%s.%s.%s" % sys.version_info[:3];
+remote:        gyp ERR! stack   File "<string>", line 1
+remote:        gyp ERR! stack     import sys; print "%s.%s.%s" % sys.version_info[:3];
+remote:        gyp ERR! stack                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+remote:        gyp ERR! stack SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?
+remote:        gyp ERR! stack
+remote:        gyp ERR! stack     at ChildProcess.exithandler (node:child_process:397:12)
+remote:        gyp ERR! stack     at ChildProcess.emit (node:events:390:28)
+remote:        gyp ERR! stack     at maybeClose (node:internal/child_process:1064:16)
+remote:        gyp ERR! stack     at Process.ChildProcess._handle.onexit (node:internal/child_process:301:5)
+remote:        gyp ERR! System Linux 4.4.0-1104-aws
+remote:        gyp ERR! command "/tmp/build_df850c69/bin/node" "/tmp/build_df850c69/node_modules/node-gyp/bin/node-gyp.js" "rebuild" "--verbose" "--libsass_ext=" "--libsass_cflags=" "--libsass_ldflags=" "--libsass_library="
+remote:        gyp ERR! cwd /tmp/build_df850c69/node_modules/node-sass
+remote:        gyp ERR! node -v v16.13.1
+remote:        gyp ERR! node-gyp -v v3.8.0
+remote:        gyp ERR! not ok
+remote:        Build failed with error code: 1
+remote:        info Visit https://yarnpkg.com/en/docs/cli/install for documentation about this command.
+remote:        rake aborted!
+remote:        cssbundling-rails: Command css:build failed, ensure yarn is installed and `yarn build:css` runs without errors
+remote:        /tmp/build_df850c69/vendor/bundle/ruby/3.1.0/gems/cssbundling-rails-1.1.1/lib/tasks/cssbundling/build.rake:5:in `block (2 levels) in <main>'
+remote:        Tasks: TOP => assets:precompile => css:build
+remote:        (See full trace by running task with --trace)
+remote:
+remote:  !
+remote:  !     Precompiling assets failed.
+remote:  !
+remote:  !     Push rejected, failed to compile Ruby app.
+remote:
+remote:  !     Push failed
+remote:  !
+remote:  ! ## Warning - The same version of this code has already been built: 99b9daa44eae234205454ad8655272d1b27d5c3e
+remote:  !
+remote:  ! We have detected that you have triggered a build from source code with version 99b9daa44eae234205454ad8655272d1b27d5c3e
+remote:  ! at least twice. One common cause of this behavior is attempting to deploy code from a different branch.
+remote:  !
+remote:  ! If you are developing on a branch and deploying via git you must run:
+remote:  !
+remote:  !     git push heroku <branchname>:main
+remote:  !
+remote:  ! This article goes into details on the behavior:
+remote:  !   https://devcenter.heroku.com/articles/duplicate-build-version
+remote:
+remote: Verifying deploy...
+remote:
+remote: !       Push rejected to englishing.
+remote:
+To https://git.heroku.com/englishing.git
+ ! [remote rejected] develop -> main (pre-receive hook declined)
+error: failed to push some refs to 'https://git.heroku.com/englishing.git'
