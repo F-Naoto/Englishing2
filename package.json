@@ -1,5 +1,5 @@
 {
-  "name": "Englishing2",
+  "name": "englishing2",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.2.0",
@@ -24,7 +24,7 @@
     "webpack-dev-server": "^4.10.1"
   },
   "scripts": {
-    "build": "cd client && npm run build",
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
     "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/stylesheets/application.scss"
   }
 }
