@@ -23,6 +23,10 @@
   "devDependencies": {
     "webpack-dev-server": "^4.10.1"
   },
+  "engines": {
+    "node": "16.6",
+    "npm": "8.19.2"
+  },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
     "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/stylesheets/application.scss"
