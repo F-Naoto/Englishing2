@@ -24,7 +24,6 @@
     "webpack-dev-server": "^4.10.1"
   },
   "engines": {
-    "node": "16.6",
     "npm": "8.19.2"
   },
   "scripts": {
