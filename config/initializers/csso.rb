@@ -11,8 +11,7 @@ class CssoCompressor
     temp_file.flush
 
     # Run the compressor and capture the output
-    css, err, status = Open3.capture3("npx", "csso", temp_file.path)
-    {data: css}
+
   end
 end
 
