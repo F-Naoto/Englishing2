@@ -90,7 +90,8 @@ production:
   compile: false
 
   # Extract and emit a css file
-  extract_css: true
+  # falseに修正
+  extract_css: false
 
   # Cache manifest.json for performance
   cache_manifest: true
