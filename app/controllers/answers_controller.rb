@@ -1,5 +1,6 @@
 class AnswersController < ApplicationController
   before_action :authenticate_teacher!
+  
   def create
     @answer = current_teacher.answers.build(answer_params)
     existing_answer_combination = Answer.where(teacher_id: current_teacher.id).where(question_id: params[:answer][:question_id])

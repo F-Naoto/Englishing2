@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  # before_action :authenticate_student!
+  before_action :authenticate_student!, only: %i[new create destroy]
 
   def index
     @search = Question.ransack(params[:q])
@@ -35,8 +35,8 @@ class QuestionsController < ApplicationController
     redirect_to questions_path
   end
 
-    private
-      def question_params
-        params.permit(:title, :content)
-      end
+  private
+    def question_params
+      params.permit(:title, :content)
+    end
 end

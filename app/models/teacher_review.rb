@@ -3,7 +3,10 @@ class TeacherReview < ApplicationRecord
 
   belongs_to :student
   belongs_to :teacher
-
-  validates :content, presence: true
-  validates :score,   presence: true
+  with_options presence: true do
+    validates  :student_id
+    validates  :teacher_id
+    validates  :content
+    validates  :score
+  end
 end

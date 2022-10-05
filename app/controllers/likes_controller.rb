@@ -1,4 +1,6 @@
 class LikesController < ApplicationController
+  before_action :authenticate_student!
+  
   def create
     like = current_student.likes.build(question_id: params[:question_id])
     @question = Question.find(params[:question_id])

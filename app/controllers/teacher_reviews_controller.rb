@@ -18,20 +18,6 @@ class TeacherReviewsController < ApplicationController
     end
   end
 
-  def edit
-    @teacher = Teacher.find(params[:id])
-  end
-
-  def update
-    @teacher = Teacher.find(params[:id])
-    if @teacher.update(user_params)
-      flash[:success] = "Profile updated"
-      redirect_to @teacher
-    else
-      render 'edit'
-    end
-  end
-
   def change_average_score
     @teacher = Teacher.find(teacher_review_params[:teacher_id])
     average_score = @teacher.average_score

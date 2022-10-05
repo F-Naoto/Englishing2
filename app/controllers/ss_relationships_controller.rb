@@ -1,4 +1,6 @@
 class SsRelationshipsController < ApplicationController
+  before_action :authenticate_student!
+  
   def create
     current_student.ss_follow(params[:followed_id])
     @followed_student = Student.find(params[:followed_id])

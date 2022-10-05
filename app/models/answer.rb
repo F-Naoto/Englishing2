@@ -3,5 +3,9 @@ class Answer < ApplicationRecord
 
   belongs_to :teacher
   belongs_to :question
-  validates  :content, presence: true, length: {minimum:1, maximum:300}
+  with_options presence: true do
+    validates  :content, length: {minimum:1, maximum:300}
+    validates  :teacher_id
+    validates  :question_id
+  end
 end
