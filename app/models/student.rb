@@ -37,7 +37,7 @@ class Student < ApplicationRecord
     validates :password, length: {minimum:6, maximum:15}
     validates :password_confirmation, length: {minimum:6, maximum:15}
   end
-  validates :self_introduction, length: {minimum:1, maximum:100}
+  validates :self_introduction, length: {maximum:100}
 
   def st_follow(teacher)
     st_active_relationships.create(followed_id: teacher)
@@ -71,6 +71,15 @@ class Student < ApplicationRecord
         action: 'follow'
       )
       ss_notification.save if ss_notification.valid?
+    end
+  end
+
+  def self.guest
+    find_or_create_by!(email: 'guest_student@example.com') do |student|
+      password = SecureRandom.urlsafe_base64(10)
+      student.password = password
+      student.password_confirmation = password
+      student.name = "GuestStudent"
     end
   end
 end

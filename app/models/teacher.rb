@@ -20,6 +20,8 @@ class Teacher < ApplicationRecord
     validates :password, length: {minimum:6, maximum:15}
     validates :password_confirmation, length: {minimum:6, maximum:15}
   end
+  validates :self_introduction, length: {maximum:100}
+
   def average_score
     unless self.teacher_reviews.empty?
       teacher_reviews.average(:score).round(1).to_f
@@ -34,6 +36,15 @@ class Teacher < ApplicationRecord
       average.round(1)
     else
       0.0
+    end
+  end
+
+  def self.guest
+    find_or_create_by!(email: 'guest_teacher@example.com') do |teacher|
+      password = SecureRandom.urlsafe_base64(10)
+      teacher.password = password
+      teacher.password_confirmation = password
+      teacher.name = "GuestTeacher"
     end
   end
 end

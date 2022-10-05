@@ -10,6 +10,12 @@ Rails.application.routes.draw do
     passwords:     'students/passwords',
     registrations: 'students/registrations'
   }
+  devise_scope :teacher do
+    post 'teachers/guest_sign_in', to: 'teachers/sessions#guest_sign_in'
+  end
+  devise_scope :student do
+    post 'students/guest_sign_in', to: 'students/sessions#guest_sign_in'
+  end
   get 'best_answers/create'
   get 'teacher_reviews/ranking', to: 'teacher_reviews#ranking'
   root to: 'home#top'

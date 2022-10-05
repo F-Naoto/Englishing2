@@ -25,6 +25,12 @@ class Students::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+  def guest_sign_in
+    student = Student.guest
+    sign_in student
+    redirect_to root_path, notice: 'GuestStudentとしてログインしました。'
+  end
+
   def after_sign_in_path_for(resource)
     student_path(resource)
   end
