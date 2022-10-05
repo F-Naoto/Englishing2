@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Student < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -8,16 +10,16 @@ class Student < ApplicationRecord
   has_many :answers, dependent: :destroy
   has_many :teacher_reviews, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_many :st_active_relationships, class_name: "StRelationship",
-                                     foreign_key: "follower_id",
+  has_many :st_active_relationships, class_name: 'StRelationship',
+                                     foreign_key: 'follower_id',
                                      dependent: :destroy
   has_many :st_following, through: :st_active_relationships, source: :followed
-  has_many :ss_active_relationships, class_name: "SsRelationship",
-                                     foreign_key: "follower_id",
+  has_many :ss_active_relationships, class_name: 'SsRelationship',
+                                     foreign_key: 'follower_id',
                                      dependent: :destroy
   has_many :ss_following, through: :ss_active_relationships, source: :followed
-  has_many :ss_passive_relationships, class_name: "SsRelationship",
-                                      foreign_key: "followed_id",
+  has_many :ss_passive_relationships, class_name: 'SsRelationship',
+                                      foreign_key: 'followed_id',
                                       dependent: :destroy
   has_many :ss_follower, through: :ss_passive_relationships, source: :follower
   has_many :best_answers, dependent: :destroy
@@ -32,12 +34,12 @@ class Student < ApplicationRecord
                                       dependent: :destroy
 
   with_options presence: true do
-    validates :name, length: {minimum: 5, maximum: 15}
-    validates :email, length: {maximum:30}
-    validates :password, length: {minimum:6, maximum:15}
-    validates :password_confirmation, length: {minimum:6, maximum:15}
+    validates :name, length: { minimum: 5, maximum: 15 }
+    validates :email, length: { maximum: 30 }
+    validates :password, length: { minimum: 6, maximum: 15 }
+    validates :password_confirmation, length: { minimum: 6, maximum: 15 }
   end
-  validates :self_introduction, length: {maximum:100}
+  validates :self_introduction, length: { maximum: 100 }
 
   def st_follow(teacher)
     st_active_relationships.create(followed_id: teacher)
@@ -64,7 +66,7 @@ class Student < ApplicationRecord
   end
 
   def create_notification_follow!(current_student)
-    temp = SsNotification.where(["visitor_id = ? and visited_id = ? and action = ? ", current_student.id, id, 'follow'])
+    temp = SsNotification.where(['visitor_id = ? and visited_id = ? and action = ? ', current_student.id, id, 'follow'])
     if temp.blank?
       ss_notification = current_student.ss_active_notifications.build(
         visited_id: id,
@@ -79,7 +81,7 @@ class Student < ApplicationRecord
       password = SecureRandom.urlsafe_base64(10)
       student.password = password
       student.password_confirmation = password
-      student.name = "GuestStudent"
+      student.name = 'GuestStudent'
     end
   end
 end

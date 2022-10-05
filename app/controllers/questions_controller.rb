@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class QuestionsController < ApplicationController
   before_action :authenticate_student!, only: %i[new create destroy]
 
@@ -20,10 +22,10 @@ class QuestionsController < ApplicationController
   def create
     @question = current_student.questions.build(question_params)
     if @question.save
-      flash[:success] = "質問を投稿しました。"
+      flash[:success] = '質問を投稿しました。'
       redirect_to questions_path
     else
-      flash[:danger] = "質問を投稿できませんでした。"
+      flash[:danger] = '質問を投稿できませんでした。'
       render :index
     end
   end
@@ -31,12 +33,13 @@ class QuestionsController < ApplicationController
   def destroy
     @question = Question.find(params[:id])
     @question.destroy
-    flash[:success] = "質問を削除しました。"
+    flash[:success] = '質問を削除しました。'
     redirect_to questions_path
   end
 
   private
-    def question_params
-      params.permit(:title, :content)
-    end
+
+  def question_params
+    params.permit(:title, :content)
+  end
 end

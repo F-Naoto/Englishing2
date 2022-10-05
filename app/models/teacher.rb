@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Teacher < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -6,8 +8,8 @@ class Teacher < ApplicationRecord
   has_one_attached :avatar
   has_many :answers, dependent: :destroy
   has_many :teacher_reviews, dependent: :destroy
-  has_many :st_passive_relationships, class_name: "StRelationship",
-                                      foreign_key: "followed_id",
+  has_many :st_passive_relationships, class_name: 'StRelationship',
+                                      foreign_key: 'followed_id',
                                       dependent: :destroy
   has_many :st_followers, through: :st_passive_relationships, source: :follower
   has_many :best_answers, dependent: :destroy
@@ -15,27 +17,27 @@ class Teacher < ApplicationRecord
   has_many :chat_rooms, through: :chat_room_users
   has_many :chat_messages, dependent: :destroy
   with_options presence: true do
-    validates :name, length: {minimum: 5, maximum: 15}
-    validates :email, length: {maximum:30}
-    validates :password, length: {minimum:6, maximum:15}
-    validates :password_confirmation, length: {minimum:6, maximum:15}
+    validates :name, length: { minimum: 5, maximum: 15 }
+    validates :email, length: { maximum: 30 }
+    validates :password, length: { minimum: 6, maximum: 15 }
+    validates :password_confirmation, length: { minimum: 6, maximum: 15 }
   end
-  validates :self_introduction, length: {maximum:100}
+  validates :self_introduction, length: { maximum: 100 }
 
   def average_score
-    unless self.teacher_reviews.empty?
-      teacher_reviews.average(:score).round(1).to_f
-    else
+    if teacher_reviews.empty?
       0.0
+    else
+      teacher_reviews.average(:score).round(1).to_f
     end
   end
 
   def review_score_percentage
-    unless self.teacher_reviews.empty?
-      average = teacher_reviews.average(:score).to_f*100/5
-      average.round(1)
-    else
+    if teacher_reviews.empty?
       0.0
+    else
+      average = teacher_reviews.average(:score).to_f * 100 / 5
+      average.round(1)
     end
   end
 
@@ -44,7 +46,7 @@ class Teacher < ApplicationRecord
       password = SecureRandom.urlsafe_base64(10)
       teacher.password = password
       teacher.password_confirmation = password
-      teacher.name = "GuestTeacher"
+      teacher.name = 'GuestTeacher'
     end
   end
 end

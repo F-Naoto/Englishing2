@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeacherReviewsController < ApplicationController
   before_action :authenticate_student!, only: [:create]
   after_action  :change_average_score,  only: [:create]
@@ -9,19 +11,19 @@ class TeacherReviewsController < ApplicationController
   def create
     @teacher_review = current_student.teacher_reviews.build(teacher_review_params)
     if @teacher_review.save
-      flash[:notice] = "レビューを投稿しました。"
+      flash[:notice] = 'レビューを投稿しました。'
       redirect_to teacher_teacher_reviews_path(@teacher_review.teacher)
     else
       @teacher = @teacher_review.teacher
-      flash.now[:alert] = "レビューを投稿できませんでした。"
-      render "teachers/show"
+      flash.now[:alert] = 'レビューを投稿できませんでした。'
+      render 'teachers/show'
     end
   end
 
   def change_average_score
     @teacher = Teacher.find(teacher_review_params[:teacher_id])
     average_score = @teacher.average_score
-    @teacher.update(average_score: average_score)
+    @teacher.update(average_score:)
   end
 
   #   def destroy
@@ -35,7 +37,8 @@ class TeacherReviewsController < ApplicationController
   end
 
   private
-    def teacher_review_params
-      params.require(:teacher_review).permit(:teacher_id, :score, :content)
-    end
+
+  def teacher_review_params
+    params.require(:teacher_review).permit(:teacher_id, :score, :content)
+  end
 end

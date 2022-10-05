@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class StRelationshipsController < ApplicationController
   before_action :current_student!
-  
+
   def create
     @followed_teacher = Teacher.find(params[:followed_id])
     current_student.st_follow(params[:followed_id])

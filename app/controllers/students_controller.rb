@@ -1,13 +1,14 @@
+# frozen_string_literal: true
+
 class StudentsController < ApplicationController
-  before_action :set_student, only:%i[show st_following ss_following ss_follower]
+  before_action :set_student, only: %i[show st_following ss_following ss_follower]
 
   def index
     @search = Student.ransack(params[:q])
     @students = @search.result.page(params[:page]).per(8)
   end
 
-  def show
-  end
+  def show; end
 
   def st_following
     @st_followings = @student.st_following
@@ -21,8 +22,9 @@ class StudentsController < ApplicationController
     @ss_followers = @student.ss_follower
   end
 
-    private
-     def set_student
-      @student = Student.find(params[:id])
-     end
+  private
+
+  def set_student
+    @student = Student.find(params[:id])
+  end
 end

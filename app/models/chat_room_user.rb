@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChatRoomUser < ApplicationRecord
   belongs_to :teacher
   belongs_to :student

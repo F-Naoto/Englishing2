@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChatRoomsController < ApplicationController
   before_action :authenticate_any!
 
@@ -25,7 +27,7 @@ class ChatRoomsController < ApplicationController
     if current_student || current_teacher
       true
     else
-      flash[:alert] = "先生もしくは生徒でログインをしてください。"
+      flash[:alert] = '先生もしくは生徒でログインをしてください。'
       redirect_to root_url
     end
   end
