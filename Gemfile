@@ -67,3 +67,6 @@ gem "tailwindcss-rails", "~> 2.0"
 gem 'psych', '~> 3.1'
 gem 'rails-i18n'
 gem 'jquery-rails'
+gem 'net-imap'
+gem 'net-pop'
+gem 'net-smtp'
