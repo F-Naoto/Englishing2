@@ -33,7 +33,7 @@ class TeacherReviewsController < ApplicationController
   #   end
 
   def ranking
-    @teachers = Teacher.order(average_score: :DESC).limit(10)
+    @teachers = Teacher.order(average_score: :DESC).limit(5)
   end
 
   private
