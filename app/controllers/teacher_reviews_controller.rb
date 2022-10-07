@@ -20,16 +20,15 @@ class TeacherReviewsController < ApplicationController
   end
 
   def update_average_score
-    average_score = @teacher.average_score
-    @teacher.update(average_score: average_score)
+    average_score = @teacher.average_review_score
+    @teacher.update_attribute(:average_score, average_score)
   end
 
   def ranking
-    @teachers = Teacher.order(average_score: :DESC).limit(5)
+    @teachers = Teacher.order(average_score: "DESC").limit(5)
   end
 
   private
-
   def teacher_review_params
     params.require(:teacher_review).permit(:teacher_id, :score, :content)
   end
