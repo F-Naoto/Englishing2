@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Englishing2</title>
+    <title>Englishing</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,9 +11,9 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="pt-20 pb-20 m-0">
+  <body class="mt-30 m-0">
     <%= render "partials/navbar"%>
-    <%= render 'layouts/notification' %>
+    <%= render "layouts/notification" %>
     <%= yield %>
   </body>
 </html>
