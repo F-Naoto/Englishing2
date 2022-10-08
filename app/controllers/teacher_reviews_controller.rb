@@ -10,12 +10,12 @@ class TeacherReviewsController < ApplicationController
     @teacher_review = current_student.teacher_reviews.build(teacher_review_params)
     if @teacher_review.save
       update_average_score
-      flash[:notice] = 'レビューを投稿しました。'
+      flash[:notice] = "レビューを投稿しました。"
       redirect_to teacher_teacher_reviews_path(@teacher_review.teacher)
     else
-      @teacher = @teacher_review.teacher
-      flash.now[:alert] = 'レビューを投稿できませんでした。'
-      render 'teachers/show'
+      teacher = @teacher_review.teacher
+      flash.now[:alert] = "レビューを投稿できませんでした。"
+      redirect_to teacher_path(teacher.id)
     end
   end
 
