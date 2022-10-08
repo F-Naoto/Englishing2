@@ -1,4 +1,4 @@
-window.addEventListener("load", function() {
+window.addEventListener("turbolinks:load", function() {
 	const stars = document.querySelector(".ratings").children;
 	const ratingValue = document.getElementById("rating-value");
 	const ratingValueDisplay = document.getElementById("rating-value-display");
