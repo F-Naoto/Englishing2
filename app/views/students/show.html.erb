@@ -11,7 +11,9 @@
         <div class="text-center sm:flex-grow">
           <div class="my-4">
             <p class="text-xl leading-tight"><%= @student.name %></p>
-            <p class="text-sm leading-tight text-grey-dark text-left"><%= safe_join(@student.self_introduction.split("\n"),tag(:br)) %></p>
+            <% if !@student.self_introduction.nil? %>
+              <p class="text-sm leading-tight text-grey-dark text-left"><%= safe_join(@student.self_introduction.split("\n"),tag(:br)) %></p>
+            <% end %>
             <div class="mt-3">
               <p><%= link_to @student.st_following.count, st_following_student_path(@student), class: 'text-sm leading-tight text-blue-500 underline' %>フォロー（先生）</p>
               <p><%= link_to @student.ss_following.count, ss_following_student_path(@student), class: 'text-sm leading-tight text-blue-500 underline' %>フォロー（生徒）</p>

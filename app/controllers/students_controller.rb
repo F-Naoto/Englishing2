@@ -6,7 +6,8 @@ class StudentsController < ApplicationController
     @students = @search.result.page(params[:page]).per(8)
   end
 
-  def show; end
+  def show
+  end
 
   def st_following
     @st_followings = @student.st_following
