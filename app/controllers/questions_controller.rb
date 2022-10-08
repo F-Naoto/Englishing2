@@ -25,6 +25,8 @@ class QuestionsController < ApplicationController
       flash[:success] = '質問を投稿しました。'
       redirect_to questions_path
     else
+      @search = Question.ransack(params[:q])
+      @questions = @search.result.page(params[:page]).per(8)
       flash[:danger] = '質問を投稿できませんでした。'
       render :index
     end
@@ -38,7 +40,6 @@ class QuestionsController < ApplicationController
   end
 
   private
-
   def question_params
     params.permit(:title, :content)
   end
