@@ -1,0 +1,37 @@
+<h1 class="text-gray-800 text-3xl lg:text-3xl font-bold text-center mb-4 md:mb-6 mt-20"><%= @teacher.name %>先生に質問</h1>
+<div class="container mx-auto">
+  <div class="max-w-2xl border rounded m-auto">
+    <div>
+      <div class="w-full">
+        <div class="relative flex items-center p-3 border-b border-gray-300">
+          <% if @teacher.avatar.attached? %>
+            <%= image_tag @teacher.avatar, class: "w-10 h-10 rounded-full object-cover" %>
+          <% else %>
+            <img src="https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=256" loading="lazy" alt="Photo by Radu Florin" class="w-10 h-10 rounded-full object-cover">
+          <% end %>
+          <span class="block ml-2 font-bold text-gray-600">
+            <% if current_teacher %>
+              <%= @student.name  %>
+            <% else %>
+              <%= @teacher.name  %>
+            <% end %>
+          </span>
+        </div>
+        <div class="relative w-full p-6 overflow-y-auto h-[40rem]">
+          <ul class="space-y-3" id='messages'>
+            <li>
+              <%= render @chat_messages, teacher: @teacher, student: @student %>
+            </li>
+          </ul>
+        </div>
+        <div class="flex items-center justify-between w-full p-3 border-gray-300">
+          <% if current_teacher %>
+            <%= render 'teacher_form', chat_room: @chat_room, student_id: @student_id, teacher_id: @teacher_id %>
+          <% else %>
+            <%= render 'student_form', chat_room: @chat_room, student_id: @student_id, teacher_id: @teacher_id %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

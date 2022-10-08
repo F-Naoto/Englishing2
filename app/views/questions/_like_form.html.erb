@@ -1,0 +1,7 @@
+<div class="like_form">
+  <% if question.liked_by?(current_student) %>
+    <%= render 'unlike', question: question %>
+  <% else %>
+    <%= render 'like', question: question %>
+  <% end %>
+</div>

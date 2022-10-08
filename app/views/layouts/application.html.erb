@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Englishing2</title>
+    <title>Englishing</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= stylesheet_link_tag "application.tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="mt-30 m-0">
+    <%= render "partials/navbar"%>
+    <%= render "layouts/notification" %>
     <%= yield %>
+    <%= render "layouts/footer" %>
   </body>
 </html>

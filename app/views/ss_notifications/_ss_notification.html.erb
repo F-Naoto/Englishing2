@@ -1,0 +1,6 @@
+<div class="md:py-4 border-b-2">
+  <%= ss_notification_form(ss_notification) %>
+  <span class="block text-gray-500 text-sm">
+    <%= "(#{time_ago_in_words(ss_notification.created_at)}前)" %>
+  </span>
+</div>

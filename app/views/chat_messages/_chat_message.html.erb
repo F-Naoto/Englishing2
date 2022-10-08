@@ -1,0 +1,17 @@
+<div class="relative max-w-xl px-4 py-2 text-gray-700 rounded shadow chat-message">
+  <div><%= chat_message.created_at.strftime("%Y-%m-%d %H:%M:%S") %></div>
+  <% if chat_message.poster == true %>
+    <%= Student.find(chat_message.student_id).name %>
+  <% else %>
+    <%= Teacher.find(chat_message.teacher_id).name %>
+  <% end %>
+  <% if chat_message.content.nil? %>
+    <div>
+      <%= chat_message.content %>
+    </div>
+  <% else %>
+    <div>
+      <%= safe_join(chat_message.content.split("\n"),tag(:br))%>
+    </div>
+  <%end %>
+</div>

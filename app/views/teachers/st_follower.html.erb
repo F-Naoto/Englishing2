@@ -1,0 +1,22 @@
+<h1 class="text-gray-800 text-3xl lg:text-3xl font-bold text-center mb-4 md:mb-6 mt-20"><%= "#{@teacher.name}をフォローしている生徒一覧" %></h1>
+<div class="bg-white py-6 sm:py-8 lg:py-12">
+  <div class="max-w-screen-xl px-4 md:px-8 mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-x-4 lg:gap-x-8 gap-y-8 lg:gap-y-12">
+      <% @st_followers.each do |st_follower| %>
+        <div class="flex flex-col items-center">
+          <div class="w-24 md:w-32 h-24 md:h-32 bg-gray-100 rounded-full overflow-hidden shadow-lg mb-2 md:mb-4">
+            <% if st_follower.avatar.attached? %>
+              <%= image_tag st_follower.avatar, class: "block h-16 sm:h-24 rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0" %>
+            <% else %>
+              <img src="https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=256" loading="lazy" alt="Photo by Radu Florin" class="w-full h-full object-cover object-center" />
+            <% end %>
+          </div>
+          <div>
+            <div class="text-indigo-500 md:text-lg font-bold text-center"><%= link_to st_follower.name, teacher_path(st_follower) %></div>
+            <p class="text-gray-500 text-sm md:text-base text-center mb-3 md:mb-4"><%= st_follower.self_introduction %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<h1 class="text-purple-900 font-bold text-2xl text-center mt-20">回答ページ</h1>
+<div class="mt-4 bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden">
+  <div class="px-4 py-4">
+    <div class="mb-4">
+      <div class="flex">
+        <%= render 'questions/like_form', question: @question if current_student %>
+        <div class="text-sm leading-tight pl-2", id="likes_count"><%= @question.likes.count if current_student %></div>
+      </div>
+      <p class="text-xl leading-tight mt-3"><%= @question.title %></p>
+      <p class="card-subtitle mb-2 text-muted">by <%= link_to @question.student.name, student_path(@question.student) %></p>
+      <p class="text-xl leading-tight mt-6">質問内容</p>
+      <p class="mb-4 mt-3"><%= safe_join(@question.content.split("\n"),tag(:br))%></p>
+      <%= render 'solved_mark', question: @question %>
+    </div>
+  </div>
+</div>
+<%= render 'answer_form', question: @question %>
+<% @question.answers.each do |answer| %>
+  <div class="bg-white">
+    <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
+      <div class="mt-3 grid sm:grid-cols-1 xl:grid-cols-1 gap-4 md:gap-8">
+        <div class="flex flex-col border rounded-lg p-4 md:p-6">
+          <h3 class="text-lg md:text-xl font-semibold mb-2"><%= answer.teacher.name %></h3>
+          <% unless BestAnswer.where(question_id: answer.question.id).exists? %>
+            <% if current_student && current_student.id == @question.student.id %>
+              <span id="edit_answer", value=<%= answer.id %>><%= "編集" %></span>
+              <%= render 'answer_form_modal', answer: @answer, question: @question %>
+              <%= link_to '削除', answer_path(answer), method: :delete, data: {confirm: "削除してよろしいでしょうか。"} %>
+            <% end %>
+          <% end %>
+          <p class="mb-4 "><%= answer.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+          <p class="mb-4"><%= answer.content %></p>
+          <%= render 'best_answer', question: @question, best_answer: @best_answer, answer: @answer %>
+          <% if BestAnswer.where(teacher_id: answer.teacher).where(question_id: @question).exists? %>
+            <%= image_tag "hanamaru.png", class: "w-20" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<%= javascript_include_tag 'edit_answer.js' %>

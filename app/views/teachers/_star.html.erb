@@ -1,0 +1,13 @@
+<div class="flex gap-0.5 -ml-1">
+    <% if teacher_review.score == 1 then %>
+        <span class="text-3xl text-yellow-400">★</span>
+    <% elsif teacher_review.score == 2 then %>
+        <span class="text-3xl text-yellow-400">★★</span>
+    <% elsif teacher_review.score == 3 then %>
+        <span class="text-3xl text-yellow-400">★★★</span>
+    <% elsif teacher_review.score == 4 then %>
+        <span class="text-3xl text-yellow-400">★★★★</span>
+    <% else %>
+        <span class="text-3xl text-yellow-400">★★★★★</span>
+    <% end %>
+</div>

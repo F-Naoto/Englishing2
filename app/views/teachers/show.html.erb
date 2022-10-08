@@ -1,0 +1,62 @@
+<h1 class="text-gray-800 text-3xl lg:text-3xl font-bold text-center mb-4 md:mb-6 mt-20">Teacher Profile</h1>
+<div class="mt-4 bg-white mx-auto max-w-md shadow-lg rounded-lg break-words px-10", style="word-break: break-all;">
+  <div class="sm:flex sm:items-center px-4 py-4">
+    <div class="w-3/5 text-center sm:text-left sm:flex-grow">
+      <div class="mb-4">
+        <% if @teacher.avatar.attached? %>
+          <%= image_tag @teacher.avatar, class: "m-auto w-40 h-40 rounded-full object-cover object-center" %>
+        <% else %>
+          <img src="https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=256" loading="lazy" alt="Photo by Radu Florin" class="m-auto w-40 h-40 rounded-full object-cover object-center">
+        <% end %>
+        <div class="sm:flex-grow">
+          <div class="my-4">
+            <p class="text-xl leading-tight text-center pt-3"><%=@teacher.name %></p>
+            <p class="text-sm leading-tight text-grey-dark text-center">回答数<%= @teacher.answers.count %></p>
+            <p class="text-sm leading-tight text-grey-dark text-center">評価<%= @teacher.average_score %></p>
+          </div>
+          <div>
+            <p class="text-center"><%= link_to @teacher.st_followers.count, st_follower_teacher_path, class: 'text-sm leading-tight text-blue-500 underline', id:'followers' %>フォロワー（生徒）</p>
+            <% unless @teacher.self_introduction.nil? %>
+              <p class="text-xl leading-tight text-left py-3">自己紹介</p>
+              <p class="text-sm leading-tight text-left py-3"><%=@teacher.self_introduction %></p>
+            <% end %>
+          </div>
+          <div class="text-center">
+            <%= render 'teachers/message' if current_student %>
+            <%= render 'students/st_follow_form', teacher: @teacher %>
+            <% if current_teacher && current_teacher.id == @teacher.id %>
+              <button class="text-xs font-semibold rounded-full px-4 py-1 mt-3 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">
+                <%= link_to "Edit", edit_teacher_registration_path %>
+              </button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="reviews-list mt-10">
+  <% if @teacher.teacher_reviews.exists? %>
+    <h2 class="text-xl font-bold text-center">レビュー一覧（<%= @teacher.teacher_reviews.count %>件）</h2>
+    <% @teacher.teacher_reviews.limit(5).each do |teacher_review| %>
+      <div class="w-2/5 m-auto">
+        <div class="flex flex-col gap-3 py-4 md:py-8 border-b-2">
+          <div>
+            <span class="block text-sm font-bold"><%= teacher_review.student.name %></span>
+            <span class="block text-sm"><%= teacher_review.created_at.strftime("%Y-%m-%d %H:%M") %></span>
+          </div>
+          <%= render 'teachers/star', teacher: @teacher, teacher_review: teacher_review %>
+          <p><%= teacher_review.content %></p>
+        </div>
+      </div>
+    <% end %>
+    <%= link_to teacher_teacher_reviews_path(@teacher), class: "flex items-center justify-center w-3/12 mt-8 cursor-pointer m-auto px-8 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" do %>
+    <p>他のレビューを見る</p>
+    <% end %>
+  <% else %>
+    <h2 class="text-xl font-bold text-center">レビューはまだありません。</h2>
+  <% end %>
+</div>
+<%= render 'teacher_reviews/review_form', teacher: @teacher, teacher_review: @teacher_review %>
+
+<%= javascript_include_tag 'review.js' %>

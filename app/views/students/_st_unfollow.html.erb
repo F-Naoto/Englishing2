@@ -1,0 +1,7 @@
+<% if current_student %>
+  <%= form_with(model: current_student.st_active_relationships.find_by(followed_id: teacher.id),
+              html: { method: :delete }, local: false) do |f| %>
+    <%= hidden_field_tag :followed_id, teacher.id %>
+    <%= f.submit "Unfollow", class: "bg-white" %>
+  <% end %>
+<% end %>

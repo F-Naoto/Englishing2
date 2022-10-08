@@ -1,0 +1,55 @@
+<h1 class="text-gray-800 text-3xl lg:text-3xl font-bold text-center mb-4 md:mb-6 mt-20">Student Profile</h1>
+<div class="mt-4 bg-white mx-auto max-w-md shadow-lg rounded-lg break-words px-10", style="word-break: break-all;">
+  <div class="px-4 py-4">
+    <div class="m-auto w-3/5 text-center sm:text-left sm:flex-grow">
+      <div class="mb-4">
+        <% if @student.avatar.attached? %>
+          <%= image_tag @student.avatar, class: "m-auto w-40 h-40 rounded-full object-cover object-center" %>
+        <% else %>
+          <img src="https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=256" loading="lazy" alt="Photo by Radu Florin" class="m-auto w-40 h-40 rounded-full object-cover object-center">
+        <% end %>
+        <div class="text-center sm:flex-grow">
+          <div class="my-4">
+            <p class="text-xl leading-tight"><%= @student.name %></p>
+            <p class="text-sm leading-tight text-grey-dark"><%= @student.self_introduction %></p>
+            <div class="mt-3">
+              <p><%= link_to @student.st_following.count, st_following_student_path(@student), class: 'text-sm leading-tight text-blue-500 underline' %>フォロー（先生）</p>
+              <p><%= link_to @student.ss_following.count, ss_following_student_path(@student), class: 'text-sm leading-tight text-blue-500 underline' %>フォロー（生徒）</p>
+              <p><%= link_to @student.ss_follower.count, ss_follower_student_path(@student), class: 'text-sm leading-tight text-blue-500 underline', id:'followers' %>フォロワー（生徒）</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center">
+      <% unless current_student && @student.id == current_student.id %>
+        <%= render 'ss_follow_form', student: @student %>
+      <% end %>
+      <% if current_student && current_student.id == @student.id %>
+        <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white"><%= link_to "Edit", edit_student_registration_path %>
+        </button>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="reviews-list mt-10">
+  <% if !@student.questions.empty? %>
+    <h2 class="text-xl font-bold text-center">質問一覧（<%= @student.questions.count %>件）</h2>
+  <% else %>
+    <h2 class="text-xl font-bold text-center">まだ質問はありません。</h2>
+  <% end %>
+  <% @student.questions.limit(10).each do |question| %>
+    <%= link_to question_path(question) do %>
+      <div class="w-2/5 m-auto">
+        <div class="flex flex-col gap-3 py-4 md:py-8 border-b-2">
+            <div>
+              <span class="block text-gray-500 text-sm"><%= question.created_at.strftime("%Y-%m-%d %H:%M") %></span>
+            </div>
+            <p class="text-gray-600"><%= question.title %></p>
+            <p class="text-gray-600"><%= question.content %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
