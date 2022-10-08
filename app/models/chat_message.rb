@@ -11,6 +11,5 @@ class ChatMessage < ApplicationRecord
     validates  :teacher_id
     validates  :student_id
     validates  :content
-    validates  :poster
   end
 end
