@@ -36,6 +36,9 @@ Rails.application.routes.draw do
     end
   end
   resources :teachers do
+    member do
+      get :st_follower
+    end
     collection do
       get 'search'
     end

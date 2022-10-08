@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class CreateBestAnswers < ActiveRecord::Migration[6.0]
   def change
     create_table :best_answers do |t|

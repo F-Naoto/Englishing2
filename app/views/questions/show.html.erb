@@ -4,16 +4,17 @@
     <div class="mb-4">
       <div class="flex">
         <%= render 'questions/like_form', question: @question if current_student %>
-        <div class="text-sm leading-tight pl-2", id="likes_count"><%= @question.likes.count %></div>
+        <div class="text-sm leading-tight pl-2", id="likes_count"><%= @question.likes.count if current_student %></div>
       </div>
-      <p class="text-xl leading-tight">タイトル：<%= @question.title %></p>
-      <h6 class="card-subtitle mb-2 text-muted">生徒名：<%= link_to @question.student.name, student_path(@question.student) %></h6>
-      <p class="text-sm leading-tight text-grey-dark">質問内容：<%= @question.content %></p>
-      <%= render 'solved_mark',   question: @question %>
+      <p class="text-xl leading-tight mt-3"><%= @question.title %></p>
+      <p class="card-subtitle mb-2 text-muted">by <%= link_to @question.student.name, student_path(@question.student) %></p>
+      <p class="text-xl leading-tight mt-6">質問内容</p>
+      <p class="mb-4 mt-3"><%= safe_join(@question.content.split("\n"),tag(:br))%></p>
+      <%= render 'solved_mark', question: @question %>
     </div>
   </div>
 </div>
-<%= render 'answer_form', answer: @answer, question: @question %>
+<%= render 'answer_form', question: @question %>
 <% @question.answers.each do |answer| %>
   <div class="bg-white">
     <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
@@ -27,8 +28,8 @@
               <%= link_to '削除', answer_path(answer), method: :delete, data: {confirm: "削除してよろしいでしょうか。"} %>
             <% end %>
           <% end %>
-          <p class="text-gray-500 mb-4 "><%= answer.created_at %></p>
-          <p class="text-gray-500 mb-4"><%= answer.content %></p>
+          <p class="mb-4 "><%= answer.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+          <p class="mb-4"><%= answer.content %></p>
           <%= render 'best_answer', question: @question, best_answer: @best_answer, answer: @answer %>
           <% if BestAnswer.where(teacher_id: answer.teacher).where(question_id: @question).exists? %>
             <%= image_tag "hanamaru.png", class: "w-20" %>
@@ -38,5 +39,4 @@
     </div>
   </div>
 <% end %>
-
 <%= javascript_include_tag 'edit_answer.js' %>

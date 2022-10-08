@@ -32,13 +32,7 @@ class Student < ApplicationRecord
   has_many :ss_passive_notifications, class_name: 'SsNotification',
                                       foreign_key: 'visited_id',
                                       dependent: :destroy
-
-  with_options presence: true do
-    validates :name, length: { minimum: 2, maximum: 15 }
-    # validates :email, length: { maximum: 30 }
-    validates :password, length: { minimum: 6, maximum: 15 }
-    validates :password_confirmation, length: { minimum: 6, maximum: 15 }
-  end
+  validates :name, presence: true, length: { minimum: 2, maximum: 15 }
   validates :self_introduction, length: { maximum: 100 }
 
   def st_follow(teacher)

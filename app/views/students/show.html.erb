@@ -9,7 +9,7 @@
           <img src="https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=256" loading="lazy" alt="Photo by Radu Florin" class="m-auto w-40 h-40 rounded-full object-cover object-center">
         <% end %>
         <div class="text-center sm:flex-grow">
-          <div class="mb-4">
+          <div class="my-4">
             <p class="text-xl leading-tight"><%= @student.name %></p>
             <p class="text-sm leading-tight text-grey-dark"><%= @student.self_introduction %></p>
             <div class="mt-3">
@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="text-center">
-      <% unless @student.id == current_student.id %>
+      <% unless current_student && @student.id == current_student.id %>
         <%= render 'ss_follow_form', student: @student %>
       <% end %>
       <% if current_student && current_student.id == @student.id %>
@@ -43,7 +43,7 @@
       <div class="w-2/5 m-auto">
         <div class="flex flex-col gap-3 py-4 md:py-8 border-b-2">
             <div>
-              <span class="block text-gray-500 text-sm"><%= question.created_at %></span>
+              <span class="block text-gray-500 text-sm"><%= question.created_at.strftime("%Y-%m-%d %H:%M") %></span>
             </div>
             <p class="text-gray-600"><%= question.title %></p>
             <p class="text-gray-600"><%= question.content %></p>

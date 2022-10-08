@@ -1,9 +1,11 @@
-<% if current_student && current_student.id == question.student.id %>
-  <% unless BestAnswer.where(question_id: question.id).exists? %>
-    <%= form_with model: best_answer do |f| %>
-      <%= f.hidden_field :question_id, value: question.id %>
-      <%= f.hidden_field :teacher_id,  value: answer.teacher.id %>
-      <%= f.submit 'ベストアンサーに選ぶ', class: "cursor-pointer" %>
+<% question.answers.each do |answer| %>
+  <% if current_student && current_student.id == question.student.id %>
+    <% unless BestAnswer.where(question_id: question.id).exists? %>
+      <%= form_with model: best_answer do |f| %>
+        <%= f.hidden_field :question_id, value: question.id %>
+        <%= f.hidden_field :teacher_id,  value: answer.teacher.id %>
+        <%= f.submit 'ベストアンサーに選ぶ', class: "cursor-pointer" %>
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
+<% end  %>

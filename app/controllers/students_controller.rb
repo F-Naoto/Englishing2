@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class StudentsController < ApplicationController
   before_action :set_student, only: %i[show st_following ss_following ss_follower]
 
@@ -23,7 +21,6 @@ class StudentsController < ApplicationController
   end
 
   private
-
   def set_student
     @student = Student.find(params[:id])
   end
