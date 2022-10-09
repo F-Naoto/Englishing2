@@ -1,8 +1,9 @@
+<% provide(:title, "通知") %>
 <div class="w-2/5 m-auto">
-    <h3 class="text-center">通知</h3>
+    <h1 class="text-gray-800 text-3xl lg:text-3xl font-bold text-center mb-4 md:mb-6 mt-32">通知</h1>
     <% if @ss_notifications.exists? %>
         <%= render @ss_notifications %>
     <% else %>
-        <p>通知はありません</p>
+        <p class="text-center">通知はありません...</p>
     <% end %>
 </div>
