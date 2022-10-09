@@ -22,15 +22,14 @@ $(function() {
     }
   });
 
-  $(document).on('keypress', '[data-behavior~=room_speaker]', function(e) {
-    if (e.keyCode === 13) {
+  $(document).on('click', '#send_btn', function(e) {
       const room_id = $('textarea').data('room_id')
       const teacher_id = $('textarea').data('teacher_id')
       const student_id = $('textarea').data('student_id')
       const poster = $('textarea').data('poster')
-      chatChannel.speak(e.target.value, room_id, teacher_id, student_id, poster);
-      e.target.value = '';
+      const content = $('textarea').val()
+      chatChannel.speak(content, room_id, teacher_id, student_id, poster);
+      $('textarea').val("")
       e.preventDefault();
-    }
   });
 });
