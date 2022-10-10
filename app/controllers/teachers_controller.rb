@@ -28,7 +28,8 @@ class TeachersController < ApplicationController
   end
 
   def check_id
-    unless current_student.id == @student.id
+    @teacher = Teacher.find(params[:id])
+    unless current_teacher.id == @teacher.id
       redirect_to root_url
       flash[:alert] = "不正な操作が行われました。"
     end
