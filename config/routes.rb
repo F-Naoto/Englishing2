@@ -31,6 +31,9 @@ Rails.application.routes.draw do
     member do
       get :ss_follower
     end
+    member do
+      get :chat_member
+    end
     collection do
       get 'search'
     end
@@ -38,6 +41,9 @@ Rails.application.routes.draw do
   resources :teachers do
     member do
       get :st_follower
+    end
+    member do
+      get :chat_member
     end
     collection do
       get 'search'
