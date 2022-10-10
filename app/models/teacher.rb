@@ -16,7 +16,7 @@ class Teacher < ApplicationRecord
   has_many :chat_room_users
   has_many :chat_rooms, through: :chat_room_users
   has_many :chat_messages, dependent: :destroy
-  validates :name, presence: true, length: { minimum: 2, maximum: 15 }
+  validates :name, presence: true, length: { minimum: 2, maximum: 10 }, uniqueness: true
   validates :self_introduction, length: { maximum: 100 }
 
   def average_review_score
