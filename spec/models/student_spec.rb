@@ -1,7 +1,67 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 RSpec.describe Student, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "生徒を正常に登録できる" do
+    student = create(:student)
+    expect(student).to be_valid
+  end
+
+  it "名前が空の場合、無効である" do
+    student = build(:student, name: nil)
+    student.valid?
+    expect(student.errors[:name]).to include("を入力してください", "は2文字以上で入力してください")
+  end
+
+  it "メールアドレスが空の場合、無効である"  do
+    student = build(:student, email: nil)
+    student.valid?
+    expect(student.errors[:email]).to include("を入力してください")
+  end
+
+  it "パスワードが空の場合、無効である" do
+    student = build(:student, password: nil)
+    student.valid?
+    expect(student.errors[:password]).to include("を入力してください")
+  end
+
+  it "重複したメールアドレスの場合、無効である" do
+    create(:student, email: "test@gmail.com")
+    student2 = build(:student, email: "test@gmail.com")
+    student2.valid?
+    expect(student2.errors[:email]).to include("はすでに存在します")
+  end
+
+  it "重複したユーザー名の場合、無効である" do
+    create(:student, name: "Joe")
+    student2 = build(:student, name: "Joe")
+    student2.valid?
+    expect(student2.errors[:name]).to include("はすでに存在します")
+  end
+
+  it "ユーザー名が２文字以下の場合、無効である" do
+    student = build(:student, name: "a")
+    student.valid?
+    expect(student.errors[:name]).to include("は2文字以上で入力してください")
+  end
+
+  it "ユーザー名が10文字以上の場合、無効である" do
+    student = build(:student, name: "12345678910")
+    student.valid?
+    expect(student.errors[:name]).to include("は10文字以内で入力してください")
+  end
+
+  it "自己紹介が100文字以上の場合、無効である" do
+    student = build(:student, self_introduction: "a"*101)
+    student.valid?
+    expect(student.errors[:self_introduction]).to include("は100文字以内で入力してください")
+  end
+
+  describe 'アソシエーションについて' do
+    it '生徒が削除されたら、質問も削除される' do
+      student = build(:student)
+      student.questions << create(:question)
+      student.save
+      expect{ student.destroy }.to change{ Question.count }.by(-1)
+    end
+  end
 end

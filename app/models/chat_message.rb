@@ -8,6 +8,6 @@ class ChatMessage < ApplicationRecord
     validates  :chat_room_id
     validates  :teacher_id
     validates  :student_id
-    validates  :content
+    validates  :content, length: { maximum: 200 }
   end
 end

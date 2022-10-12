@@ -8,8 +8,5 @@ class SsNotification < ApplicationRecord
   with_options presence: true do
     validates  :visitor_id
     validates  :visited_id
-    validates  :question_id
-    validates  :action
-    validates  :checked
   end
 end

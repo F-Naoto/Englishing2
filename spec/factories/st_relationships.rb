@@ -1,4 +1,4 @@
 FactoryBot.define do
-  factory :ss_relationship do
+  factory :st_relationship do
   end
 end
