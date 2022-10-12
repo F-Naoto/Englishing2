@@ -13,10 +13,10 @@ class Teacher < ApplicationRecord
                                       dependent: :destroy
   has_many :st_followers, through: :st_passive_relationships, source: :follower
   has_many :best_answers, dependent: :destroy
-  has_many :chat_room_users
+  has_many :chat_room_users, dependent: :destroy
   has_many :chat_rooms, through: :chat_room_users
   has_many :chat_messages, dependent: :destroy
-  validates :name, presence: true, length: { minimum: 2, maximum: 10 }, uniqueness: true
+  validates :name, presence: true, length: { minimum: 2, maximum: 15 }, uniqueness: true
   validates :self_introduction, length: { maximum: 100 }
 
   def average_review_score

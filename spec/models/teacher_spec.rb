@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Teacher, type: :model do
-  it "生徒名、メールアドレス、パスワード、パスワード確認がある場合、正常に登録できること" do
+  it "先生を正常に登録できる" do
     teacher = create(:teacher)
     expect(teacher).to be_valid
   end
@@ -54,5 +54,14 @@ RSpec.describe Teacher, type: :model do
     teacher = build(:teacher, self_introduction: "a"*101)
     teacher.valid?
     expect(teacher.errors[:self_introduction]).to include("は100文字以内で入力してください")
+  end
+
+  describe 'association' do
+    it 'delete funds when deleted a teacher associated it' do
+      teacher = build(:teacher)
+      teacher.answers << build(:answer)
+      teacher.save
+      expect{ teacher.destroy }.to change{ Answer.count }.by(-1)
+    end
   end
 end

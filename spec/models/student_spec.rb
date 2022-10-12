@@ -1,24 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe Student, type: :model do
-  it "生徒名、メールアドレス、パスワード、パスワード確認がある場合、正常に登録できること" do
+  it "生徒を正常に登録できる" do
     student = create(:student)
     expect(student).to be_valid
   end
 
-  it "名前ない場合、無効である" do
+  it "名前が空の場合、無効である" do
     student = build(:student, name: nil)
     student.valid?
     expect(student.errors[:name]).to include("を入力してください", "は2文字以上で入力してください")
   end
 
-  it "メールアドレスがない場合、無効である"  do
+  it "メールアドレスが空の場合、無効である"  do
     student = build(:student, email: nil)
     student.valid?
     expect(student.errors[:email]).to include("を入力してください")
   end
 
-  it "パスワードがない場合、無効である" do
+  it "パスワードが空の場合、無効である" do
     student = build(:student, password: nil)
     student.valid?
     expect(student.errors[:password]).to include("を入力してください")
@@ -54,5 +54,14 @@ RSpec.describe Student, type: :model do
     student = build(:student, self_introduction: "a"*101)
     student.valid?
     expect(student.errors[:self_introduction]).to include("は100文字以内で入力してください")
+  end
+
+  describe 'アソシエーションについて' do
+    it '生徒が削除されたら、質問も削除される' do
+      student = build(:student)
+      student.questions << create(:question)
+      student.save
+      expect{ student.destroy }.to change{ Question.count }.by(-1)
+    end
   end
 end
