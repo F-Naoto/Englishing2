@@ -3,13 +3,21 @@ require 'devise'
 
 RSpec.describe "Students", type: :system do
   let!(:student) { create(:student, name: "student", self_introduction: "introduction") }
+  let(:teacher) { create(:teacher) }
   let(:other_student) { create(:student)}
+
   describe 'ページ遷移確認' do
-    before do
-      visit students_path
+    context '生徒のログインページに遷移' do
+      it '生徒のログインページへのアクセスに成功' do
+        visit new_student_session_path
+        expect(page).to have_content "メールアドレス"
+        expect(page).to have_content "パスワード"
+        expect(current_path).to eq new_student_session_path
+      end
     end
     context '生徒の一覧ページに遷移' do
       it '生徒の一覧ページへのアクセスに成功' do
+        visit students_path
         student_list = create_list(:student, 3)
         visit students_path
         expect(page).to have_content 'Meet Your Friends'
@@ -18,54 +26,151 @@ RSpec.describe "Students", type: :system do
         expect(page).to have_content student_list[2].name
         expect(current_path).to eq students_path
       end
-      # it '生徒の画像が表示される' do
-      #   student_list = create_list(:student, 3)
-      #   expect(page).to have_content 'Meet Your Friends'
-      #   expect(page).to have_content student_list[0].name
-      #   expect(page).to have_content student_list[1].name
-      #   expect(page).to have_content student_list[2].name
-      #   expect(current_path).to eq students_path
-      # end
-      it 'キーワードを入力して検索した場合、生徒名と自己紹介が表示される' do
-        fill_in 'キーワードを入力', with: "introduction"
-        click_button '検索'
-        expect(page).to have_content "#{student.self_introduction}"
-        expect(page).to have_content "#{student.name}"
-      end
-      it 'キーワードを入力して検索した場合、生徒詳細ページへのリンクが正常に機能する' do
-        fill_in 'キーワードを入力', with: "introduction"
-        click_button '検索'
-        expect(page).to have_link "#{student.name}", href: student_path(student.id)
-      end
-      it '生徒名を入力して検索できる' do
-        fill_in '生徒名を入力', with: "#{student.name}"
-        click_button '検索'
-        expect(page).to have_link "#{student.name}"
+    end
+    context '生徒の新規作成ページに遷移' do
+      it '生徒の新規作成ページへのアクセスに成功' do
+        visit new_student_registration_path
+        expect(page).to have_content '生徒登録'
+        expect(page).to have_content '生徒名'
+        expect(page).to have_content 'メールアドレス'
+        expect(page).to have_content 'パスワード（最低６文字）'
+        expect(page).to have_content 'パスワード確認'
+        expect(page).to have_button '登録'
       end
     end
-    # context '生徒の新規作成ページに遷移' do
-    #   it '生徒の新規作成ページへのアクセスに成功' do
-    #     visit new_student_session_path
-    #     expect(page).to have_content 'Meet Your Friends'
-    #     expect(page).to have_content 'Meet Your Friends'
-    #     expect(page).to have_content '生徒新規作成'
-    #     expect(current_path).to eq new_student_path
-    #   end
-    # end
     context '生徒の編集ページに遷移' do
-      before do
+      it '生徒の編集ページへのアクセスに成功' do
         login_as student, scope: :student
         visit edit_student_registration_path(student)
-      end
-      it '生徒の編集ページへのアクセスに成功' do
         expect(page).to have_content '生徒アカウント情報編集'
         expect(page).to have_field 'student[name]', with: student.name
         expect(page).to have_field 'student[email]', with: student.email
         expect(page).to have_field 'student[self_introduction]', with: student.self_introduction
         expect(current_path).to eq edit_student_registration_path(student)
       end
-      it 'ユーザー名の編集に成功' do
-        fill_in 'student[name]', with: "#{student.name}"
+    end
+    context '詳細ページに遷移' do
+      let!(:question) { create(:question, student_id: other_student.id)}
+      it '詳細ページへのアクセスに成功' do
+        visit student_path(student)
+        expect(page).to have_content 'Student Profile'
+        expect(page).to have_content student.name
+        expect(page).to have_content 'フォロー（先生）'
+        expect(page).to have_content 'フォロー（生徒）'
+        expect(page).to have_content 'フォロワー（生徒）'
+        expect(page).to have_content 'まだ質問はありません。'
+        expect(current_path).to eq student_path(student)
+      end
+    end
+    context 'メッセージページに遷移' do
+      let!(:chat_room) { create(:chat_room, id:1) }
+      let!(:chat_room_user) { create(:chat_room_user, chat_room_id: chat_room.id, student_id: student.id, teacher_id: teacher.id)}
+      it 'メッセージページへのアクセスに成功' do
+        login_as student, scope: :student
+        visit teacher_path(teacher)
+        click_link 'Message'
+        expect(page).to have_content "#{teacher.name}先生に質問"
+        expect(page).to have_content teacher.name
+        expect(page).to have_field 'メッセージを入力したらボタンをクリック'
+        expect(current_path).to eq chat_room_path(chat_room)
+      end
+    end
+  end
+
+  describe '生徒のログイン' do
+    before do
+      visit new_student_session_path
+    end
+    context 'フォームの入力値が正常な場合' do
+      it 'ログインに成功' do
+        fill_in 'student_email',	with: "#{student.email}"
+        fill_in 'student_password',	with: "#{student.password}"
+        click_button 'ログイン'
+        expect(current_path).to eq student_path(student.id)
+        expect(page).to have_content 'ログインしました。'
+      end
+    end
+    context 'メールアドレスが未入力の場合' do
+      it 'ログインに失敗' do
+        fill_in 'student_email',	with: nil
+        fill_in 'student_password',	with: "#{student.password}"
+        click_button 'ログイン'
+        expect(current_path).to eq new_student_session_path
+        expect(page).to have_content 'メールアドレスまたはパスワードが違います。'
+      end
+    end
+    context 'パスワードが違う場合' do
+      it 'ログインに失敗' do
+        fill_in 'student_email',	with: "#{student.email}"
+        fill_in 'student_password',	with: "false_password"
+        click_button 'ログイン'
+        expect(current_path).to eq new_student_session_path
+        expect(page).to have_content 'パスワードが違います。'
+      end
+    end
+  end
+
+  describe '生徒の検索' do
+    before do
+      visit students_path
+      fill_in 'キーワードを入力', with: "#{teacher.self_introduction}"
+      click_button '検索'
+    end
+    context 'キーワードを入力して検索した場合' do
+      it '生徒名と自己紹介が表示される' do
+        expect(page).to have_content "#{student.self_introduction}"
+        expect(page).to have_content "#{student.name}"
+      end
+      it '生徒詳細ページへのリンクが表示される' do
+        expect(page).to have_link "#{student.name}", href: student_path(student.id)
+      end
+    end
+  end
+
+  describe 'ユーザーの新規作成' do
+    before do
+      visit new_student_registration_path
+    end
+    context 'フォームの入力値が正常な場合' do
+      it '生徒の登録に成功' do
+        fill_in "student[name]",	with: "test_name"
+        fill_in "student[email]",	with: "test@gmail.com"
+        fill_in "student[password]",	with: "registration_password"
+        fill_in "student[password_confirmation]",	with: "registration_password"
+        click_button '登録'
+        # expect(current_path).to eq 'students/'
+        expect(page).to have_content 'アカウント登録が完了しました。'
+      end
+    end
+    context '名前が未入力の場合' do
+      it '生徒の登録に失敗' do
+        fill_in "student[name]",	with: nil
+        fill_in "student[email]",	with: "registration_email"
+        fill_in "student[password]",	with: "registration_password"
+        fill_in "student[password_confirmation]",	with: "registration_password"
+        click_button '登録'
+        expect(current_path).to eq '/students'
+        expect(page).to have_content '※名前を入力してください'
+      end
+    end
+    context 'すでにログインしている場合' do
+      it 'ログインしている場合、マイページに遷移する' do
+        login_as student, scope: :student
+        visit new_student_registration_path
+        # expect(current_path).to eq 'students/1'
+        expect(page).to have_content 'すでにログインしています。'
+      end
+    end
+  end
+
+  describe '生徒の編集' do
+    before do
+      login_as student, scope: :student
+      visit edit_student_registration_path(student)
+    end
+    context 'フォームの入力値が正常な場合' do
+      it '生徒名の編集に成功' do
+        fill_in 'student[name]', with: "changed_name"
         fill_in 'student[current_password]', with: "#{student.password}"
         click_button '変更する'
         expect(page).to have_content 'アカウント情報を変更しました。'
@@ -86,41 +191,14 @@ RSpec.describe "Students", type: :system do
         expect(page).to have_content 'アカウント情報を変更しました。'
         expect(current_path).to eq student_path(student)
       end
+    end
+    context '現在のパスワードを入力しない場合' do
       it '編集に失敗' do
         fill_in 'student[email]', with: "change_email@gmail.com"
         click_button '変更する'
         expect(page).to have_content '現在のパスワードを入力してください'
         expect(current_path).to eq students_path
       end
-    end
-
-    context '生徒の詳細ページに遷移' do
-      let!(:question) { create(:question, student_id: other_student.id)}
-
-      it '生徒の詳細ページへのアクセスに成功' do
-        visit student_path(student)
-        expect(page).to have_content 'Student Profile'
-        expect(page).to have_content student.name
-        expect(page).to have_content 'フォロー（先生）'
-        expect(page).to have_content 'フォロー（生徒）'
-        expect(page).to have_content 'フォロワー（生徒）'
-        expect(page).to have_content 'まだ質問はありません。'
-        expect(current_path).to eq student_path(student)
-      end
-      it '生徒の質問が正しく表示される' do
-        visit student_path(other_student)
-        expect(page).to have_content "質問一覧（#{Question.count}件）"
-        expect(page).to have_content 'タイトルテスト'
-        expect(page).to have_content '質問テスト'
-      end
-      # it 'ユーザーをフォロー、フォロー解除できる' do
-      #   login_as student, scope: :student
-      #   visit student_path(other_student)
-      #   expect {
-      #     click_on 'Follow'
-      #     sleep 0.5
-      #   }.to change { SsRelationship.count }.by(1)
-      # end
     end
   end
 end
