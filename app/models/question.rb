@@ -7,8 +7,8 @@ class Question < ApplicationRecord
   has_many   :best_answers, dependent: :destroy
   has_many   :ss_notifications, dependent: :destroy
   with_options presence: true do
-    validates  :title, length: { minimum: 1, maximum: 20 }
-    validates  :content, length: { minimum: 1, maximum: 200 }
+    validates  :title, length: { maximum: 20 }
+    validates  :content, length: { maximum: 200 }
     validates  :student_id
   end
 

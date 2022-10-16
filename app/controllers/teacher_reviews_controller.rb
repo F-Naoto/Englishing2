@@ -14,7 +14,7 @@ class TeacherReviewsController < ApplicationController
       redirect_to teacher_teacher_reviews_path(@teacher_review.teacher)
     else
       teacher = @teacher_review.teacher
-      flash.now[:alert] = "レビューを投稿できませんでした。"
+      flash[:alert] = "レビューを投稿できませんでした。"
       redirect_to teacher_path(teacher.id)
     end
   end

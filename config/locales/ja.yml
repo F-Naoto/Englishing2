@@ -4,6 +4,7 @@ ja:
       student: 生徒
       teacher: 先生
       teacher_review: 先生レビュー
+      question: 質問
     attributes:
       student:
         name: 名前
@@ -21,7 +22,10 @@ ja:
         current_password: 現在のパスワード
       teacher_review:
         score: 点数
-        content: 内容
+        content: レビューの内容
+      question:
+        title: タイトル
+        content: 質問内容
   errors:
     messages:
       already_confirmed: は既に登録済みです。ログインしてください。

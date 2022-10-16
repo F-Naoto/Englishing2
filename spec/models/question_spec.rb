@@ -26,7 +26,7 @@ RSpec.describe Question, type: :model do
     it "質問内容が200文字以上の場合無効である" do
       question = build(:question, title: "a"*201)
       question.valid?
-      expect(question.errors[:title]).to include("は20文字以内で入力してください")
+      expect(question.errors[:title]).to include("は200文字以内で入力してください")
     end
   end
 end

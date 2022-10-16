@@ -1,11 +1,10 @@
-# frozen_string_literal: true
-
 class QuestionsController < ApplicationController
   before_action :authenticate_student!, only: %i[new create destroy]
 
   def index
     @search = Question.ransack(params[:q])
     @questions = @search.result.page(params[:page]).per(8)
+    @question = current_student.questions.build if current_student
   end
 
   def show
@@ -27,7 +26,7 @@ class QuestionsController < ApplicationController
     else
       @search = Question.ransack(params[:q])
       @questions = @search.result.page(params[:page]).per(8)
-      flash[:danger] = '質問を投稿できませんでした。'
+      flash.now[:danger] = '質問を投稿できませんでした。'
       render :index
     end
   end
@@ -41,6 +40,6 @@ class QuestionsController < ApplicationController
 
   private
   def question_params
-    params.permit(:title, :content)
+    params.require(:question).permit(:title, :content)
   end
 end

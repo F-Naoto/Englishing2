@@ -2,6 +2,7 @@
   <div class="text-center mt-6">
     <div class="py-8 border-b border-indigo-50">
       <%= form_with(model: @question, local: true) do |f| %>
+      <%= render 'layouts/error_messages', object: f.object %>
         <div class: "flex-1 justify-center">
           <div><%= f.label :title, "タイトル" %></div>
           <div><%= f.text_field :title, class: "border border-gray-300 rounded w-2/5 h-8 px-2 py-2" %></div>

@@ -1,4 +1,4 @@
-<% unless BestAnswer.where(question_id: @question.id).exists? %>
+<% unless BestAnswer.where(question_id: question.id).exists? %>
   <% if current_teacher %>
     <%= form_with model: answer do |f| %>
       <div class="text-center mt-6">

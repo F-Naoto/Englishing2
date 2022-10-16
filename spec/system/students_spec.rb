@@ -3,15 +3,15 @@ require 'devise'
 
 RSpec.describe "Students", type: :system do
   let!(:student) { create(:student, name: "student", self_introduction: "introduction") }
-  let(:teacher) { create(:teacher) }
-  let(:other_student) { create(:student)}
+  let!(:teacher) { create(:teacher) }
+  let!(:other_student) { create(:student)}
 
   describe 'ページ遷移確認' do
     context '生徒のログインページに遷移' do
       it '生徒のログインページへのアクセスに成功' do
         visit new_student_session_path
-        expect(page).to have_content "メールアドレス"
-        expect(page).to have_content "パスワード"
+        expect(page).to have_content 'メールアドレス'
+        expect(page).to have_content 'パスワード'
         expect(current_path).to eq new_student_session_path
       end
     end
@@ -62,19 +62,6 @@ RSpec.describe "Students", type: :system do
         expect(current_path).to eq student_path(student)
       end
     end
-    context 'メッセージページに遷移' do
-      let!(:chat_room) { create(:chat_room, id:1) }
-      let!(:chat_room_user) { create(:chat_room_user, chat_room_id: chat_room.id, student_id: student.id, teacher_id: teacher.id)}
-      it 'メッセージページへのアクセスに成功' do
-        login_as student, scope: :student
-        visit teacher_path(teacher)
-        click_link 'Message'
-        expect(page).to have_content "#{teacher.name}先生に質問"
-        expect(page).to have_content teacher.name
-        expect(page).to have_field 'メッセージを入力したらボタンをクリック'
-        expect(current_path).to eq chat_room_path(chat_room)
-      end
-    end
   end
 
   describe '生徒のログイン' do
@@ -110,6 +97,21 @@ RSpec.describe "Students", type: :system do
     end
   end
 
+  describe '生徒のログアウト' do
+    before do
+      login_as student, scope: :student
+      visit root_url
+    end
+    context '正常な場合' do
+      it 'ログアウトに成功' do
+        find(".my_page_btn").click
+        find(".logout").click
+        expect(current_path).to eq "/"
+        expect(page).to have_content 'ログアウトしました。'
+      end
+    end
+  end
+
   describe '生徒の検索' do
     before do
       visit students_path
@@ -117,11 +119,9 @@ RSpec.describe "Students", type: :system do
       click_button '検索'
     end
     context 'キーワードを入力して検索した場合' do
-      it '生徒名と自己紹介が表示される' do
+      it '該当する生徒が表示される' do
         expect(page).to have_content "#{student.self_introduction}"
         expect(page).to have_content "#{student.name}"
-      end
-      it '生徒詳細ページへのリンクが表示される' do
         expect(page).to have_link "#{student.name}", href: student_path(student.id)
       end
     end
@@ -138,7 +138,6 @@ RSpec.describe "Students", type: :system do
         fill_in "student[password]",	with: "registration_password"
         fill_in "student[password_confirmation]",	with: "registration_password"
         click_button '登録'
-        # expect(current_path).to eq 'students/'
         expect(page).to have_content 'アカウント登録が完了しました。'
       end
     end
@@ -157,7 +156,7 @@ RSpec.describe "Students", type: :system do
       it 'ログインしている場合、マイページに遷移する' do
         login_as student, scope: :student
         visit new_student_registration_path
-        # expect(current_path).to eq 'students/1'
+        expect(current_path).to eq "/students/#{student.id}"
         expect(page).to have_content 'すでにログインしています。'
       end
     end
@@ -201,4 +200,9 @@ RSpec.describe "Students", type: :system do
       end
     end
   end
+
+  # describe 'フォロー、アンフォロー' do
+  #   context 'context' do
+  #   end
+  # end
 end
