@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class SsRelationshipsController < ApplicationController
   before_action :authenticate_student!
 

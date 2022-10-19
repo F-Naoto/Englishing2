@@ -7,7 +7,6 @@ RSpec.describe "Questions", type: :system do
   let!(:student2) { create(:student) }
   let!(:question) { create(:question, student_id: student.id) }
   let!(:question2) { create(:question, student_id: student2.id) }
-  let!(:answer) { create(:answer, teacher_id: teacher.id, question_id: question.id ) }
   let!(:best_answer) { create(:best_answer, question_id: question.id, student_id: student.id, teacher_id: teacher.id) }
 
   describe '先生が質問一覧ページに遷移' do
@@ -49,7 +48,7 @@ RSpec.describe "Questions", type: :system do
     end
   end
 
-  describe '質問を投稿' do
+  describe '質問の投稿' do
     before do
       login_as student, scope: :student
       visit questions_path
@@ -81,6 +80,27 @@ RSpec.describe "Questions", type: :system do
         fill_in 'キーワードを入力', with: question.content
         click_on '検索'
         expect(page).to  have_content student.name
+      end
+    end
+  end
+
+  describe '質問への回答' do
+    before do
+      login_as teacher, scope: :teacher
+      visit question_path(question.id)
+      fill_in 'answer[content]', with: 'test_answer'
+      click_on '回答する'
+    end
+    context '質問に初めて回答する場合' do
+      it '回答に成功' do
+        expect(page).to have_content '回答を投稿しました。'
+      end
+    end
+    context '同じ質問に回答する場合' do
+      it '回答に失敗' do
+        fill_in 'answer[content]', with: 'test_answer'
+        click_on '回答する'
+        expect(page).to have_content '回答に失敗しました。'
       end
     end
   end

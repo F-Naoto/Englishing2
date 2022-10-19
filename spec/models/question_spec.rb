@@ -1,32 +1,40 @@
 require 'rails_helper'
 
 RSpec.describe Question, type: :model do
-  it "正常に登録できる" do
-    question = create(:question)
-    expect(question).to be_valid
+  describe '質問の投稿' do
+    context 'フォームの入力値が正常な場合' do
+      it '質問を正常に投稿できる' do
+        question = create(:question)
+        expect(question).to be_valid
+      end
+    end
   end
-  describe "about title" do
-    it "タイトルが空の場合、無効である" do
+  context 'フォームの入力値が空の場合' do
+    it '質問の投稿に失敗する' do
       question = build(:question, title: nil)
       question.valid?
-      expect(question.errors[:title]).to include("を入力してください")
-    end
-    it "タイトルが20文字以上の場合無効である" do
-      question = build(:question, title: "a"*21)
-      question.valid?
-      expect(question.errors[:title]).to include("は20文字以内で入力してください")
+      expect(question.errors[:title]).to include('を入力してください')
     end
   end
-  describe "about content" do
-    it "質問内容が空の場合、無効である" do
+  context 'タイトルが20文字以上の場合' do
+    it '質問の投稿に失敗する' do
+      question = build(:question, title: 'a'*21)
+      question.valid?
+      expect(question.errors[:title]).to include('は20文字以内で入力してください')
+    end
+  end
+  context '質問内容が空の場合' do
+    it '質問の投稿に失敗する' do
       question = build(:question, content: nil)
       question.valid?
-      expect(question.errors[:content]).to include("を入力してください")
+      expect(question.errors[:content]).to include('を入力してください')
     end
-    it "質問内容が200文字以上の場合無効である" do
-      question = build(:question, title: "a"*201)
+  end
+  context '質問内容が200文字以上の場合' do
+    it '質問の投稿に失敗する' do
+      question = build(:question, content: 'a'*201)
       question.valid?
-      expect(question.errors[:title]).to include("は200文字以内で入力してください")
+      expect(question.errors[:content]).to include('は200文字以内で入力してください')
     end
   end
 end

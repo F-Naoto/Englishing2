@@ -3,7 +3,7 @@
 <div class="reviews-list mt-10">
   <% @teachers.each_with_index do |teacher, index| %>
     <%= link_to teacher_path(teacher) do %>
-      <div class="w-3/5 m-auto mt-4 text-center">
+      <div class="w-3/5 m-auto mt-4 text-center teacher">
         <div class="flex flex-col gap-3 py-4 md:py-8 border-b-2">
           <div>
             <span class="text-3xl text-yellow-400 font-bold"><%= "#{index+1}位"%></span>

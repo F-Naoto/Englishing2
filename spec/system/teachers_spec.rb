@@ -5,7 +5,9 @@ RSpec.describe "Teachers", type: :system do
   let!(:teacher) { create(:teacher, name: "teacher", self_introduction: "introduction", average_score:1) }
   let!(:other_teacher) { create(:teacher, name: "other_teacher", average_score:3) }
   let!(:other_teacher2) { create(:teacher, name: "other_teacher2", average_score:5)  }
-  let!(:student) { create(:student)}
+  let!(:teacher) { create(:teacher)}
+  # let!(:answer) { create(:answer) }
+  let!(:question) { create(:question) }
 
   describe 'ページ遷移確認' do
     context '先生のログインページに遷移' do
@@ -64,34 +66,34 @@ RSpec.describe "Teachers", type: :system do
     end
   end
 
-  describe '生徒のログイン' do
+  describe '先生のログイン' do
     before do
-      visit new_student_session_path
+      visit new_teacher_session_path
     end
     context 'フォームの入力値が正常な場合' do
       it 'ログインに成功' do
-        fill_in 'student_email',	with: "#{student.email}"
-        fill_in 'student_password',	with: "#{student.password}"
+        fill_in 'teacher_email',	with: "#{teacher.email}"
+        fill_in 'teacher_password',	with: "#{teacher.password}"
         click_button 'ログイン'
-        expect(current_path).to eq student_path(student.id)
+        expect(current_path).to eq teacher_path(teacher.id)
         expect(page).to have_content 'ログインしました。'
       end
     end
     context 'メールアドレスが未入力の場合' do
       it 'ログインに失敗' do
-        fill_in 'student_email',	with: nil
-        fill_in 'student_password',	with: "#{student.password}"
+        fill_in 'teacher_email',	with: nil
+        fill_in 'teacher_password',	with: "#{teacher.password}"
         click_button 'ログイン'
-        expect(current_path).to eq new_student_session_path
+        expect(current_path).to eq new_teacher_session_path
         expect(page).to have_content 'メールアドレスまたはパスワードが違います。'
       end
     end
     context 'パスワードが違う場合' do
       it 'ログインに失敗' do
-        fill_in 'student_email',	with: "#{student.email}"
-        fill_in 'student_password',	with: "false_password"
+        fill_in 'teacher_email',	with: "#{teacher.email}"
+        fill_in 'teacher_password',	with: "false_password"
         click_button 'ログイン'
-        expect(current_path).to eq new_student_session_path
+        expect(current_path).to eq new_teacher_session_path
         expect(page).to have_content 'パスワードが違います。'
       end
     end
