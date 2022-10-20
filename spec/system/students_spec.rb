@@ -168,6 +168,13 @@ RSpec.describe "Students", type: :system do
       visit edit_student_registration_path(student)
     end
     context 'フォームの入力値が正常な場合' do
+      it '画像の編集に成功' do
+        attach_file 'プロフィール画像', "#{Rails.root}/spec/fixtures/image/profile_img.jpg"
+        fill_in 'student[current_password]', with: "#{student.password}"
+        click_button '変更する'
+        expect(page).to have_content 'アカウント情報を変更しました。'
+        expect(current_path).to eq student_path(student)
+      end
       it '生徒名の編集に成功' do
         fill_in 'student[name]', with: "changed_name"
         fill_in 'student[current_password]', with: "#{student.password}"
@@ -200,9 +207,4 @@ RSpec.describe "Students", type: :system do
       end
     end
   end
-
-  # describe 'フォロー、アンフォロー' do
-  #   context 'context' do
-  #   end
-  # end
 end

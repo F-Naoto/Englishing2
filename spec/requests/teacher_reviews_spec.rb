@@ -7,7 +7,7 @@ RSpec.describe 'TeacherReviews', type: :request do
                          {teacher_id: teacher.id,
                           score: 4,
                           content: "sample_review"}} }
-  let!(:bad_review_params) { {teacher_review:
+  let!(:invalid_review_params) { {teacher_review:
                              {teacher_id: teacher.id,
                               score: 4,
                               content: nil}} }
@@ -17,7 +17,7 @@ RSpec.describe 'TeacherReviews', type: :request do
   end
 
   describe 'GET /teachers/:teacher_id/teacher_reviews' do
-    it '先生のレビュー一覧画面へのリクエストに成功する' do
+    it 'リクエストに成功する' do
       get teacher_teacher_reviews_path(teacher)
       expect(response).to have_http_status(200)
     end
@@ -29,22 +29,22 @@ RSpec.describe 'TeacherReviews', type: :request do
         post teacher_teacher_reviews_path(teacher), params: review_params
         expect(response).to redirect_to teacher_teacher_reviews_path(teacher)
       end
-      it 'TeacherReviewsが1件増える' do
+      it 'TeacherReviewが1件増える' do
         expect{
           post teacher_teacher_reviews_path(teacher), params: review_params
         }.to change(TeacherReview, :count).by(1)
       end
     end
     context 'パラメーターが不正な場合' do
-      it '先生の詳細画面へredirectする' do
-        post teacher_teacher_reviews_path(teacher), params: bad_review_params
+      it '先生の詳細画面へリダイレクトする' do
+        post teacher_teacher_reviews_path(teacher), params: invalid_review_params
         expect(response).to redirect_to teacher_path(teacher)
       end
     end
   end
 
   describe 'GET /teacher_reviews/ranking' do
-    it '先生ランキング画面へのリクエストに成功する' do
+    it 'リクエストに成功する' do
       get teacher_reviews_ranking_path
       expect(response).to have_http_status(200)
     end

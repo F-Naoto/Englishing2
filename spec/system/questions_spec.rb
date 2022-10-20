@@ -4,9 +4,9 @@ require 'devise'
 RSpec.describe "Questions", type: :system do
   let!(:teacher) { create(:teacher) }
   let!(:student) { create(:student) }
-  let!(:student2) { create(:student) }
+  let!(:other_student) { create(:student) }
   let!(:question) { create(:question, student_id: student.id) }
-  let!(:question2) { create(:question, student_id: student2.id) }
+  let!(:other_question) { create(:question, student_id: other_student.id) }
   let!(:best_answer) { create(:best_answer, question_id: question.id, student_id: student.id, teacher_id: teacher.id) }
 
   describe '先生が質問一覧ページに遷移' do
@@ -18,11 +18,11 @@ RSpec.describe "Questions", type: :system do
       it '回答リンクが機能する' do
         expect(page).to have_link '回答する'
         click_link '回答する'
-        expect(current_path).to eq question_path(question2.id)
+        expect(current_path).to eq question_path(other_question.id)
       end
       it 'タイトルと生徒名が正常に表示される' do
-        expect(page).to have_content student2.name
-        expect(page).to have_content question2.title
+        expect(page).to have_content other_student.name
+        expect(page).to have_content other_question.title
       end
     end
     context '解決済みの質問がある場合' do
@@ -39,7 +39,7 @@ RSpec.describe "Questions", type: :system do
   describe '生徒が質問一覧ページに遷移' do
     context '生徒自身の質問がある場合' do
       it '削除リンクが表示される' do
-        login_as student2, scope: :student
+        login_as other_student, scope: :student
         visit questions_path
         expect(page).to have_link '削除する'
         click_link '削除する'
@@ -87,8 +87,8 @@ RSpec.describe "Questions", type: :system do
   describe '質問への回答' do
     before do
       login_as teacher, scope: :teacher
-      visit question_path(question.id)
-      fill_in 'answer[content]', with: 'test_answer'
+      visit question_path(other_question)
+      fill_in '内容', with: 'test_answer'
       click_on '回答する'
     end
     context '質問に初めて回答する場合' do
@@ -98,7 +98,7 @@ RSpec.describe "Questions", type: :system do
     end
     context '同じ質問に回答する場合' do
       it '回答に失敗' do
-        fill_in 'answer[content]', with: 'test_answer'
+        fill_in '内容', with: 'test_answer'
         click_on '回答する'
         expect(page).to have_content '回答に失敗しました。'
       end

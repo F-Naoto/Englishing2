@@ -21,7 +21,6 @@ RSpec.describe "StRelationships", type: :request do
 
   describe 'DELETE /st_relationships/:id' do
     let!(:st_relationship) { create(:st_relationship, follower_id: student.id, followed_id: teacher.id) }
-
     it '生徒が先生へのアンフォローに成功' do
       delete st_relationship_path(st_relationship), params:{ followed_id: teacher.id }, xhr: true
       expect(response).to render_template  "st_relationships/destroy"

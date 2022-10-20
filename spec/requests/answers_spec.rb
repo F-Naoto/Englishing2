@@ -6,14 +6,14 @@ RSpec.describe 'Answers', type: :request do
   let!(:question) { create(:question) }
   let!(:answer) { create(:answer) }
   let!(:answer_params) { { answer: { content: 'sample answer', question_id: question.id} } }
-  let!(:bad_answer_params) { { answer: { content: nil, question_id: question.id } } }
+  let!(:invalid_answer_params) { { answer: { content: nil, question_id: question.id } } }
 
   describe 'POST /answers' do
     before do
       sign_in(teacher)
     end
     context 'パラメーターが正常な場合' do
-      it '回答を投稿し、質問の詳細ページにredirectする' do
+      it '質問の詳細ページにリダイレクトする' do
         post answers_path, params: answer_params
         expect(response).to redirect_to "/questions/#{question.id}"
       end
@@ -25,7 +25,7 @@ RSpec.describe 'Answers', type: :request do
     end
     context 'パラメータが不正な場合' do
       it '質問の詳細ページにrenderする' do
-        post answers_path, params: bad_answer_params
+        post answers_path, params: invalid_answer_params
         expect(response).to redirect_to "/questions/#{question.id}"
       end
     end

@@ -7,6 +7,9 @@ class BestAnswersController < ApplicationController
     if @best_answer.save
       flash[:success] = 'ベストアンサーを選びました。'
       redirect_to question
+    else
+      flash[:success] = 'ベストアンサーを選べませんでした。'
+      redirect_to question
     end
   end
 

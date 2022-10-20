@@ -154,6 +154,13 @@ RSpec.describe "Teachers", type: :system do
       visit edit_teacher_registration_path(teacher)
     end
     context 'フォームの入力値が正常な場合' do
+      it '画像の編集に成功' do
+        attach_file 'プロフィール画像', "#{Rails.root}/spec/fixtures/image/profile_img.jpg"
+        fill_in 'teacher[current_password]', with: "#{teacher.password}"
+        click_button '変更する'
+        expect(page).to have_content 'アカウント情報を変更しました。'
+        expect(current_path).to eq teacher_path(teacher)
+      end
       it '先生名の編集に成功' do
         visit edit_teacher_registration_path(teacher)
         fill_in 'teacher[name]', with: "#{teacher.name}"

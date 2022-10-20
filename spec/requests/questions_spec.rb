@@ -4,17 +4,17 @@ RSpec.describe 'Questions', type: :request do
   let!(:question) { create(:question) }
   let!(:student){ create(:student) }
   let!(:question_params) { { question: { title: 'sample_title', content: 'sample_content'} } }
-  let!(:bad_question_params) { { question: { title: 'sample_title', content: nil } } }
+  let!(:invalid_question_params) { { question: { title: 'sample_title', content: nil } } }
 
   describe 'GET /question' do
-    it '質問の一覧ページにredirectする' do
+    it 'リクエストが成功する' do
       get questions_path
       expect(response).to have_http_status(200)
     end
   end
 
   describe 'GET /questions/:id' do
-    it '質問の詳細ページにredirectする' do
+    it 'リクエストが成功する' do
     get questions_path(question)
     expect(response).to have_http_status(200)
     end
@@ -25,7 +25,7 @@ RSpec.describe 'Questions', type: :request do
       sign_in student
     end
     context 'リクエストが成功した場合' do
-      it '質問の一覧ページにredirectする' do
+      it '質問の一覧ページにリダイレクトする' do
       expect{
         post questions_path, params: question_params
       }.to change( Question, :count).by(1)
@@ -34,7 +34,7 @@ RSpec.describe 'Questions', type: :request do
     end
     context 'リクエストが失敗した場合' do
       it '質問の一覧ページにrenderする' do
-        post questions_path, params: bad_question_params
+        post questions_path, params: invalid_question_params
         expect(response).to render_template :index
       end
     end
