@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "DeviseStudents", type: :request do
+RSpec.describe 'DeviseStudents', type: :request do
   let(:student) { create(:student) }
   let(:student_params) { attributes_for(:student) }
-  let(:invalid_student_params) { attributes_for(:student, name: "") }
+  let(:invalid_student_params) { attributes_for(:student, name: '') }
 
   describe 'GET /students' do
     it 'リクエストが成功する' do
@@ -75,7 +77,7 @@ RSpec.describe "DeviseStudents", type: :request do
     context 'ユーザーが存在しない場合' do
       it 'エラーが発生する' do
         student.delete
-        expect{ get student_path(student) }.to raise_error ActiveRecord::RecordNotFound
+        expect { get student_path(student) }.to raise_error ActiveRecord::RecordNotFound
       end
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Answer, type: :model do
@@ -22,7 +24,7 @@ RSpec.describe Answer, type: :model do
     end
     context '回答が300文字以上の場合' do
       it '回答の投稿に失敗' do
-        answer = build(:answer, content: 'a'*301)
+        answer = build(:answer, content: 'a' * 301)
         answer.valid?
         expect(answer.errors[:content]).to include('は300文字以内で入力してください')
       end
@@ -35,7 +37,7 @@ RSpec.describe Answer, type: :model do
         question = build(:question)
         question.answers << create(:answer)
         question.save
-        expect{ question.destroy }.to change{ Answer.count }.by(-1)
+        expect { question.destroy }.to change { Answer.count }.by(-1)
       end
     end
     context '先生が削除された場合' do
@@ -43,7 +45,7 @@ RSpec.describe Answer, type: :model do
         teacher = build(:teacher)
         teacher.answers << create(:answer)
         teacher.save
-        expect{ teacher.destroy }.to change{ Answer.count }.by(-1)
+        expect { teacher.destroy }.to change { Answer.count }.by(-1)
       end
     end
   end

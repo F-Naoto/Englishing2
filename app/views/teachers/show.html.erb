@@ -11,7 +11,7 @@
         <% end %>
         <div class="sm:flex-grow">
           <div class="my-4">
-            <p class="text-xl leading-tight text-center pt-3"><%=@teacher.name %></p>
+            <p class="text-xl leading-tight text-center pt-3"><%= @teacher.name %></p>
             <p class="text-sm leading-tight text-grey-dark text-center">回答数<%= @teacher.answers.count %></p>
             <p class="text-sm leading-tight text-grey-dark text-center">評価<%= @teacher.average_score %></p>
           </div>
@@ -19,7 +19,7 @@
             <p class="text-center"><%= link_to @teacher.st_followers.count, st_follower_teacher_path, class: 'text-sm leading-tight text-blue-500 underline', id:'followers' %>フォロワー（生徒）</p>
             <% unless @teacher.self_introduction.nil? %>
               <p class="text-xl leading-tight text-left py-3">自己紹介</p>
-              <p class="text-sm leading-tight text-left py-3"><%=@teacher.self_introduction %></p>
+              <p class="text-sm leading-tight text-left py-3"><%= @teacher.self_introduction %></p>
             <% end %>
           </div>
           <div class="text-center">

@@ -6,7 +6,7 @@
       <div class="w-3/5 m-auto mt-4 text-center teacher">
         <div class="flex flex-col gap-3 py-4 md:py-8 border-b-2">
           <div>
-            <span class="text-3xl text-yellow-400 font-bold"><%= "#{index+1}位"%></span>
+            <span class="text-3xl text-yellow-400 font-bold"><%= "#{index+1}位" %></span>
           </div>
           <div class="flex item-center">
             <% if teacher.avatar.attached? %>
@@ -15,8 +15,8 @@
               <img src="https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=256" loading="lazy" alt="Photo by Radu Florin" class="mx-10 w-40 h-40 rounded-full object-cover object-center">
             <% end %>
             <div class="mt-6">
-              <div">
-                <span class="text-3xl"><%= "#{teacher.name}先生" %></span>
+              <div>
+                <span class="text-3xl mb-4"><%= "#{teacher.name}先生" %></span>
               </div>
               <div>
                 <span class="text-2xl"><%= "平均点：#{teacher.average_review_score}点" %></span>

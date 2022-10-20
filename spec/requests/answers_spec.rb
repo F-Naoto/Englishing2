@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Answers', type: :request do
@@ -5,7 +7,7 @@ RSpec.describe 'Answers', type: :request do
   let!(:student) { create(:student) }
   let!(:question) { create(:question) }
   let!(:answer) { create(:answer) }
-  let!(:answer_params) { { answer: { content: 'sample answer', question_id: question.id} } }
+  let!(:answer_params) { { answer: { content: 'sample answer', question_id: question.id } } }
   let!(:invalid_answer_params) { { answer: { content: nil, question_id: question.id } } }
 
   describe 'POST /answers' do
@@ -18,9 +20,9 @@ RSpec.describe 'Answers', type: :request do
         expect(response).to redirect_to "/questions/#{question.id}"
       end
       it 'Answerが1件保存される' do
-        expect{
+        expect do
           post answers_path, params: answer_params
-        }.to change( Answer, :count).by(1)
+        end.to change(Answer, :count).by(1)
       end
     end
     context 'パラメータが不正な場合' do

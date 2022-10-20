@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AnswersController < ApplicationController
   before_action :authenticate_teacher!
 
@@ -7,11 +9,10 @@ class AnswersController < ApplicationController
 
     if existing_answer_combination.empty? && @answer.save
       flash[:success] = '回答を投稿しました。'
-      redirect_to "/questions/#{params[:answer][:question_id]}"
     else
       flash[:danger] = '回答に失敗しました。'
-      redirect_to "/questions/#{params[:answer][:question_id]}"
     end
+    redirect_to "/questions/#{params[:answer][:question_id]}"
   end
 
   # def edit
@@ -33,6 +34,7 @@ class AnswersController < ApplicationController
   # end
 
   private
+
   def answer_params
     params.require(:answer).permit(:content, :question_id)
   end

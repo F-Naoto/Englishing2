@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Question, type: :model do
@@ -18,7 +20,7 @@ RSpec.describe Question, type: :model do
   end
   context 'タイトルが20文字以上の場合' do
     it '質問の投稿に失敗する' do
-      question = build(:question, title: 'a'*21)
+      question = build(:question, title: 'a' * 21)
       question.valid?
       expect(question.errors[:title]).to include('は20文字以内で入力してください')
     end
@@ -32,7 +34,7 @@ RSpec.describe Question, type: :model do
   end
   context '質問内容が200文字以上の場合' do
     it '質問の投稿に失敗する' do
-      question = build(:question, content: 'a'*201)
+      question = build(:question, content: 'a' * 201)
       question.valid?
       expect(question.errors[:content]).to include('は200文字以内で入力してください')
     end

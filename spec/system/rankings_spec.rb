@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'devise'
 
-RSpec.describe "Rankings", type: :system do
-  let!(:student) { create(:student, name: "student", self_introduction: "introduction") }
+RSpec.describe 'Rankings', type: :system do
+  let!(:student) { create(:student, name: 'student', self_introduction: 'introduction') }
   let!(:teacher) { create(:teacher) }
 
   describe 'ページ遷移確認' do

@@ -7,15 +7,15 @@
         <h1 class="text-white text-4xl sm:text-5xl md:text-6xl font-bold text-center my-8 md:my-12">Englishing</h1>
         <p class="text-white text-xl sm:text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12">最高の仲間と最高の先生と英語を学ぼう</p>
         <div class="w-full flex flex-row md:flex-col sm:flex-col sm:justify-center gap-2.5">
-          <%= link_to "先生アカウントを作成", new_teacher_registration_path, class: "inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"  %>
-          <%= link_to "生徒アカウントを作成", new_student_registration_path, class: "inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"  %>
+          <%= link_to "先生アカウントを作成", new_teacher_registration_path, class: "inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3" %>
+          <%= link_to "生徒アカウントを作成", new_student_registration_path, class: "inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3" %>
         </div>
         <div class="w-full flex flex-col sm:justify-center gap-2.5 mt-3">
           <% unless teacher_signed_in? %>
-            <%= link_to "先生をお試し", teachers_guest_sign_in_path, method: :post , class: "inline-block bg-green-500 hover:bg-green-600 active:bg-green-700 focus-visible:ring ring-green-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"  %>
+            <%= link_to "先生をお試し", teachers_guest_sign_in_path, method: :post , class: "inline-block bg-green-500 hover:bg-green-600 active:bg-green-700 focus-visible:ring ring-green-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3" %>
           <% end %>
           <% unless student_signed_in? %>
-            <%= link_to "生徒をお試し", students_guest_sign_in_path, method: :post , class: "inline-block bg-green-500 hover:bg-green-600 active:bg-green-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"  %>
+            <%= link_to "生徒をお試し", students_guest_sign_in_path, method: :post , class: "inline-block bg-green-500 hover:bg-green-600 active:bg-green-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3" %>
           <% end %>
         </div>
       </div>

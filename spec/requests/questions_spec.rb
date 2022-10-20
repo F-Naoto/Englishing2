@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Questions', type: :request do
   let!(:question) { create(:question) }
-  let!(:student){ create(:student) }
-  let!(:question_params) { { question: { title: 'sample_title', content: 'sample_content'} } }
+  let!(:student) { create(:student) }
+  let!(:question_params) { { question: { title: 'sample_title', content: 'sample_content' } } }
   let!(:invalid_question_params) { { question: { title: 'sample_title', content: nil } } }
 
   describe 'GET /question' do
@@ -15,8 +17,8 @@ RSpec.describe 'Questions', type: :request do
 
   describe 'GET /questions/:id' do
     it 'リクエストが成功する' do
-    get questions_path(question)
-    expect(response).to have_http_status(200)
+      get questions_path(question)
+      expect(response).to have_http_status(200)
     end
   end
 
@@ -26,10 +28,10 @@ RSpec.describe 'Questions', type: :request do
     end
     context 'リクエストが成功した場合' do
       it '質問の一覧ページにリダイレクトする' do
-      expect{
-        post questions_path, params: question_params
-      }.to change( Question, :count).by(1)
-      expect(response).to redirect_to questions_path
+        expect do
+          post questions_path, params: question_params
+        end.to change(Question, :count).by(1)
+        expect(response).to redirect_to questions_path
       end
     end
     context 'リクエストが失敗した場合' do
@@ -43,9 +45,9 @@ RSpec.describe 'Questions', type: :request do
   describe 'DELETE /questions/:id' do
     it '質問の削除に成功する' do
       sign_in student
-      expect{
+      expect  do
         delete question_path(question)
-      }.to change( Question, :count).by(-1)
+      end.to change(Question, :count).by(-1)
       expect(response).to redirect_to questions_path
     end
   end

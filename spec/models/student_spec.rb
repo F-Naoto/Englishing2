@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Student, type: :model do
-
   describe '生徒の登録' do
     context '正常な場合' do
       it '生徒の登録に成功' do
@@ -17,7 +18,7 @@ RSpec.describe Student, type: :model do
       end
     end
     context 'メールアドレスが空の場合' do
-      it '生徒の登録に失敗する'  do
+      it '生徒の登録に失敗する' do
         student = build(:student, email: nil)
         student.valid?
         expect(student.errors[:email]).to include('を入力してください')
@@ -62,7 +63,7 @@ RSpec.describe Student, type: :model do
     end
     context '自己紹介が100文字以上の場合' do
       it '生徒の登録に失敗する' do
-        student = build(:student, self_introduction: 'a'*101)
+        student = build(:student, self_introduction: 'a' * 101)
         student.valid?
         expect(student.errors[:self_introduction]).to include('は100文字以内で入力してください')
       end
@@ -75,7 +76,7 @@ RSpec.describe Student, type: :model do
         student = build(:student)
         student.questions << create(:question)
         student.save
-        expect{ student.destroy }.to change{ Question.count }.by(-1)
+        expect { student.destroy }.to change { Question.count }.by(-1)
       end
     end
   end

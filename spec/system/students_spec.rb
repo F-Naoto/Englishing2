@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'devise'
 
-RSpec.describe "Students", type: :system do
-  let!(:student) { create(:student, name: "student", self_introduction: "introduction") }
+RSpec.describe 'Students', type: :system do
+  let!(:student) { create(:student, name: 'student', self_introduction: 'introduction') }
   let!(:teacher) { create(:teacher) }
-  let!(:other_student) { create(:student)}
+  let!(:other_student) { create(:student) }
 
   describe 'ページ遷移確認' do
     context '生徒のログインページに遷移' do
@@ -50,7 +52,7 @@ RSpec.describe "Students", type: :system do
       end
     end
     context '詳細ページに遷移' do
-      let!(:question) { create(:question, student_id: other_student.id)}
+      let!(:question) { create(:question, student_id: other_student.id) }
       it '詳細ページへのアクセスに成功' do
         visit student_path(student)
         expect(page).to have_content 'Student Profile'
@@ -70,8 +72,8 @@ RSpec.describe "Students", type: :system do
     end
     context 'フォームの入力値が正常な場合' do
       it 'ログインに成功' do
-        fill_in 'student_email',	with: "#{student.email}"
-        fill_in 'student_password',	with: "#{student.password}"
+        fill_in 'student_email',	with: student.email.to_s
+        fill_in 'student_password',	with: student.password.to_s
         click_button 'ログイン'
         expect(current_path).to eq student_path(student.id)
         expect(page).to have_content 'ログインしました。'
@@ -80,7 +82,7 @@ RSpec.describe "Students", type: :system do
     context 'メールアドレスが未入力の場合' do
       it 'ログインに失敗' do
         fill_in 'student_email',	with: nil
-        fill_in 'student_password',	with: "#{student.password}"
+        fill_in 'student_password',	with: student.password.to_s
         click_button 'ログイン'
         expect(current_path).to eq new_student_session_path
         expect(page).to have_content 'メールアドレスまたはパスワードが違います。'
@@ -88,8 +90,8 @@ RSpec.describe "Students", type: :system do
     end
     context 'パスワードが違う場合' do
       it 'ログインに失敗' do
-        fill_in 'student_email',	with: "#{student.email}"
-        fill_in 'student_password',	with: "false_password"
+        fill_in 'student_email',	with: student.email.to_s
+        fill_in 'student_password',	with: 'false_password'
         click_button 'ログイン'
         expect(current_path).to eq new_student_session_path
         expect(page).to have_content 'パスワードが違います。'
@@ -104,9 +106,9 @@ RSpec.describe "Students", type: :system do
     end
     context '正常な場合' do
       it 'ログアウトに成功' do
-        find(".my_page_btn").click
-        find(".logout").click
-        expect(current_path).to eq "/"
+        find('.my_page_btn').click
+        find('.logout').click
+        expect(current_path).to eq '/'
         expect(page).to have_content 'ログアウトしました。'
       end
     end
@@ -115,14 +117,14 @@ RSpec.describe "Students", type: :system do
   describe '生徒の検索' do
     before do
       visit students_path
-      fill_in 'キーワードを入力', with: "#{teacher.self_introduction}"
+      fill_in 'キーワードを入力', with: teacher.self_introduction.to_s
       click_button '検索'
     end
     context 'キーワードを入力して検索した場合' do
       it '該当する生徒が表示される' do
-        expect(page).to have_content "#{student.self_introduction}"
-        expect(page).to have_content "#{student.name}"
-        expect(page).to have_link "#{student.name}", href: student_path(student.id)
+        expect(page).to have_content student.self_introduction.to_s
+        expect(page).to have_content student.name.to_s
+        expect(page).to have_link student.name.to_s, href: student_path(student.id)
       end
     end
   end
@@ -133,20 +135,20 @@ RSpec.describe "Students", type: :system do
     end
     context 'フォームの入力値が正常な場合' do
       it '生徒の登録に成功' do
-        fill_in "student[name]",	with: "test_name"
-        fill_in "student[email]",	with: "test@gmail.com"
-        fill_in "student[password]",	with: "registration_password"
-        fill_in "student[password_confirmation]",	with: "registration_password"
+        fill_in 'student[name]',	with: 'test_name'
+        fill_in 'student[email]',	with: 'test@gmail.com'
+        fill_in 'student[password]',	with: 'registration_password'
+        fill_in 'student[password_confirmation]',	with: 'registration_password'
         click_button '登録'
         expect(page).to have_content 'アカウント登録が完了しました。'
       end
     end
     context '名前が未入力の場合' do
       it '生徒の登録に失敗' do
-        fill_in "student[name]",	with: nil
-        fill_in "student[email]",	with: "registration_email"
-        fill_in "student[password]",	with: "registration_password"
-        fill_in "student[password_confirmation]",	with: "registration_password"
+        fill_in 'student[name]',	with: nil
+        fill_in 'student[email]',	with: 'registration_email'
+        fill_in 'student[password]',	with: 'registration_password'
+        fill_in 'student[password_confirmation]',	with: 'registration_password'
         click_button '登録'
         expect(current_path).to eq '/students'
         expect(page).to have_content '※名前を入力してください'
@@ -170,29 +172,29 @@ RSpec.describe "Students", type: :system do
     context 'フォームの入力値が正常な場合' do
       it '画像の編集に成功' do
         attach_file 'プロフィール画像', "#{Rails.root}/spec/fixtures/image/profile_img.jpg"
-        fill_in 'student[current_password]', with: "#{student.password}"
+        fill_in 'student[current_password]', with: student.password.to_s
         click_button '変更する'
         expect(page).to have_content 'アカウント情報を変更しました。'
         expect(current_path).to eq student_path(student)
       end
       it '生徒名の編集に成功' do
-        fill_in 'student[name]', with: "changed_name"
-        fill_in 'student[current_password]', with: "#{student.password}"
+        fill_in 'student[name]', with: 'changed_name'
+        fill_in 'student[current_password]', with: student.password.to_s
         click_button '変更する'
         expect(page).to have_content 'アカウント情報を変更しました。'
         expect(current_path).to eq student_path(student)
       end
       it 'メールアドレスの編集に成功' do
-        fill_in 'student[email]', with: "change_email@gmail.com"
-        fill_in 'student[current_password]', with: "#{student.password}"
+        fill_in 'student[email]', with: 'change_email@gmail.com'
+        fill_in 'student[current_password]', with: student.password.to_s
         click_button '変更する'
         expect(page).to have_content 'アカウント情報を変更しました。'
         expect(current_path).to eq student_path(student)
       end
       it 'パスワードの編集に成功' do
-        fill_in 'student[password]', with: "new_password"
+        fill_in 'student[password]', with: 'new_password'
         fill_in 'student[password_confirmation]', with: 'new_password'
-        fill_in 'student[current_password]', with: "#{student.password}"
+        fill_in 'student[current_password]', with: student.password.to_s
         click_button '変更する'
         expect(page).to have_content 'アカウント情報を変更しました。'
         expect(current_path).to eq student_path(student)
@@ -200,7 +202,7 @@ RSpec.describe "Students", type: :system do
     end
     context '現在のパスワードを入力しない場合' do
       it '編集に失敗' do
-        fill_in 'student[email]', with: "change_email@gmail.com"
+        fill_in 'student[email]', with: 'change_email@gmail.com'
         click_button '変更する'
         expect(page).to have_content '現在のパスワードを入力してください'
         expect(current_path).to eq students_path

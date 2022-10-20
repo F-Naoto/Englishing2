@@ -1,16 +1,22 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'TeacherReviews', type: :request do
   let!(:teacher) { create(:teacher) }
   let!(:student) { create(:student) }
-  let!(:review_params) { {teacher_review:
-                         {teacher_id: teacher.id,
-                          score: 4,
-                          content: "sample_review"}} }
-  let!(:invalid_review_params) { {teacher_review:
-                             {teacher_id: teacher.id,
-                              score: 4,
-                              content: nil}} }
+  let!(:review_params) do
+    { teacher_review:
+                         { teacher_id: teacher.id,
+                           score: 4,
+                           content: 'sample_review' } }
+  end
+  let!(:invalid_review_params) do
+    { teacher_review:
+                             { teacher_id: teacher.id,
+                               score: 4,
+                               content: nil } }
+  end
 
   before do
     sign_in student
@@ -30,9 +36,9 @@ RSpec.describe 'TeacherReviews', type: :request do
         expect(response).to redirect_to teacher_teacher_reviews_path(teacher)
       end
       it 'TeacherReviewが1件増える' do
-        expect{
+        expect do
           post teacher_teacher_reviews_path(teacher), params: review_params
-        }.to change(TeacherReview, :count).by(1)
+        end.to change(TeacherReview, :count).by(1)
       end
     end
     context 'パラメーターが不正な場合' do

@@ -1,2 +1,4 @@
-require './db/seeds/students.rb'
-require './db/seeds/teachers.rb'
+# frozen_string_literal: true
+
+require './db/seeds/students'
+require './db/seeds/teachers'

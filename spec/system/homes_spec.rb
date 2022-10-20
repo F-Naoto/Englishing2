@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Homes", type: :system do
-    let!(:student) { create(:student) }
-    let!(:teacher) { create(:teacher) }
+RSpec.describe 'Homes', type: :system do
+  let!(:student) { create(:student) }
+  let!(:teacher) { create(:teacher) }
 
   describe 'トップページに遷移' do
     context 'ログインしていない場合' do
@@ -32,7 +34,7 @@ RSpec.describe "Homes", type: :system do
       end
       it 'navbarが正常に表示される' do
         expect(page).to have_content 'マイページ'
-        find(".my_page_btn").click
+        find('.my_page_btn').click
         expect(page).to have_content '生徒マイページ'
         expect(page).to have_content 'メッセージ'
         expect(page).to have_content 'お知らせ'
@@ -55,7 +57,7 @@ RSpec.describe "Homes", type: :system do
       end
       it 'navbarが正常に表示される' do
         expect(page).to have_content 'マイページ'
-        find(".my_page_btn").click
+        find('.my_page_btn').click
         expect(page).to have_content '先生マイページ'
         expect(page).to have_content 'メッセージ'
         expect(page).to have_content '先生ログアウト'

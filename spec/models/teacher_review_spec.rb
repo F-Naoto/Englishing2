@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe TeacherReview, type: :model do
-
   describe '先生レビューの投稿' do
     context '正常な場合' do
       it '先生レビューを正常に登録できる' do

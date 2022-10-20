@@ -1,13 +1,14 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'devise'
 
-RSpec.describe "Messages", type: :system do
-
+RSpec.describe 'Messages', type: :system do
   describe 'メッセージページに遷移' do
     let!(:student) { create(:student) }
     let!(:teacher) { create(:teacher) }
-    let!(:chat_room) { create(:chat_room, id:1) }
-    let!(:chat_room_user) { create(:chat_room_user, chat_room_id: chat_room.id, student_id: student.id, teacher_id: teacher.id)}
+    let!(:chat_room) { create(:chat_room, id: 1) }
+    let!(:chat_room_user) { create(:chat_room_user, chat_room_id: chat_room.id, student_id: student.id, teacher_id: teacher.id) }
     context '生徒がメッセージページに遷移' do
       before do
         login_as student, scope: :student

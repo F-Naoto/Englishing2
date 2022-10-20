@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe SsRelationship, type: :model do
@@ -16,7 +18,7 @@ RSpec.describe SsRelationship, type: :model do
     context '情報が正常な場合' do
       it '生徒が生徒のアンフォローに成功する' do
         unfollow = student.ss_unfollow(other_student.id)
-        expect{ unfollow.delete }.to change{ SsRelationship.count }.by(-1)
+        expect { unfollow.delete }.to change { SsRelationship.count }.by(-1)
       end
     end
   end

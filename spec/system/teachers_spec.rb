@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'devise'
 
-RSpec.describe "Teachers", type: :system do
-  let!(:teacher) { create(:teacher, name: "teacher", self_introduction: "introduction", average_score:1) }
-  let!(:other_teacher) { create(:teacher, name: "other_teacher", average_score:3) }
-  let!(:other_teacher2) { create(:teacher, name: "other_teacher2", average_score:5)  }
-  let!(:teacher) { create(:teacher)}
+RSpec.describe 'Teachers', type: :system do
+  let!(:teacher) { create(:teacher, name: 'teacher', self_introduction: 'introduction', average_score: 1) }
+  let!(:other_teacher) { create(:teacher, name: 'other_teacher', average_score: 3) }
+  let!(:other_teacher2) { create(:teacher, name: 'other_teacher2', average_score: 5) }
+  let!(:teacher) { create(:teacher) }
   # let!(:answer) { create(:answer) }
   let!(:question) { create(:question) }
 
@@ -13,8 +15,8 @@ RSpec.describe "Teachers", type: :system do
     context '先生のログインページに遷移' do
       it '先生のログインページへのアクセスに成功' do
         visit new_teacher_session_path
-        expect(page).to have_content "メールアドレス"
-        expect(page).to have_content "パスワード"
+        expect(page).to have_content 'メールアドレス'
+        expect(page).to have_content 'パスワード'
         expect(current_path).to eq new_teacher_session_path
       end
     end
@@ -58,7 +60,7 @@ RSpec.describe "Teachers", type: :system do
         expect(page).to have_content 'Teacher Profile'
         expect(page).to have_content other_teacher.name
         expect(page).to have_content '回答数'
-        expect(page).to have_content "評価"
+        expect(page).to have_content '評価'
         expect(page).to have_content 'フォロワー（生徒）'
         expect(page).to have_content 'レビューはまだありません。'
         expect(current_path).to eq teacher_path(other_teacher)
@@ -72,8 +74,8 @@ RSpec.describe "Teachers", type: :system do
     end
     context 'フォームの入力値が正常な場合' do
       it 'ログインに成功' do
-        fill_in 'teacher_email',	with: "#{teacher.email}"
-        fill_in 'teacher_password',	with: "#{teacher.password}"
+        fill_in 'teacher_email',	with: teacher.email.to_s
+        fill_in 'teacher_password',	with: teacher.password.to_s
         click_button 'ログイン'
         expect(current_path).to eq teacher_path(teacher.id)
         expect(page).to have_content 'ログインしました。'
@@ -82,7 +84,7 @@ RSpec.describe "Teachers", type: :system do
     context 'メールアドレスが未入力の場合' do
       it 'ログインに失敗' do
         fill_in 'teacher_email',	with: nil
-        fill_in 'teacher_password',	with: "#{teacher.password}"
+        fill_in 'teacher_password',	with: teacher.password.to_s
         click_button 'ログイン'
         expect(current_path).to eq new_teacher_session_path
         expect(page).to have_content 'メールアドレスまたはパスワードが違います。'
@@ -90,8 +92,8 @@ RSpec.describe "Teachers", type: :system do
     end
     context 'パスワードが違う場合' do
       it 'ログインに失敗' do
-        fill_in 'teacher_email',	with: "#{teacher.email}"
-        fill_in 'teacher_password',	with: "false_password"
+        fill_in 'teacher_email',	with: teacher.email.to_s
+        fill_in 'teacher_password',	with: 'false_password'
         click_button 'ログイン'
         expect(current_path).to eq new_teacher_session_path
         expect(page).to have_content 'パスワードが違います。'
@@ -106,9 +108,9 @@ RSpec.describe "Teachers", type: :system do
     end
     context '正常な場合' do
       it 'ログアウトに成功' do
-        find(".my_page_btn").click
-        find(".logout").click
-        expect(current_path).to eq "/"
+        find('.my_page_btn').click
+        find('.logout').click
+        expect(current_path).to eq '/'
         expect(page).to have_content 'ログアウトしました。'
       end
     end
@@ -120,30 +122,30 @@ RSpec.describe "Teachers", type: :system do
     end
     context 'キーワードを入力して検索した場合' do
       it '情報が正常に表示される' do
-        fill_in 'キーワードを入力', with: "#{teacher.self_introduction}"
+        fill_in 'キーワードを入力', with: teacher.self_introduction.to_s
         click_button '検索'
-        expect(page).to have_content "#{teacher.self_introduction}"
-        expect(page).to have_content "#{teacher.name}"
-        expect(page).to have_content "#{teacher.average_score}"
-        expect(page).to have_link "#{teacher.name}", href: teacher_path(teacher.id)
+        expect(page).to have_content teacher.self_introduction.to_s
+        expect(page).to have_content teacher.name.to_s
+        expect(page).to have_content teacher.average_score.to_s
+        expect(page).to have_link teacher.name.to_s, href: teacher_path(teacher.id)
       end
     end
     context '先生名を入力して検索した場合' do
       it '情報が正常に表示される' do
-        fill_in '先生名を入力', with: "#{teacher.name}"
+        fill_in '先生名を入力', with: teacher.name.to_s
         click_button '検索'
-        expect(page).to have_content "#{teacher.self_introduction}"
-        expect(page).to have_content "#{teacher.name}"
-        expect(page).to have_content "#{teacher.average_score}"
-        expect(page).to have_link "#{teacher.name}", href: teacher_path(teacher.id)
+        expect(page).to have_content teacher.self_introduction.to_s
+        expect(page).to have_content teacher.name.to_s
+        expect(page).to have_content teacher.average_score.to_s
+        expect(page).to have_link teacher.name.to_s, href: teacher_path(teacher.id)
       end
     end
     context 'レビュースコアを選び、検索した場合' do
       it '情報が正常に表示される' do
         find('#q_average_score_gt_3').click
         click_button '検索'
-        expect(page).to have_content "#{other_teacher2.name}"
-        expect(page).to have_content "#{other_teacher2.average_score}"
+        expect(page).to have_content other_teacher2.name.to_s
+        expect(page).to have_content other_teacher2.average_score.to_s
       end
     end
   end
@@ -156,30 +158,30 @@ RSpec.describe "Teachers", type: :system do
     context 'フォームの入力値が正常な場合' do
       it '画像の編集に成功' do
         attach_file 'プロフィール画像', "#{Rails.root}/spec/fixtures/image/profile_img.jpg"
-        fill_in 'teacher[current_password]', with: "#{teacher.password}"
+        fill_in 'teacher[current_password]', with: teacher.password.to_s
         click_button '変更する'
         expect(page).to have_content 'アカウント情報を変更しました。'
         expect(current_path).to eq teacher_path(teacher)
       end
       it '先生名の編集に成功' do
         visit edit_teacher_registration_path(teacher)
-        fill_in 'teacher[name]', with: "#{teacher.name}"
-        fill_in 'teacher[current_password]', with: "#{teacher.password}"
+        fill_in 'teacher[name]', with: teacher.name.to_s
+        fill_in 'teacher[current_password]', with: teacher.password.to_s
         click_button '変更する'
         expect(page).to have_content 'アカウント情報を変更しました。'
         expect(current_path).to eq teacher_path(teacher)
       end
       it 'メールアドレスの編集に成功' do
-        fill_in 'teacher[email]', with: "change_email@gmail.com"
-        fill_in 'teacher[current_password]', with: "#{teacher.password}"
+        fill_in 'teacher[email]', with: 'change_email@gmail.com'
+        fill_in 'teacher[current_password]', with: teacher.password.to_s
         click_button '変更する'
         expect(page).to have_content 'アカウント情報を変更しました。'
         expect(current_path).to eq teacher_path(teacher)
       end
       it 'パスワードの編集に成功' do
-        fill_in 'teacher[password]', with: "new_password"
+        fill_in 'teacher[password]', with: 'new_password'
         fill_in 'teacher[password_confirmation]', with: 'new_password'
-        fill_in 'teacher[current_password]', with: "#{teacher.password}"
+        fill_in 'teacher[current_password]', with: teacher.password.to_s
         click_button '変更する'
         expect(page).to have_content 'アカウント情報を変更しました。'
         expect(current_path).to eq teacher_path(teacher)
@@ -187,7 +189,7 @@ RSpec.describe "Teachers", type: :system do
     end
     context '現在のパスワードを入力しない場合' do
       it '編集に失敗' do
-        fill_in 'teacher[email]', with: "change_email@gmail.com"
+        fill_in 'teacher[email]', with: 'change_email@gmail.com'
         click_button '変更する'
         expect(page).to have_content '現在のパスワードを入力してください'
         expect(current_path).to eq teachers_path

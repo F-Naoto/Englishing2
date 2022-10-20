@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeachersController < ApplicationController
   before_action :set_teacher, only: %i[show st_follower]
   before_action :check_id, only: %i[chat_member]
@@ -13,9 +15,7 @@ class TeachersController < ApplicationController
 
   def chat_member
     @teacher = Teacher.find(params[:id])
-    if current_teacher && !current_teacher.chat_room_users.nil?
-      @chat_members = current_teacher.chat_room_users
-    end
+    @chat_members = current_teacher.chat_room_users if current_teacher && !current_teacher.chat_room_users.nil?
   end
 
   def st_follower
@@ -23,6 +23,7 @@ class TeachersController < ApplicationController
   end
 
   private
+
   def set_teacher
     @teacher = Teacher.find(params[:id])
   end
@@ -31,7 +32,7 @@ class TeachersController < ApplicationController
     @teacher = Teacher.find(params[:id])
     unless current_teacher.id == @teacher.id
       redirect_to root_url
-      flash[:alert] = "不正な操作が行われました。"
+      flash[:alert] = '不正な操作が行われました。'
     end
   end
 end

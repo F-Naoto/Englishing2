@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'devise'
 
-RSpec.describe "Questions", type: :system do
+RSpec.describe 'Questions', type: :system do
   let!(:teacher) { create(:teacher) }
   let!(:student) { create(:student) }
   let!(:other_student) { create(:student) }
@@ -79,7 +81,7 @@ RSpec.describe "Questions", type: :system do
         visit questions_path
         fill_in 'キーワードを入力', with: question.content
         click_on '検索'
-        expect(page).to  have_content student.name
+        expect(page).to have_content student.name
       end
     end
   end
