@@ -6,13 +6,12 @@ class BestAnswersController < ApplicationController
   def create
     @best_answer = current_student.best_answers.build(best_answer_params)
     question = Question.find(params[:best_answer][:question_id])
-    if @best_answer.save
-      flash[:success] = 'ベストアンサーを選びました。'
-      redirect_to question
-    else
-      flash[:danger] = '失敗しました。'
-      render :index
-    end
+    flash[:success] = if @best_answer.save
+                        'ベストアンサーを選びました。'
+                      else
+                        'ベストアンサーを選べませんでした。'
+                      end
+    redirect_to question
   end
 
   private

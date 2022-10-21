@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Student < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -30,7 +32,6 @@ class Student < ApplicationRecord
   has_many :ss_passive_notifications, class_name: 'SsNotification',
                                       foreign_key: 'visited_id',
                                       dependent: :destroy
-
 
   validates :name, presence: true, length: { minimum: 2, maximum: 10 }, uniqueness: true
   validates :self_introduction, length: { maximum: 100 }

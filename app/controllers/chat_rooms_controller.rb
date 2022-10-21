@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class ChatRoomsController < ApplicationController
   before_action :authenticate_any!
-  before_action :check_authenticate_user, only:%i[show]
+  before_action :check_authenticate_user, only: %i[show]
 
   def create
     chat_room_user = ChatRoomUser.where(student_id: current_student.id).where(teacher_id: params[:teacher_id])
@@ -33,17 +35,13 @@ class ChatRoomsController < ApplicationController
 
   def check_authenticate_user
     @chat_room = ChatRoom.find(params[:id])
-    if current_student
-      unless @chat_room.chat_room_users.map(&:student_id) == [current_student.id]
-        redirect_to root_url
-        flash[:alert] = "不正な操作が行われました。"
-      end
+    if current_student && @chat_room.chat_room_users.map(&:student_id) != [current_student.id]
+      redirect_to root_url
+      flash[:alert] = '不正な操作が行われました。'
     end
-    if current_teacher
-      unless  @chat_room.chat_room_users.map(&:teacher_id) == [current_teacher.id]
-        redirect_to root_url
-        flash[:alert] = "不正な操作が行われました。"
-      end
+    if current_teacher && @chat_room.chat_room_users.map(&:teacher_id) != [current_teacher.id]
+      redirect_to root_url
+      flash[:alert] = '不正な操作が行われました。'
     end
   end
 end

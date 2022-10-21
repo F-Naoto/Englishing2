@@ -9,30 +9,29 @@ class AnswersController < ApplicationController
 
     if existing_answer_combination.empty? && @answer.save
       flash[:success] = '回答を投稿しました。'
-      redirect_to "/questions/#{params[:answer][:question_id]}"
     else
-      flash[:danger] = '回答は一回までです。'
-      render "/questions/#{params[:answer][:question_id]}"
+      flash[:danger] = '回答に失敗しました。'
     end
+    redirect_to "/questions/#{params[:answer][:question_id]}"
   end
 
-  def edit
-    @answer = Answer.find(params[:id])
-  end
+  # def edit
+  #   @answer = Answer.find(params[:id])
+  # end
 
-  def update
-    @answer = Answer.find(params[:id])
-    @answer.update(answer_params)
-    redirect_to question_path(@answer.question_id)
-  end
+  # def update
+  #   @answer = Answer.find(params[:id])
+  #   @answer.update(answer_params)
+  #   redirect_to question_path(@answer.question_id)
+  # end
 
-  def destroy
-    @answer = Answer.find(params[:id])
-    question = @answer.question
-    @answer.destroy
-    flash[:success] = '回答を削除しました。'
-    redirect_to question_path(question)
-  end
+  # def destroy
+  #   @answer = Answer.find(params[:id])
+  #   question = @answer.question
+  #   @answer.destroy
+  #   flash[:success] = '回答を削除しました。'
+  #   redirect_to question_path(question)
+  # end
 
   private
 

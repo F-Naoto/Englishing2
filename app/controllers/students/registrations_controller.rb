@@ -8,7 +8,7 @@ module Students
     def create
       if Teacher.find_by(email: sign_up_params[:email])
         redirect_to root_url
-        flash[:alert] = "先生と同じメールアドレスは使用できません。"
+        flash[:alert] = '先生と同じメールアドレスは使用できません。'
       else
         super
       end

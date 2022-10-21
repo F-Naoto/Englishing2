@@ -122,6 +122,8 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    launchy (2.5.0)
+      addressable (~> 2.7)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -184,6 +186,10 @@ GEM
       bundler (>= 1.3.0)
       railties (= 6.0.5.1)
       sprockets-rails (>= 2.0.0)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -319,6 +325,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   jquery-rails
   kaminari
+  launchy
   listen (~> 3.2)
   mysql2 (>= 0.4.4)
   net-imap
@@ -328,6 +335,7 @@ DEPENDENCIES
   psych (~> 3.1)
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.4)
+  rails-controller-testing
   rails-i18n
   ransack
   rspec-rails (~> 4.0.1)

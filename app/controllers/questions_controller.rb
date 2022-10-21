@@ -6,6 +6,7 @@ class QuestionsController < ApplicationController
   def index
     @search = Question.ransack(params[:q])
     @questions = @search.result.page(params[:page]).per(8)
+    @question = current_student.questions.build if current_student
   end
 
   def show
@@ -27,7 +28,7 @@ class QuestionsController < ApplicationController
     else
       @search = Question.ransack(params[:q])
       @questions = @search.result.page(params[:page]).per(8)
-      flash[:danger] = '質問を投稿できませんでした。'
+      flash.now[:danger] = '質問を投稿できませんでした。'
       render :index
     end
   end
@@ -40,7 +41,8 @@ class QuestionsController < ApplicationController
   end
 
   private
+
   def question_params
-    params.permit(:title, :content)
+    params.require(:question).permit(:title, :content)
   end
 end

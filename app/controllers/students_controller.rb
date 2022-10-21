@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class StudentsController < ApplicationController
-  before_action :set_student, only: %i[show  chat_member st_following ss_following ss_follower]
+  before_action :set_student, only: %i[show chat_member st_following ss_following ss_follower]
   before_action :check_id, only: %i[chat_member]
 
   def index
@@ -7,13 +9,10 @@ class StudentsController < ApplicationController
     @students = @search.result.page(params[:page]).per(8)
   end
 
-  def show
-  end
+  def show; end
 
   def chat_member
-    if current_student && !current_student.chat_room_users.nil?
-      @chat_members = current_student.chat_room_users
-    end
+    @chat_members = current_student.chat_room_users if current_student && !current_student.chat_room_users.nil?
   end
 
   def st_following
@@ -29,6 +28,7 @@ class StudentsController < ApplicationController
   end
 
   private
+
   def set_student
     @student = Student.find(params[:id])
   end
@@ -36,7 +36,7 @@ class StudentsController < ApplicationController
   def check_id
     unless current_student.id == @student.id
       redirect_to root_url
-      flash[:alert] = "不正な操作が行われました。"
+      flash[:alert] = '不正な操作が行われました。'
     end
   end
 end

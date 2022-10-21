@@ -5,7 +5,8 @@ module SsNotificationsHelper
     @visitor = ss_notification.visitor
     case ss_notification.action
     when 'follow'
-      "#{tag.a(ss_notification.visitor.name, href: student_path(@visitor), style: 'font-weight: bold;')}があなたをフォローしました。"
+      tag.a(ss_notification.visitor.name, href: student_path(@visitor),
+                                          style: 'font-weight: bold;') + 'があなたをフォローしました。'
     when 'like'
       tag.a(ss_notification.visitor.name, href: student_path(@visitor),
                                           style: 'font-weight: bold;') + 'が' + tag.a('あなたの質問', href: question_path(ss_notification.question_id),
