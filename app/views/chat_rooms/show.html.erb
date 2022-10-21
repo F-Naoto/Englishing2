@@ -1,4 +1,5 @@
-<h1 class="text-gray-800 text-3xl lg:text-3xl font-bold text-center mb-4 md:mb-6 mt-20"><%= @teacher.name %>先生に質問</h1>
+<% provide(:title, "#{@teacher.name}先生に質問") %>
+<h1 class="text-gray-800 text-3xl lg:text-3xl font-bold text-center mb-4 md:mb-6 mt-32"><%= @teacher.name %>先生に質問</h1>
 <div class="container mx-auto">
   <div class="max-w-2xl border rounded m-auto">
     <div>
@@ -11,9 +12,9 @@
           <% end %>
           <span class="block ml-2 font-bold text-gray-600">
             <% if current_teacher %>
-              <%= @student.name  %>
+              <%= @student.name %>
             <% else %>
-              <%= @teacher.name  %>
+              <%= @teacher.name %>
             <% end %>
           </span>
         </div>

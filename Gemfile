@@ -47,15 +47,18 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
+  gem 'launchy'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
+  gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
+  gem 'rspec-rails', '~> 4.0.1'
   gem 'webdrivers'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'cssbundling-rails'
 gem 'devise'
-gem 'factory_bot_rails'
 gem 'faker'
 gem 'font-awesome-sass', '~> 6.1.2'
 gem 'jquery-rails'
@@ -67,7 +70,6 @@ gem 'pry-rails'
 gem 'psych', '~> 3.1'
 gem 'rails-i18n'
 gem 'ransack'
-gem 'rspec-rails'
 gem 'rubocop'
 gem 'rubocop-rails', require: false
 gem 'tailwindcss-rails', '~> 2.0'

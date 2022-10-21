@@ -4,6 +4,16 @@ module Teachers
   class RegistrationsController < Devise::RegistrationsController
     before_action :configure_permitted_parameters, only: %i[create update]
     before_action :ensure_normal_user, only: %i[destroy]
+
+    def create
+      if Student.find_by(email: sign_up_params[:email])
+        redirect_to root_url
+        flash[:alert] = '生徒と同じメールアドレスは使用できません。'
+      else
+        super
+      end
+    end
+
     def update
       super
       resource.avatar.attach(account_update_params[:avatar]) if account_update_params[:avatar].present?

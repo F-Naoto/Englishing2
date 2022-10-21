@@ -1,5 +1,5 @@
 <%= form_with(model: current_student.ss_active_relationships.find_by(followed_id: student.id),
-            html: { method: :delete }, local: false) do |f| %>
+            html: { method: :delete }, local: false, id: "unfollow") do |f| %>
   <%= hidden_field_tag :followed_id, student.id %>
   <%= f.submit "Unfollow", class:"bg-white font-bold" %>
 <% end %>

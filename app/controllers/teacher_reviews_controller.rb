@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeacherReviewsController < ApplicationController
   before_action :authenticate_student!, only: %i[create]
 
@@ -13,9 +15,9 @@ class TeacherReviewsController < ApplicationController
       flash[:notice] = 'レビューを投稿しました。'
       redirect_to teacher_teacher_reviews_path(@teacher_review.teacher)
     else
-      @teacher = @teacher_review.teacher
-      flash.now[:alert] = 'レビューを投稿できませんでした。'
-      render 'teachers/show'
+      teacher = @teacher_review.teacher
+      flash[:alert] = 'レビューを投稿できませんでした。'
+      redirect_to teacher_path(teacher.id)
     end
   end
 
@@ -25,10 +27,11 @@ class TeacherReviewsController < ApplicationController
   end
 
   def ranking
-    @teachers = Teacher.order(average_score: "DESC").limit(5)
+    @teachers = Teacher.order(average_score: 'DESC').limit(5)
   end
 
   private
+
   def teacher_review_params
     params.require(:teacher_review).permit(:teacher_id, :score, :content)
   end

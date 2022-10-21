@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Englishing</title>
+    <title><%= page_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,9 +11,9 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="mt-30 m-0">
-    <%= render "partials/navbar"%>
-    <%= render "layouts/notification" %>
+  <body class="mt-20">
+    <div><%= render "partials/navbar" %></div>
+    <div><%= render "layouts/flash_message" %></div>
     <%= yield %>
     <%= render "layouts/footer" %>
   </body>

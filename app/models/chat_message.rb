@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ChatMessage < ApplicationRecord
   after_create_commit { ChatMessageBroadcastJob.perform_later self }
 
@@ -10,7 +8,6 @@ class ChatMessage < ApplicationRecord
     validates  :chat_room_id
     validates  :teacher_id
     validates  :student_id
-    validates  :content
-    validates  :poster
+    validates  :content, length: { maximum: 200 }
   end
 end

@@ -1,7 +1,8 @@
-<h1 class="text-gray-800 text-3xl lg:text-3xl font-bold text-center mb-4 md:mb-6 mt-20">Student Profile</h1>
+<% provide(:title, "#{@student.name}さんのプロフィール") %>
+<h1 class="text-gray-800 text-3xl lg:text-3xl font-bold text-center mb-4 md:mb-6 mt-32">Student Profile</h1>
 <div class="mt-4 bg-white mx-auto max-w-md shadow-lg rounded-lg break-words px-10", style="word-break: break-all;">
-  <div class="px-4 py-4">
-    <div class="m-auto w-3/5 text-center sm:text-left sm:flex-grow">
+  <div class="py-4">
+    <div class="m-auto w-4/5 text-center sm:text-left sm:flex-grow">
       <div class="mb-4">
         <% if @student.avatar.attached? %>
           <%= image_tag @student.avatar, class: "m-auto w-40 h-40 rounded-full object-cover object-center" %>
@@ -11,7 +12,9 @@
         <div class="text-center sm:flex-grow">
           <div class="my-4">
             <p class="text-xl leading-tight"><%= @student.name %></p>
-            <p class="text-sm leading-tight text-grey-dark"><%= @student.self_introduction %></p>
+            <% if !@student.self_introduction.nil? %>
+              <p class="text-sm leading-tight text-grey-dark text-left"><%= safe_join(@student.self_introduction.split("\n"),tag(:br)) %></p>
+            <% end %>
             <div class="mt-3">
               <p><%= link_to @student.st_following.count, st_following_student_path(@student), class: 'text-sm leading-tight text-blue-500 underline' %>フォロー（先生）</p>
               <p><%= link_to @student.ss_following.count, ss_following_student_path(@student), class: 'text-sm leading-tight text-blue-500 underline' %>フォロー（生徒）</p>
@@ -26,8 +29,9 @@
         <%= render 'ss_follow_form', student: @student %>
       <% end %>
       <% if current_student && current_student.id == @student.id %>
-        <button class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white"><%= link_to "Edit", edit_student_registration_path %>
-        </button>
+        <%= link_to edit_student_registration_path do %>
+          <button class="text-xs font-semibold rounded-full px-6 py-2 leading-normal bg-white border border-purple text-purple hover:bg-purple">Edit</button>
+        <% end %>
       <% end %>
     </div>
   </div>
