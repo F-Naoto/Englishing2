@@ -161,6 +161,7 @@ RSpec.describe 'Teachers', type: :system do
         fill_in 'teacher[current_password]', with: teacher.password.to_s
         click_button '変更する'
         expect(page).to have_content 'アカウント情報を変更しました。'
+        expect(page).to have_selector("img[src$='profile_img.jpg']")
         expect(current_path).to eq teacher_path(teacher)
       end
       it '先生名の編集に成功' do
