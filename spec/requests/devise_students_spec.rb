@@ -47,7 +47,7 @@ RSpec.describe 'DeviseStudents', type: :request do
 
       it 'エラーが表示される' do
         post student_registration_path, params: { student: invalid_student_params }
-        expect(response.body).to include '※名前を入力してください'
+        expect(response.body).to include '・名前を入力してください'
       end
     end
   end

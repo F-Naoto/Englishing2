@@ -26,6 +26,7 @@ RSpec.describe 'Students', type: :system do
         expect(page).to have_content student_list[0].name
         expect(page).to have_content student_list[1].name
         expect(page).to have_content student_list[2].name
+        expect(page).to have_selector("img[src$='https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=256']")
         expect(current_path).to eq students_path
       end
     end
@@ -57,6 +58,7 @@ RSpec.describe 'Students', type: :system do
         visit student_path(student)
         expect(page).to have_content 'Student Profile'
         expect(page).to have_content student.name
+        expect(page).to have_selector("img[src$='https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=256']")
         expect(page).to have_content 'フォロー（先生）'
         expect(page).to have_content 'フォロー（生徒）'
         expect(page).to have_content 'フォロワー（生徒）'
@@ -151,7 +153,7 @@ RSpec.describe 'Students', type: :system do
         fill_in 'student[password_confirmation]',	with: 'registration_password'
         click_button '登録'
         expect(current_path).to eq '/students'
-        expect(page).to have_content '※名前を入力してください'
+        expect(page).to have_content '・名前を入力してください'
       end
     end
     context 'すでにログインしている場合' do

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 RSpec.describe ChatMessage, type: :model do
@@ -43,7 +41,7 @@ RSpec.describe ChatMessage, type: :model do
         expect { teacher.destroy }.to change { ChatMessage.count }.by(-1)
       end
     end
-    context '生徒が削除されたら場合' do
+    context '生徒が削除された場合' do
       it 'メッセージも削除される' do
         student = build(:student)
         student.chat_messages << create(:chat_message)

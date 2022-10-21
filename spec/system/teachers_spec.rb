@@ -28,6 +28,7 @@ RSpec.describe 'Teachers', type: :system do
         expect(page).to have_content teacher_list[0].name
         expect(page).to have_content teacher_list[1].name
         expect(page).to have_content teacher_list[2].name
+        expect(page).to have_selector("img[src$='https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=256']")
         expect(current_path).to eq teachers_path
       end
     end
@@ -59,6 +60,7 @@ RSpec.describe 'Teachers', type: :system do
         visit teacher_path(other_teacher)
         expect(page).to have_content 'Teacher Profile'
         expect(page).to have_content other_teacher.name
+        expect(page).to have_selector("img[src$='https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=256']")
         expect(page).to have_content '回答数'
         expect(page).to have_content '評価'
         expect(page).to have_content 'フォロワー（生徒）'

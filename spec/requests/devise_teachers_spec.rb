@@ -47,7 +47,7 @@ RSpec.describe 'DeviseTeachers', type: :request do
 
       it 'エラーが表示される' do
         post teacher_registration_path, params: { teacher: invalid_teacher_params }
-        expect(response.body).to include '※名前を入力してください'
+        expect(response.body).to include '・名前を入力してください'
       end
     end
   end
