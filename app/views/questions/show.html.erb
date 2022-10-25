@@ -30,7 +30,7 @@
             <% end %>
           <% end %>
           <p class="mb-4 "><%= answer.created_at.strftime("%Y-%m-%d %H:%M") %></p>
-          <p class="mb-4"><%= answer.content %></p>
+          <p class="mb-4 mt-3"><%= safe_join(answer.content.split("\n"),tag(:br))%></p>
           <%= render 'best_answer', question: @question, best_answer: @best_answer, answer: @answer %>
           <% if BestAnswer.where(teacher_id: answer.teacher).where(question_id: @question).exists? %>
             <%= image_tag "hanamaru.png", class: "w-20 absolute top-5 right-5" %>
