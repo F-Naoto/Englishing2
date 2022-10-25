@@ -1,2 +1,2 @@
-require './db/seeds/students'
-require './db/seeds/teachers'
+require './db/seeds/student'
+require './db/seeds/teacher'
