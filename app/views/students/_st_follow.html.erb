@@ -1,6 +1,6 @@
 <% if current_student %>
   <%= form_with(model: current_student.st_active_relationships.build, local: false, id: "follow") do |f| %>
     <%= hidden_field_tag :followed_id, teacher.id %>
-    <%= f.submit "Follow", class: "bg-white" %>
+    <%= f.submit "Follow", class: "bg-white font-bold cursor-pointer" %>
   <% end %>
 <% end %>
