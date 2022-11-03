@@ -9,4 +9,8 @@ class BestAnswer < ApplicationRecord
     validates  :teacher_id
     validates  :student_id
   end
+
+  def self.already_selected?(question)
+    where(question_id: question.id).exists?
+  end
 end
