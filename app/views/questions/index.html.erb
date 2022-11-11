@@ -15,9 +15,9 @@
       <% @questions.each do |question| %>
         <div class="flex flex-col border rounded-lg p-4 md:p-6 my-6">
           <%= link_to question_path(question) do %>
-            <div class="text-sm md:text-sm font-semibold mb-2"><%= question.title %></div>
+            <div class="text-sm md:text-sm font-semibold"><%= question.title %></div>
             <div class="text-sm md:text-sm font-semibold mb-2">by <%= question.student.name %></div>
-            <div class="text-sm md:text-sm font-semibold mb-2"><%= question.content %></div>
+            <div class="text-sm md:text-sm mb-3"><%= safe_join(question.content.split("\n"),tag(:br)) %></div>
             <% unless BestAnswer.where(question_id: question.id).exists? %>
               <div class="flex">
                 <div>
@@ -32,7 +32,7 @@
                 </div>
               </div>
             <% else %>
-              <span class="text-2xl text-red-500 text-center text-bold">解決済み</span>
+              <span class="text-2xl text-black-500 text-center text-bold border-2 px-2 py-1 rounded-lg bg-red-300">解決済み</span>
             <% end %>
           <% end %>
         </div>

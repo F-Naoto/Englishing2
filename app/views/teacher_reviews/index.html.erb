@@ -16,7 +16,7 @@
       <div class="flex flex-col gap-3 py-4 md:py-8 border-b-2">
           <div>
             <span class="block text-sm font-bold"><%= teacher_review.student.name %></span>
-            <span class="block text-gray-500 text-sm"><%= teacher_review.created_at %></span>
+            <span class="block text-gray-500 text-sm"><%= teacher_review.created_at.strftime("%Y-%m-%d %H:%M:%S") %></span>
           </div>
           <%= render 'teachers/star', teacher: @teacher, teacher_review: teacher_review %>
           <p class="text-gray-600"><%= teacher_review.content %></p>

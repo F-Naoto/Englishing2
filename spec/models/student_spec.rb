@@ -56,9 +56,9 @@ RSpec.describe Student, type: :model do
     end
     context 'ユーザー名が10文字以上の場合' do
       it '生徒の登録に失敗する' do
-        student = build(:student, name: '12345678910')
+        student = build(:student, name: 'a' * 16)
         student.valid?
-        expect(student.errors[:name]).to include('は10文字以内で入力してください')
+        expect(student.errors[:name]).to include('は15文字以内で入力してください')
       end
     end
     context '自己紹介が100文字以上の場合' do
