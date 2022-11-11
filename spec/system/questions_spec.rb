@@ -70,7 +70,7 @@ RSpec.describe 'Questions', type: :system do
         click_on '質問する'
         expect(page).to  have_content '質問を投稿できませんでした。'
         expect(page).to  have_content '・タイトルを入力してください'
-        expect(page).to  have_content '・質問内容を入力してください'
+        expect(page).to  have_content '質問内容を入力してください'
       end
     end
   end

@@ -33,7 +33,7 @@ class Student < ApplicationRecord
                                       foreign_key: 'visited_id',
                                       dependent: :destroy
 
-  validates :name, presence: true, length: { minimum: 2, maximum: 10 }, uniqueness: true
+  validates :name, presence: true, length: { minimum: 2, maximum: 15 }, uniqueness: true
   validates :self_introduction, length: { maximum: 100 }
 
   def st_follow(teacher)

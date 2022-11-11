@@ -40,12 +40,12 @@ RSpec.describe 'Homes', type: :system do
         expect(page).to have_content 'お知らせ'
         expect(page).to have_content '生徒ログアウト'
       end
-      it 'アカウント作成ボタンが正常に表示される' do
-        expect(page).to have_content '先生アカウントを作成'
-        expect(page).to have_content '生徒アカウントを作成'
+      it 'アカウント作成ボタンが正常に表示されない' do
+        expect(page).to have_no_content '先生アカウントを作成'
+        expect(page).to have_no_content '生徒アカウントを作成'
       end
-      it 'アカウントお試しボタンが正常に表示される' do
-        expect(page).to have_content '先生をお試し'
+      it 'アカウントお試しボタンが正常に表示されない' do
+        expect(page).to have_no_content '先生をお試し'
         expect(page).to have_no_content '生徒をお試し'
       end
     end
@@ -62,12 +62,12 @@ RSpec.describe 'Homes', type: :system do
         expect(page).to have_content 'メッセージ'
         expect(page).to have_content '先生ログアウト'
       end
-      it 'アカウント作成ボタンが正常に表示される' do
-        expect(page).to have_content '先生アカウントを作成'
-        expect(page).to have_content '生徒アカウントを作成'
+      it 'アカウント作成ボタンが正常に表示されない' do
+        expect(page).to have_no_content '先生アカウントを作成'
+        expect(page).to have_no_content '生徒アカウントを作成'
       end
-      it 'アカウントお試しボタンが正常に表示される' do
-        expect(page).to have_content '生徒をお試し'
+      it 'アカウントお試しボタンが正常に表示されない' do
+        expect(page).to have_no_content '生徒をお試し'
         expect(page).to have_no_content '先生をお試し'
       end
     end
